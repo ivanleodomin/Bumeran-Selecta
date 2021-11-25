@@ -3,6 +3,8 @@ const router = express.Router();
 const RecruiterController = require("../controllers/RecruiterController.js");
 
 router.post("/", RecruiterController.creatRecruiter)
+router.get("/:id", RecruiterController.getById)
+router.put("/:id/done", RecruiterController.done)
 
 
 module.exports = router
