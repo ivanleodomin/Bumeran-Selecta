@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const vacants = require("./vacants")
 
-router.get("/", (req, res) => {
-  res.sendStatus(200);
-});
+/* router.use('/recluiters', recluiters) */
+router.use('/vacants', vacants)
 
 module.exports = router;
