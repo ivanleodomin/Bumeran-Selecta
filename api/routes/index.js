@@ -1,8 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const recruiter = require("./recruiter.js");
 
-router.get("/", (req, res) => {
-  res.sendStatus(200);
-});
+router.use("/recruiter", recruiter);
 
 module.exports = router;
