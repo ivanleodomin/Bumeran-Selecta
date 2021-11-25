@@ -8,19 +8,23 @@
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
     "express": "^4.17.1",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "sequelize": "^6.12.0-alpha.1",
     "volleyball": "^1.5.1",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "seed": "node api/seed",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "server": "nodemon api/server.js"
+    "server": "nodemon api/server.js",
+    "postinstall": "npm run seed"
   },
   "eslintConfig": {
     "extends": [
