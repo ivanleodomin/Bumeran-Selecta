@@ -10,8 +10,8 @@ Seniority.init(
     },
   },
   {
-    db,
-    modelName: "Recruiter",
+    sequelize: db,
+    modelName: "Seniority",
   }
 );
 

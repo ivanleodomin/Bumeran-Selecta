@@ -10,8 +10,8 @@ Area.init(
     },
   },
   {
-    db,
-    modelName: "Recruiter",
+    sequelize: db,
+    modelName: "Area",
   }
 );
 

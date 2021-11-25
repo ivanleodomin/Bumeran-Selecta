@@ -14,17 +14,9 @@ Recruiter.init(
     residence: {
       type: DataTypes.STRING,
     },
-    reviewsId: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      defaultValue: [],
-    },
-    busquedas: {
-      type: DataTypes.ARRAY(DataTypes.INTEGER),
-      defaultValue: [],
-    },
   },
   {
-    db,
+    sequelize: db,
     modelName: "Recruiter",
   }
 );

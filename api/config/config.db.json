@@ -1,8 +1,8 @@
 {
-    "database": "sql10453814",
+    "database": "bumerandb",
     "dialect": "mysql",
-    "host": "sql10.freesqldatabase.com",
+    "host": "localhost",
     "logging": false,
-    "username" : "sql10453814",
-    "password" : "6cCwDBiw9B"
+    "username" : "teamnavent",
+    "password" : "password"
   }

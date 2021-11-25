@@ -18,11 +18,13 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
+    "seed": "node api/seed",
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "server": "nodemon api/server.js"
+    "server": "nodemon api/server.js",
+    "postinstall": "npm run seed"
   },
   "eslintConfig": {
     "extends": [
