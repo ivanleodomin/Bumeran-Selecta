@@ -5,8 +5,10 @@ import Vacants from '../components/Vacants'
 import Statistics from "../components/Statistics";
 import NotFound from "../components/NotFound";
 import Header from "../views/Heading";
-import RecruitersList from "../views/RecruitersList";
-import Recruiters from "../components/Recruiters";
+//import BasicTable from "../components/table/BasicTable";
+//import SortingTable from "../components/table/SortingTable";
+import FilteringTable from "../components/table/FilteringTable";
+import AddRecruiterForm from "../containers/AddRecruiterForm";
 
 function App() {
   return (
@@ -19,7 +21,8 @@ function App() {
 
       <div>
         <Switch>
-        <Route  exact path='/recruiters' component={Recruiters} /> 
+        <Route  exact path='/recruiters' component={FilteringTable} /> 
+        <Route path='/recruiters/add'component={AddRecruiterForm}  />
         <Route path='/vacants' component={Vacants} /> 
         <Route path='/statistics' component={Statistics} />
         <Route component={NotFound} />
