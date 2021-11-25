@@ -4,11 +4,12 @@ import { Switch, Route } from 'react-router'
 import Vacants from '../components/Vacants'
 import Statistics from "../components/Statistics";
 import NotFound from "../components/NotFound";
-import Header from "../views/Heading";
+import Header from "../components/Heading";
 //import BasicTable from "../components/table/BasicTable";
 //import SortingTable from "../components/table/SortingTable";
 import FilteringTable from "../components/table/FilteringTable";
-import AddRecruiterForm from "../containers/AddRecruiterForm";
+import AddRecruiterForm from "../components/AddRecruiterForm";
+import { HiMenuAlt1 } from "react-icons/hi";
 
 function App() {
   return (
@@ -21,8 +22,8 @@ function App() {
 
       <div>
         <Switch>
-        <Route  exact path='/recruiters' component={FilteringTable} /> 
-        <Route path='/recruiters/add'component={AddRecruiterForm}  />
+        <Route exact path='/recruiter/add' component={AddRecruiterForm } />
+        <Route path='/recruiters' component={FilteringTable} /> 
         <Route path='/vacants' component={Vacants} /> 
         <Route path='/statistics' component={Statistics} />
         <Route component={NotFound} />

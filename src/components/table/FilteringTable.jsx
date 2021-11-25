@@ -222,7 +222,6 @@ const FilteringTable = () => {
     data: recruitersData,
   },
   useFilters,
-  useGlobalFilter,
   tableHooks);
 
   const {globalFilter} = state
@@ -237,7 +236,7 @@ const FilteringTable = () => {
         className="table-fixed text-base text-gray-900"
         {...getTableProps()}
       >
-        <thead className="p2 bg-yellow-200 ">
+        <thead className="p2 bg-yellow-200">
           {headerGroups.map((headerGroup) => (
             <tr
               className="border border-gray-500"
@@ -303,6 +302,8 @@ const FilteringTable = () => {
                 Add Recruiter
         </button> </Link>
     </div>
+
+    
 
 
     </>
