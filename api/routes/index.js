@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const recruiter = require("./recruiter.js");
- const seniority = require("./seniority.js");
+const seniority = require("./seniority.js");
 const area = require("./area.js");
 
 router.use("/recruiter", recruiter);
