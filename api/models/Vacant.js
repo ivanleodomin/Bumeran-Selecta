@@ -34,19 +34,11 @@ Vacants.init(
         type: S.STRING,
         allowNull: false,
       },
-      /* RecruiterID: {
-        type: S.INTEGER,
-        allowNull: false,
-        references: {
-          model: "recluiter",
-          key: "id",
-        },
-      }, */
     },
   },
   {
     sequelize,
-    modelName: "vacants",
+    modelName: "Vacant",
   }
 );
 
