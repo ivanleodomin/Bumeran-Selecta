@@ -1,5 +1,6 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
+const Review = require("./Review");
 
 class Recruiter extends Model {}
 
@@ -13,6 +14,22 @@ Recruiter.init(
     },
     residence: {
       type: DataTypes.STRING,
+    },
+    ranking: {
+      type: DataTypes.VIRTUAL,
+      get() {
+        return Review.findAll({
+          where: {
+            recluiterId: this.getDataValue("id"),
+          },
+        }).then((reviews) => {
+          let acc = 0;
+          reviews.forEach((element) => {
+            acc += element.score;
+          });
+          return acc / reviews.length;
+        });
+      },
     },
   },
   {

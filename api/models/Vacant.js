@@ -1,5 +1,5 @@
 const S = require("sequelize");
-const sequelize = require("../config/db/database");
+const sequelize = require("../config/db");
 
 class Vacants extends S.Model {}
 

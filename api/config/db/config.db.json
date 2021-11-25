@@ -1,8 +1,0 @@
-{
-    "database": "bumerandb",
-    "dialect": "mysql",
-    "host": "localhost",
-    "logging": false,
-    "username" : "teamnavent",
-    "password" : "password"
-  }
