@@ -21,21 +21,27 @@ const Header = () => {
         </div>
         <div>
           <ul className="flex flex-nowrap examples">
-            <li className="mr-6  mt-6" id="examples">
-              <div class="example">
-                <li class="hover hover-1 mr-6 ">Home</li>
-              </div>
-            </li>
-            <li className="mr-6 mt-6" id="examples">
-              <div class="example">
-                <li class="hover hover-1 mr-6">Menu</li>
-              </div>
-            </li>
-            <li className="mr-6 mt-6" id="examples">
-              <div class="example">
-                <li class="hover hover-1 m-6">About</li>
-              </div>
-            </li>
+            <Link to="/reclutadores">
+              <li className="mr-6  mt-6" id="examples">
+                <div class="example">
+                  <li class="hover hover-1 mr-6 ">Reclutadores</li>
+                </div>
+              </li>
+            </Link>
+            <Link to="/vacantes">
+              <li className="mr-6  mt-6" id="examples">
+                <div class="example">
+                  <li class="hover hover-1 mr-6 ">Vacantes</li>
+                </div>
+              </li>
+            </Link>
+            <Link to="estadisticas">
+              <li className="mr-6  mt-6" id="examples">
+                <div class="example">
+                  <li class="hover hover-1 mr-6 ">Estadisticas</li>
+                </div>
+              </li>
+            </Link>
           </ul>
         </div>
       </div>

@@ -8,7 +8,8 @@ import Navbar from "../components/Navbar";
 import FilteringTable from "../components/table/FilteringTable";
 import RecruitersAdd from "../views/RecruitersAdd";
 import Footer from "../components/Footer";
-
+import ABMRecruiters from "../components/ABMRecruiters"
+import '@themesberg/flowbite';
 function App() {
   return (
     <>
@@ -16,6 +17,9 @@ function App() {
       <Switch>
         <Route path="/home">
           <Home />
+        </Route>
+        <Route exact path="/reclutadores">
+          <ABMRecruiters/>
         </Route>
         <Route exact path="/recruiter/add">
           <RecruitersAdd />
