@@ -1,4 +1,4 @@
-const { Recruiter, Review, Vacants } = require("../models");
+const { Recruiter, Review, Vacant } = require("../models");
 const getareas = require("../utils/getInstancesAreas");
 const getSeniorities = require("../utils/getInstancesSeniorities");
 
@@ -48,11 +48,29 @@ class RecruiterController {
   }
 
   static async done(req, res) {
-    const {idVacante, score} = req.body
+    const idRecruiter = req.params.id;
+    const { idVacante, score } = req.body;
 
-    
+    const review = await Review.create({
+      score: score,
+    });
 
+    const recruiter = await Recruiter.findByPk(idRecruiter);
+
+    await Vacant.update(
+      { State: "Finalizada" },
+      { where: { id: idVacante }, returning: true }
+    );
+
+    const vacant = await Vacant.findByPk(idVacante);
+
+    review.setVacant(vacant);
+    recruiter.addReview(review);
+
+    res.send( await Review.findByPk(review.id));
   }
+
+  static async getAll(req, res) {}
 }
 
 module.exports = RecruiterController;
