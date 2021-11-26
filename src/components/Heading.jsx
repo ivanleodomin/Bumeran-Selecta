@@ -8,7 +8,7 @@ import { GrFormAdd } from 'react-icons/gr'
 const Header = () => {
     return (
         <header className='relative' >
-            <div style={{background:'#EA3380'}} className="flex item-center justify-between mb-10 pl-10 ">
+            <div style={{background:'#EA3380'}} className="flex item-center justify-between mb-10 pl-10 bg-gradient-to-r from-pink-600 to-blue-800">
         
               <div className='w-55' >
                 <img src="https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/logo-1.png" alt="BumeranLogo" className='w-full' />
