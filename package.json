@@ -29,7 +29,8 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "server": "nodemon api/server.js"
+    "server": "nodemon api/server.js",
+    "postinstall": "npm run seed"
   },
   "eslintConfig": {
     "extends": [

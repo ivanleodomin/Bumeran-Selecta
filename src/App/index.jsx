@@ -1,35 +1,44 @@
 import React from "react";
+import { Switch, Route, Redirect } from "react-router";
 import Home from "../views/Home";
-import { Switch, Route } from 'react-router'
-import Vacants from '../components/Vacants'
+import Vacants from "../components/Vacants";
 import Statistics from "../components/Statistics";
 import NotFound from "../components/NotFound";
 import Header from "../components/Heading";
-//import BasicTable from "../components/table/BasicTable";
-//import SortingTable from "../components/table/SortingTable";
 import FilteringTable from "../components/table/FilteringTable";
-import AddRecruiterForm from "../components/AddRecruiterForm";
-import { HiMenuAlt1 } from "react-icons/hi";
+import RecruitersAdd from "../views/RecruitersAdd";
+import Footer from "../components/Footer";
 
 function App() {
   return (
-    <div>
-    <div>
-      <Header/>
-      </div>
-
-      <Home/>
-
-      <div>
-        <Switch>
-        <Route exact path='/recruiter/add' component={AddRecruiterForm } />
-        <Route path='/recruiters' component={FilteringTable} /> 
-        <Route path='/vacants' component={Vacants} /> 
-        <Route path='/statistics' component={Statistics} />
+    <>
+      <Header />
+      <Switch>
+        <Route path="/home">
+          <Home />
+        </Route>
+        <Route exact path="/recruiter/add">
+          <RecruitersAdd />
+        </Route>
+        <Route path="/recruiters">
+          <FilteringTable />
+        </Route>
+        <Route path="/vacants">
+          <Vacants />
+        </Route>
+        <Route path="/stadistics">
+          <Statistics />
+        </Route>
+        <Route exact path="/">
+          <Redirect to="/home" />
+        </Route>
         <Route component={NotFound} />
-        </Switch>  
-        </div> 
-    </div>
+        <Route path="*">
+          <Redirect to="/404" />
+        </Route>
+      </Switch>
+      <Footer />
+    </>
   );
 }
 
