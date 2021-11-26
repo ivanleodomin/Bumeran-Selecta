@@ -6,10 +6,12 @@ const AddRecruiterForm = () => {
       style={{
         display: "flex",
         flexDirection: "column",
+        justifyContent:"center",
+        alignItems:'center',
         width: "800px",
         height: "600px",
         position: "absolute",
-        left: "320px",
+        left: "600px",
         top: "141px",
         padding:'48px',
         boxShadow: '0px 4px 12px',
