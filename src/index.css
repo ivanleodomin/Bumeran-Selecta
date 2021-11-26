@@ -4,101 +4,42 @@
 
 body{
     height: 100%;
+    font-family: 'Poppins', sans-serif;
 }
 
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:700");
-
-/* Reset */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  font-family: "Open Sans", sans-serif;
-  font-size: clamp(1.2rem, 3vw, 3rem);
-  font-weight: 700;
-  background: #c1f7f5;
-}
-
-ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Layout */
-body {
+#examples .example {
   display: flex;
-  justify-content: center;
+  flex-flow: row nowrap;
   align-items: center;
+  margin: 0 0 45px;
 }
-
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-li {
-  margin: 0 2rem;
-}
-
-/* Underline styles */
-a {
-  display: block;
+#examples .example .hover {
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  transition: all 0.1s ease-in-out;
   position: relative;
-  padding: 0.2em 0;
 }
-
-/* Fade in */
-a::after {
-  content: '';
+#examples .example .hover:before, #examples .example .hover:after {
+  content: "";
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0.1em;
-  background-color: hotpink;
+  bottom: -4px;
+  width: 0px;
+  height: 2px;
+  margin: 5px 0 0;
+  transition: all 0.2s ease-in-out;
+  transition-duration: 0.25;
   opacity: 0;
-  transition: opacity 300ms, transform 300ms;
+  background-color: #fe0068;
+}
+#examples .example .hover.hover-1:before, #examples .example .hover.hover-1:after {
+  left: 0;
 }
 
-a:hover::after,
-a:focus::after {
+#examples .example:hover {
+  cursor: pointer;
+}
+#examples .example:hover .hover:before, #examples .example:hover .hover:after {
+  width: 100%;
   opacity: 1;
-  transform: translate3d(0, 0.2em, 0);
-}
-
-/* Slide in */
-li:nth-child(2) a {
-  overflow: hidden;
-}
-
-li:nth-child(2) a::after {
-  opacity: 1;
-  transform: translate3d(-100%, 0, 0);
-}
-
-li:nth-child(2) a:hover::after,
-li:nth-child(2) a:focus::after{
-  transform: translate3d(0, 0, 0);
-}
-
-/* Scale from center */
-li:nth-child(3) a::after {
-  opacity: 1;
-  transform: scale(0);
-  transform-origin: center;
-}
-
-li:nth-child(3) a:hover::after,
-li:nth-child(3) a:focus::after{
-  transform: scale(1);
 }
