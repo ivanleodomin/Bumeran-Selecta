@@ -7,7 +7,7 @@ import { GrFormAdd } from "react-icons/gr";
 
 const Header = () => {
   return (
-    <header className="relative ">
+    <header className="relative">
       <div
         style={{ background: "#ffff" }}
         className="flex item-center justify-between mb-1 pl-10 mt-1 shadow h-16"

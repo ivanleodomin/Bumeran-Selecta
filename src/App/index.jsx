@@ -4,7 +4,7 @@ import Home from "../views/Home";
 import Vacants from "../components/Vacants";
 import Statistics from "../components/Statistics";
 import NotFound from "../components/NotFound";
-import Header from "../components/Heading";
+import Navbar from "../components/Navbar";
 import FilteringTable from "../components/table/FilteringTable";
 import RecruitersAdd from "../views/RecruitersAdd";
 import Footer from "../components/Footer";
@@ -12,7 +12,7 @@ import Footer from "../components/Footer";
 function App() {
   return (
     <>
-      <Header />
+      <Navbar />
       <Switch>
         <Route path="/home">
           <Home />
