@@ -4,4 +4,42 @@
 
 body{
     height: 100%;
+    font-family: 'Poppins', sans-serif;
+}
+
+#examples .example {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  margin: 0 0 45px;
+}
+#examples .example .hover {
+  text-align: center;
+  margin: 0 auto;
+  padding: 0;
+  transition: all 0.1s ease-in-out;
+  position: relative;
+}
+#examples .example .hover:before, #examples .example .hover:after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  width: 0px;
+  height: 2px;
+  margin: 5px 0 0;
+  transition: all 0.2s ease-in-out;
+  transition-duration: 0.25;
+  opacity: 0;
+  background-color: #fe0068;
+}
+#examples .example .hover.hover-1:before, #examples .example .hover.hover-1:after {
+  left: 0;
+}
+
+#examples .example:hover {
+  cursor: pointer;
+}
+#examples .example:hover .hover:before, #examples .example:hover .hover:after {
+  width: 100%;
+  opacity: 1;
 }

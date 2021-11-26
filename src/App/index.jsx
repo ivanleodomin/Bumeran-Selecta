@@ -4,18 +4,19 @@ import { Switch, Route } from 'react-router'
 import Vacants from '../components/Vacants'
 import Statistics from "../components/Statistics";
 import NotFound from "../components/NotFound";
-import Header from "../components/Heading";
+import Header from "../components/Navbar";
 //import BasicTable from "../components/table/BasicTable";
 //import SortingTable from "../components/table/SortingTable";
 import FilteringTable from "../components/table/FilteringTable";
 import AddRecruiterForm from "../components/AddRecruiterForm";
 import { HiMenuAlt1 } from "react-icons/hi";
+import  Navbar  from "../components/Navbar.jsx";
 
 function App() {
   return (
     <div>
     <div>
-      <Header/>
+      <Navbar/>
       </div>
 
       <Home/>
