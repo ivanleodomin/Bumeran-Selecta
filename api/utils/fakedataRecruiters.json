@@ -1,0 +1,68 @@
+[
+    {
+        "firstName": "Ivan",
+        "lastName": "Linari",
+        "residence": "Argentina",
+        "areaOp1Id": 4,
+        "areaOp2Id": 1,
+        "areaOp3Id":3,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 1,	
+        "seniorityOp3Id": 3
+      },
+      {
+        "firstName": "Juan",
+        "lastName": "Perez",
+        "residence": "Colombia",
+        "areaOp1Id": 2,
+        "areaOp2Id": 2,
+        "areaOp3Id":1,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 2,	
+        "seniorityOp3Id": 3
+      },
+      {
+        "firstName": "Macarena",
+        "lastName": "Colombo",
+        "residence": "Venezuela",
+        "areaOp1Id": 3,
+        "areaOp2Id": 2,
+        "areaOp3Id":1,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 2,	
+        "seniorityOp3Id": 3
+      },
+      {
+        "firstName": "Jorge",
+        "lastName": "Gutierres",
+        "residence": "Argentina",
+        "areaOp1Id": 3,
+        "areaOp2Id": 2,
+        "areaOp3Id":1,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 2,	
+        "seniorityOp3Id": 3
+      },
+      {
+        "firstName": "Fernando",
+        "lastName": "Avarez",
+        "residence": "Mexico",
+        "areaOp1Id": 3,
+        "areaOp2Id": 1,
+        "areaOp3Id":2,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 2,	
+        "seniorityOp3Id": 3
+      },
+      {
+        "firstName": "Dario",
+        "lastName": "Markez",
+        "residence": "Venezuela",
+        "areaOp1Id": 1,
+        "areaOp2Id": 2,
+        "areaOp3Id":3,
+        "seniorityOp1Id": 1,
+        "seniorityOp2Id": 2,	
+        "seniorityOp3Id": 3
+      }
+]

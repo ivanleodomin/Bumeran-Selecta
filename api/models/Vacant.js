@@ -1,9 +1,9 @@
 const S = require("sequelize");
 const sequelize = require("../config/db");
 
-class Vacants extends S.Model {}
+class Vacant extends S.Model {}
 
-Vacants.init(
+Vacant.init(
   {
     Country: {
       type: S.STRING,
@@ -17,7 +17,7 @@ Vacants.init(
       type: S.STRING,
       allowNull: false,
     },
-    Vacants: {
+    Vacant: {
       type: S.INTEGER,
       allowNull: false,
       validate: {
@@ -30,10 +30,10 @@ Vacants.init(
       validate: {
         min: 40,
       },
-      State: {
-        type: S.STRING,
-        allowNull: false,
-      },
+    },
+    State: {
+      type: S.STRING,
+      defaultValue: "Iniciada",
     },
   },
   {
@@ -42,4 +42,4 @@ Vacants.init(
   }
 );
 
-module.exports = Vacants;
+module.exports = Vacant;

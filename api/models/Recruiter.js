@@ -20,9 +20,10 @@ Recruiter.init(
       get() {
         return Review.findAll({
           where: {
-            recluiterId: this.getDataValue("id"),
+            RecruiterId: this.getDataValue("id"),
           },
         }).then((reviews) => {
+          if(!reviews.length) return null
           let acc = 0;
           reviews.forEach((element) => {
             acc += element.score;
