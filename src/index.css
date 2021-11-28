@@ -2,9 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    height: 100%;
-    font-family: 'Poppins', sans-serif;
+body {
+  height: 100%;
+  background-color: #f7f9fc;
+  font-family: "Hind Vadodara", sans-serif;
 }
 
 #examples .example {
@@ -20,7 +21,8 @@ body{
   transition: all 0.1s ease-in-out;
   position: relative;
 }
-#examples .example .hover:before, #examples .example .hover:after {
+#examples .example .hover:before,
+#examples .example .hover:after {
   content: "";
   position: absolute;
   bottom: -4px;
@@ -32,14 +34,69 @@ body{
   opacity: 0;
   background-color: #fe0068;
 }
-#examples .example .hover.hover-1:before, #examples .example .hover.hover-1:after {
+#examples .example .hover.hover-1:before,
+#examples .example .hover.hover-1:after {
   left: 0;
 }
 
 #examples .example:hover {
   cursor: pointer;
 }
-#examples .example:hover .hover:before, #examples .example:hover .hover:after {
+#examples .example:hover .hover:before,
+#examples .example:hover .hover:after {
   width: 100%;
   opacity: 1;
+}
+.colorButtonSave {
+  background-color: #e90066;
+  width: 200px;
+  font-family: "Hind Vadodara", sans-serif;
+  height: 48px;
+  line-height: 18px;
+  font-size: 16px;
+  font-style: normal;
+  margin-left: 30px;
+}
+.colorButtonFormCancel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  background-color: white;
+  font-family: "Hind Vadodara", sans-serif;
+  border: 1px solid #e90066;
+  color: #e90066;
+  width: 200px;
+  height: 48px;
+  margin-left: 100px;
+}
+
+.buttons {
+  width: 800px;
+  position: static;
+  height: 50px;
+  left: 188px;
+  top: 504px;
+  flex: none;
+  order: 5;
+  align-self: center;
+  flex-grow: 0;
+  margin: 32px 0px;
+}
+
+.form {
+  width: 800px;
+}
+
+.input {
+  height: 50px;
+}
+
+.label {
+  position: absolute;
+  font-family: Hind Vadodara;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  align-items: center;
 }

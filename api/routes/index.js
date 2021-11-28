@@ -9,6 +9,6 @@ router.use("/vacant", vacant);
 router.use("/recruiter", recruiter);
 router.use("/seniority", seniority);
 router.use("/area", area);
-router.use("/vacants", vacant)
+router.use("/vacant", vacant);
 
 module.exports = router

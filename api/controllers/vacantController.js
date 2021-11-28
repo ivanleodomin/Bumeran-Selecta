@@ -4,8 +4,12 @@ class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    const vacant = await Vacant.create(req.body);
-    return res.status(201).send(vacant);
+    try {
+      const vacant = await Vacant.create(req.body);
+      return res.status(201).send(vacant);
+    } catch(err) {
+      next(err)
+    }
   }
 
   static async getById(req, res, next) {
