@@ -1,30 +1,30 @@
 [{
-	"Country": "Venezuela",
-	"Area": "Humanidades", 
-	"Job": "Abogado",
-	"Vacant": 3,
-	"Description": "Para importante estudio jurídico con fuerte orientación a parte demandada requerimos profesional graduado con matricula en CABA que cuente con al menos 3 años de experiencia llevando adelante litigios en área civil y comercial desempeñadas en estudio o en empresas. Contratación en relación de dependencia Formal. Completan el perfil excelentes habilidades de negociación, comunicación y relaciones interpersonales, deseable conocimiento de idioma ingles. Aguardamos tu Postulacion. Muchas Gracias ¡! Equipo Hucap"
+	"country": "Venezuela",
+	"area": "Humanidades", 
+	"job": "Abogado",
+	"vacant": 2,
+	"description": "Para importante estudio jurídico con fuerte orientación a parte demandada requerimos profesional graduado con matricula en CABA que cuente con al menos 3 años de experiencia llevando adelante litigios en área civil y comercial desempeñadas en estudio o en empresas. Contratación en relación de dependencia Formal. Completan el perfil excelentes habilidades de negociación, comunicación y relaciones interpersonales, deseable conocimiento de idioma ingles. Aguardamos tu Postulacion. Muchas Gracias ¡! Equipo Hucap"
 },
 
 {
-    "Country": "Argentina",
-	"Area": "Ingenieria", 
-	"Job": "Developer web",
-	"Vacant": 3,
-	"Description":"Importante proyecto"
+    "country": "Argentina",
+	"area": "Ingenieria", 
+	"job": "Developer web",
+	"vacant": 5,
+	"description":"Para importante estudio jurídico con fuerte orientación a parte demandada requerimos profesional graduado con matricula en CABA que cuente con al menos 3 años de experiencia llevando adelante litigios en área civil y comercial desempeñadas en estudio o en empresas. Contratación en relación de dependencia Formal. Completan el perfil excelentes habilidades de negociación, comunicación y relaciones interpersonales, deseable conocimiento de idioma ingles. Aguardamos tu Postulacion. Muchas Gracias ¡! Equipo Hucap"
 },
 {
-    "Country": "Colombia",
-	"Area": "Ingenieria", 
-	"Job": "Maquetador",
-	"Vacant": 3,
-	"Description":"Importante proyecto"
+    "country": "Colombia",
+	"area": "Ingenieria", 
+	"job": "Maquetador",
+	"vacant": 2,
+	"description":"Para importante estudio jurídico con fuerte orientación a parte demandada requerimos profesional graduado con matricula en CABA que cuente con al menos 3 años de experiencia llevando adelante litigios en área civil y comercial desempeñadas en estudio o en empresas. Contratación en relación de dependencia Formal. Completan el perfil excelentes habilidades de negociación, comunicación y relaciones interpersonales, deseable conocimiento de idioma ingles. Aguardamos tu Postulacion. Muchas Gracias ¡! Equipo Hucap"
 },
 {
-    "Country": "Argentina",
-	"Area": "Contabilidad", 
-	"Job": "Contador",
-	"Vacant": 3,
-	"Description":"Importante negocio"
+    "country": "Argentina",
+	"area": "Contabilidad", 
+	"job": "Contador",
+	"vacant": 1,
+	"description":"Para importante estudio jurídico con fuerte orientación a parte demandada requerimos profesional graduado con matricula en CABA que cuente con al menos 3 años de experiencia llevando adelante litigios en área civil y comercial desempeñadas en estudio o en empresas. Contratación en relación de dependencia Formal. Completan el perfil excelentes habilidades de negociación, comunicación y relaciones interpersonales, deseable conocimiento de idioma ingles. Aguardamos tu Postulacion. Muchas Gracias ¡! Equipo Hucap"
 }
 ]

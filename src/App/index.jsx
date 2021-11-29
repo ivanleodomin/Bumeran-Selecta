@@ -1,13 +1,14 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 import Home from "../views/Home";
-import Vacants from "../components/Vacants";
-import Statistics from "../components/Statistics";
-import NotFound from "../components/NotFound";
+import Vacants from "../views/Vacants";
+import Statistics from "../views/Statistics";
+import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
-import FilteringTable from "../components/table/FilteringTable";
 import RecruitersAdd from "../views/RecruitersAdd";
-import Footer from "../components/Footer";
+import VacantsAdd from "../views/VacantsAdd";
+import Recruiters from "../views/Recruiters";
+import VacantIndividual from "../views/VacantIndividual"
 
 function App() {
   return (
@@ -17,18 +18,24 @@ function App() {
         <Route path="/home">
           <Home />
         </Route>
-        <Route exact path="/recruiter/add">
+        <Route exact path="/recruiter-form">
           <RecruitersAdd />
         </Route>
+        <Route exact path="/vacant-form">
+          <VacantsAdd />
+        </Route>
         <Route path="/recruiters">
-          <FilteringTable />
+          <Recruiters />
         </Route>
         <Route path="/vacants">
           <Vacants />
         </Route>
+        <Route path="/vacant/:id">
+          <VacantIndividual />
+        </Route>
         <Route path="/stadistics">
           <Statistics />
-        </Route>
+        </Route>    
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
@@ -37,7 +44,6 @@ function App() {
           <Redirect to="/404" />
         </Route>
       </Switch>
-      <Footer />
     </>
   );
 }

@@ -83,13 +83,25 @@ body {
   flex-grow: 0;
   margin: 32px 0px;
 }
-
+.buttonAdd {
+  background: #e90066;
+  border-radius: 8px;
+}
+.buttonBlue {
+  background-color: #0A26EE;
+  width: 160px;
+  height: 48px;
+  border-radius: 8px;
+}
 .form {
   width: 800px;
 }
 
 .input {
   height: 50px;
+}
+.inputDescription {
+  height: 153px;
 }
 
 .label {
@@ -99,4 +111,17 @@ body {
   font-weight: normal;
   font-size: 14px;
   align-items: center;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.logo {
+  width: 220px;
+  height: 30px;
+  margin-top: 18px;
+}
+.bienvenida {
+  margin-left: 315px;
 }

@@ -3,13 +3,12 @@ const { Vacant, Recruiter } = require("../models");
 class VacantController {
   //------------------Vacant-----------------------
 
-  static async createVacant(req, res, next) {
-    try {
-      const vacant = await Vacant.create(req.body);
-      return res.status(201).send(vacant);
-    } catch(err) {
-      next(err)
-    }
+  static createVacant(req, res, next) {
+    Vacant.create(req.body)
+      .then((vacant) => {
+        return res.status(201).send(vacant);
+      })
+      .catch((err) => next(err));
   }
 
   static async getById(req, res, next) {
@@ -70,17 +69,14 @@ class VacantController {
   }
 
   static async showRanking(req, res, next) {
+    const { id } = req.params;
+    const vacant = await Vacant.findByPk(id);
 
-    const {id} = req.params
-    const vacant = await Vacant.findByPk(id)
+    let recruiters = await Recruiter.findAll({
+      where: { residencia: vacant.country },
+    });
 
-
-    let recruiters = await Recruiter.findAll(
-      { where: { residencia: vacant.country },}
-    )
-
-    res.send(recruiters)
-
+    res.send(recruiters);
   }
 }
 
