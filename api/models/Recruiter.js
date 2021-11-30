@@ -15,27 +15,28 @@ Recruiter.init(
     residence: {
       type: DataTypes.STRING,
     },
-    ranking: {
-      type: DataTypes.VIRTUAL,
-      async get() {
-        const reviews = await Review.findAll({
-          where: {
-            RecruiterId: this.getDataValue("id"),
-          },
-        });
-        if (!reviews.length) return 0;
-        let acc = 0;
-        reviews.forEach((element) => {
-          acc += element.score;
-        });
-        return acc / reviews.length;
-      },
-    },
   },
   {
     sequelize: db,
     modelName: "Recruiter",
   }
 );
+
+Recruiter.prototype.getRanking = async function () {
+  const reviews = await Review.findAll({
+    where: {
+      RecruiterId: this.id,
+    },
+  });
+  if (!reviews.length) return 0;
+  else {
+    let acc = 0;
+    reviews.forEach((element) => {
+      acc += element.score
+    });
+    console.log(acc);
+    return acc / reviews.length;
+  }
+};
 
 module.exports = Recruiter;

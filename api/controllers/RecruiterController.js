@@ -1,6 +1,9 @@
-const { Recruiter, Review, Vacant } = require("../models");
+const { Recruiter, Review, Vacant, Area, Seniority } = require("../models");
 const getareas = require("../utils/getInstancesAreas");
+const idConversorDataRec = require("../utils/idConversorDataRec");
+const idConversorDataRev = require("../utils/idConversorDataRev");
 const getSeniorities = require("../utils/getInstancesSeniorities");
+const { lte } = require("sequelize/dist/lib/operators");
 
 class RecruiterController {
   static async creatRecruiter(req, res) {
@@ -43,7 +46,14 @@ class RecruiterController {
 
   static async getById(req, res) {
     const { id } = req.params;
-    const recruiter = await Recruiter.findOne({ where: { id: id } });
+    let recruiter = await Recruiter.findOne({ where: { id: id } });
+    recruiter = await idConversorDataRec(recruiter)
+    
+    let reviews = await Review.findAll({ where: { RecruiterId: id}})
+    reviews = await idConversorDataRev(reviews)
+    console.log(reviews)
+    recruiter.dataValues.reviews = reviews
+    recruiter.dataValues.ranking = await recruiter.getRanking()
     res.send(recruiter);
   }
 
@@ -67,7 +77,7 @@ class RecruiterController {
     review.setVacant(vacant);
     recruiter.addReview(review);
 
-    res.send( await Review.findByPk(review.id));
+    res.send(await Review.findByPk(review.id));
   }
 
   static async getAll(req, res) {
