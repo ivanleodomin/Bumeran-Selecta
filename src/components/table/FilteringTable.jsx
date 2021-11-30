@@ -1,12 +1,25 @@
-import React from "react";
+import React,{useState} from "react";
 import { useMemo } from "react";
 import { useTable, useGlobalFilter, useFilters } from "react-table";
 import { Link } from "react-router-dom";
 import ColumnFilter from "./ColumnFilter";
 import GlobalFilter from "./GlobalFilter";
+import {AiOutlineClose} from 'react-icons/ai'
+import './FilteringTable.css'
+import Modal from "../Modal";
 //import './basicTable.css'
 
 const FilteringTable = () => {
+
+  const [openModal, setOpenModal] = useState(false)
+
+
+/*   const toggleValue = () =>{
+  console.log(openModal);
+    openModal? setOpenModal(false): setOpenModal(true)
+  
+} */
+
   const data = useMemo(
     () => [
       {
@@ -241,6 +254,7 @@ const FilteringTable = () => {
             <tr
               className="border border-gray-500"
               {...headerGroup.getHeaderGroupProps()}
+
             >
               {headerGroup.headers.map((column) => (
                 <th
@@ -248,6 +262,7 @@ const FilteringTable = () => {
                   {...column.getHeaderProps()}
                 >
                   {column.render("Header")}
+                
                   <div>
                       {column.canFilter ? column.render('Filter'): null}
                   </div>
@@ -269,7 +284,8 @@ const FilteringTable = () => {
                     className="border border-gray-500 p-5"
                     {...cell.getCellProps()}
                   >
-                    {cell.render("Cell")}
+                    {cell.render("Cell")}  
+
                   </td>
                 ))}
               </tr>
@@ -303,6 +319,23 @@ const FilteringTable = () => {
         </button> </Link>
     </div>
 
+
+      {/* //MODAL */}
+         <div className='Modal' >        
+       <div> 
+            <h1>I am the Modal tho</h1>
+        <button className='openModel' onClick={()=>setOpenModal(true)}>  
+                Open
+                </button>{openModal && <Modal closeModal={setOpenModal}   />} 
+                 </div>
+             
+           </div>
+
+     
+      
+
+
+  
     
 
 

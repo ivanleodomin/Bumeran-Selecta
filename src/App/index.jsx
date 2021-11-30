@@ -10,6 +10,7 @@ import Header from "../components/Heading";
 import FilteringTable from "../components/table/FilteringTable";
 import AddRecruiterForm from "../components/AddRecruiterForm";
 import { HiMenuAlt1 } from "react-icons/hi";
+import Modal from "../components/Modal";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path='/statistics' component={Statistics} />
         <Route component={NotFound} />
         </Switch>  
+        
         </div> 
     </div>
   );
