@@ -1,6 +1,5 @@
 const { Recruiter, Review, Vacant, Area, Seniority } = require("../models");
 const getareas = require("../utils/getInstancesAreas");
-const idConversorDataRec = require("../utils/idConversorDataRec");
 const idConversorDataRev = require("../utils/idConversorDataRev");
 const getSeniorities = require("../utils/getInstancesSeniorities");
 const { lte } = require("sequelize/dist/lib/operators");
@@ -11,7 +10,8 @@ class RecruiterController {
       const {
         firstName,
         lastName,
-        residence,
+        country,
+        city,
         areaOp1,
         areaOp2,
         areaOp3,
@@ -28,7 +28,12 @@ class RecruiterController {
         seniorityOp3,
       ]);
 
-      const newRec = await Recruiter.create({ firstName, lastName, residence });
+      const newRec = await Recruiter.create({
+        firstName,
+        lastName,
+        country,
+        city,
+      });
 
       newRec.setAreaOp1(area1);
       newRec.setAreaOp2(area2);
@@ -46,14 +51,28 @@ class RecruiterController {
 
   static async getById(req, res) {
     const { id } = req.params;
-    let recruiter = await Recruiter.findOne({ where: { id: id } });
-    recruiter = await idConversorDataRec(recruiter)
-    
-    let reviews = await Review.findAll({ where: { RecruiterId: id}})
-    reviews = await idConversorDataRev(reviews)
-    console.log(reviews)
-    recruiter.dataValues.reviews = reviews
-    recruiter.dataValues.ranking = await recruiter.getRanking()
+    const recruiter = await Recruiter.findOne({
+      attributes: ["id", "firstName", "lastName", "country", "city"],
+      where: { id: id },
+      include: [
+        { model: Area, as: "AreaOp1", attributes: ["name"] },
+        { model: Area, as: "AreaOp2", attributes: ["name"] },
+        { model: Area, as: "AreaOp3", attributes: ["name"] },
+        { model: Seniority, as: "SeniorityOp1", attributes: ["name"] },
+        { model: Seniority, as: "SeniorityOp2", attributes: ["name"] },
+        { model: Seniority, as: "SeniorityOp3", attributes: ["name"] },
+      ],
+    });
+
+    if (!recruiter) return res.sendStatus(404);
+
+    const reviews = await Review.findAll({
+      attributes: ["id"],
+      where: { RecruiterId: id },
+      include: [{ model: Vacant, as: "Vacant" }],
+    });
+
+    recruiter.dataValues.ranking = reviews;
     res.send(recruiter);
   }
 

@@ -15,6 +15,12 @@ Recruiter.init(
     residence: {
       type: DataTypes.STRING,
     },
+    country: {
+      type: DataTypes.STRING,
+    },
+    city: {
+      type: DataTypes.STRING,
+    },
   },
   {
     sequelize: db,
@@ -32,7 +38,7 @@ Recruiter.prototype.getRanking = async function () {
   else {
     let acc = 0;
     reviews.forEach((element) => {
-      acc += element.score
+      acc += element.score;
     });
     console.log(acc);
     return acc / reviews.length;
