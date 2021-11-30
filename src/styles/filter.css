@@ -1,0 +1,138 @@
+.dropdown-button {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 6px;
+  font-size: medium;
+}
+
+li{
+  background-color:white;
+}
+
+.name {
+  margin-left: 5px;
+  width: 50%;
+}
+
+.filters {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: #d5d5fd;
+  position: absolute;
+}
+
+
+.dropdown {
+  color: #c4c4c4;
+  align-items: center;
+  font-size: 12px;
+  text-align: left;
+  background-color: white;
+  border-radius: 5px;
+  width: 33%;
+  height: 35px;
+  position: relative;
+  margin: 10px;
+}
+.trash {
+  color: blue;
+}
+
+.dropdown ul {
+  background-color: #ffff;
+  text-align: left;
+  list-style: none;
+  position: absolute;
+  width: 100%;
+  max-height: 0px;
+  overflow: auto;
+  display: block;
+  z-index: 10;
+}
+
+.onclick {
+  height: 34px;
+  border: 0.5px solid blue;
+  color: blue;
+}
+
+.dropdown ul.show {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 0.5px solid #e3dfdf;
+  width: 100%;
+  max-height: 100px;
+}
+
+.dropdown ul::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.dropdown ul::-webkit-scrollbar-thumb {
+  background-color: gray;
+  border-radius: 6px;
+}
+
+.item {
+  height: 18px;
+  color: black; 
+  margin: 8px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.item:hover {
+  background-color: #f1efef;
+}
+
+.arrow-dropdown {
+  transition: 0.2s;
+  margin-right: 10px;
+  color: blue;
+}
+
+.onclick .arrow-dropdown {
+  transform: rotate(180deg);
+}
+
+.newRecruiter {
+ font-size:15px;
+  width: 8%;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  margin-left: 12px;
+  border-radius: 5px;
+  border: blue;
+  background-color: blue;
+  margin-right: 5px;
+}
+
+.newRecruiter span {
+  color: white;
+  margin: 5px;
+}
+
+.fa-plus-circle {
+  color: white;
+  margin: 5px;
+}
+
+.newRecruiter:hover {
+  background-color: rgb(55, 55, 255);
+}
+
+.fa-search {
+  margin: 5px;
+  color: blue;
+}
+
+
+.active{
+  color: black
+}

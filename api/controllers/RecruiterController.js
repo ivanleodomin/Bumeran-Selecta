@@ -70,7 +70,10 @@ class RecruiterController {
     res.send( await Review.findByPk(review.id));
   }
 
-  static async getAll(req, res) {}
+  static async getAll(req, res) {
+    const rec = await Recruiter.findAll();
+    res.send(rec);
+  }
 }
 
 module.exports = RecruiterController;

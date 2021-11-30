@@ -1,14 +1,14 @@
 import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 import Home from "../views/Home";
-import Vacants from "../views/Vacants";
+import Vacants from "../views/Vacant/Vacants";
 import Statistics from "../views/Statistics";
 import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
-import RecruitersAdd from "../views/RecruitersAdd";
-import VacantsAdd from "../views/VacantsAdd";
-import Recruiters from "../views/Recruiters";
-import VacantIndividual from "../views/VacantIndividual"
+import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
+import VacantsAdd from "../views/Vacant/VacantsAdd";
+import Recruiters from "../views/Recruiter/Recruiters";
+import VacantIndividual from "../views/Vacant/VacantIndividual"
 
 function App() {
   return (

@@ -4,7 +4,7 @@
 
 body {
   height: 100%;
-  background-color: #f7f9fc;
+  background-color: rgb(237, 241, 247);
   font-family: "Hind Vadodara", sans-serif;
 }
 
@@ -88,7 +88,7 @@ body {
   border-radius: 8px;
 }
 .buttonBlue {
-  background-color: #0A26EE;
+  background-color: #0a26ee;
   width: 160px;
   height: 48px;
   border-radius: 8px;
@@ -106,7 +106,7 @@ body {
 
 .label {
   position: absolute;
-  font-family: Hind Vadodara;
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 14px;
@@ -118,8 +118,8 @@ body {
 }
 
 .logo {
-  width: 220px;
-  height: 30px;
+  width: 230px;
+  height: 35px;
   margin-top: 18px;
 }
 .bienvenida {
@@ -128,7 +128,7 @@ body {
 
 .backView {
   height: 289px;
-  background-color:#000df1 ;
+  background-color: #000df1;
 }
 
 .stepper {
@@ -139,4 +139,36 @@ body {
   bottom: 820px;
   left: 350px;
   position: absolute;
+}
+
+
+.scrollbox {
+	float: left;
+  max-height: 200px;
+  margin: 4rem 2rem;
+  overflow: auto;
+	width: 250px;
+
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+		
+		/* Shadows */
+		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background:
+		/* Shadow covers */
+		linear-gradient(white 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
+		
+		/* Shadows */
+		radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background-repeat: no-repeat;
+	background-color: white;
+	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+	
+	/* Opera doesn’t support this in the shorthand */
+	background-attachment: local, local, scroll, scroll;
 }

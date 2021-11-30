@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios"
-import { useHook } from "../hooks/useHook"
+import { useHook } from "../../hooks/useHook"
 
 const RecruitersAdd = () => {
   const name = useHook("")

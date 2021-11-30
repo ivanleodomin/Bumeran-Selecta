@@ -1,5 +1,5 @@
 import React from "react";
-import { useHook } from "../hooks/useHook";
+import { useHook } from "../../hooks/useHook";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -58,14 +58,14 @@ const VacantsAdd = () => {
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs mb-2 label"
                         htmlFor="grid-password"
                       >
                         Pais
                       </label>
                       <select
                         type="text"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
                         placeholder="Pais de la Vacante"
                         {...country}
                       >

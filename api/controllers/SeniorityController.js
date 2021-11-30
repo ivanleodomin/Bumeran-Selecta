@@ -21,6 +21,10 @@ class SeniorityController {
     const allSeniority = await Seniority.findAll();
     res.send(allSeniority);
   }
+
+  static async getById(req, res) {
+    res.send(await Seniority.findByPk(req.params.id));
+  }
 }
 
 module.exports = SeniorityController;
