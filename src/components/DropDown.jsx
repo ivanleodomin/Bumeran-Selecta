@@ -1,18 +1,18 @@
 import React from "react";
 import "../styles/filter.css";
 import {useDispatch} from "react-redux"
-import {setArea} from "../states/area"
-import {setSenioritie} from "../states/senioritie"
-import {setCountry} from "../states/country"
+import {useSelector} from 'react-redux'
 
-function Dropdown({ data, name }) {
+function Dropdown({ data, name, action }) {
   const dispatch = useDispatch()
   const [show, setShow] = React.useState(false);
   const [nameButton, setNameButton] = React.useState("");
 
+  
+
   const filter = (name) =>{
     setNameButton(name)
-    dispatch(setArea(name))
+    dispatch(action(name))
   }
 
   return (
