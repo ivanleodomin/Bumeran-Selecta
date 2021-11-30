@@ -1,12 +1,10 @@
-import logoSumar from "../assets/add.png";
 import "../styles/filter.css";
-import Link from "react-router-dom";
 import Dropdown from "./DropDown";
 import React from "react";
 
 const HeaderRecruiters = ({ areas, seniorities, pais }) => {
 
-  const [reset, setReset] = React.useState(false)
+ /*  const [reset, setReset] = React.useState(false) */
 
   const removeFilters = () => {
    console.log("delet")

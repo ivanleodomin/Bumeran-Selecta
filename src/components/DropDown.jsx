@@ -2,8 +2,8 @@ import React from "react";
 import "../styles/filter.css";
 import {useDispatch} from "react-redux"
 import {setArea} from "../states/area"
-import {setSenioritie} from "../states/senioritie"
-import {setCountry} from "../states/country"
+/* import {setSenioritie} from "../states/senioritie"
+import {setCountry} from "../states/country" */
 
 function Dropdown({ data, name }) {
   const dispatch = useDispatch()
