@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "../../components/Vacants/Header";
 import axios from "axios";
-import ResultsVacant from "../../components/Vacants/Results";
+import Results from "../../components/Vacants/Results";
 
 const Vacants = () => {
   const [vacants, setVacants] = React.useState([]);
@@ -28,7 +28,8 @@ const Vacants = () => {
   return (
     <>
       <Header areas={areas} seniorities={seniorities} />
-      {/* <ResultsVacant vacants={vacants} /> */}
+      <Results vacants={vacants} />
+      <div className="h-64"></div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React from "react";
+import "../../styles/card.css"
 import { useHistory } from "react-router-dom";
 
 function Card({ recruiter }) {

@@ -1,12 +1,11 @@
 import React from "react";
 import axios from "axios";
-import "../styles/view.css";
+import "../../styles/view.css";
 import { useLocation } from "react-router-dom";
 
 function View() {
   const id = useLocation().pathname.slice(12);
   const [recruiter, setRecruiter] = React.useState("");
-
   React.useEffect(() => {
     axios
       .get(`/api/recruiter/${id}`)

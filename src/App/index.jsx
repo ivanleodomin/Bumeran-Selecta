@@ -8,7 +8,6 @@ import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
 import VacantsAdd from "../views/Vacant/VacantsAdd";
 import Recruiters from "../views/Recruiter/Recruiters";
-import VacantIndividual from "../views/Vacant/VacantIndividual"
 
 function App() {
   return (
@@ -29,9 +28,6 @@ function App() {
         </Route>
         <Route path="/vacants">
           <Vacants />
-        </Route>
-        <Route path="/vacant/:id">
-          <VacantIndividual />
         </Route>
         <Route path="/stadistics">
           <Statistics />

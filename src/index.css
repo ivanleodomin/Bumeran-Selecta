@@ -8,45 +8,7 @@ body {
   font-family: "Hind Vadodara", sans-serif;
 }
 
-#examples .example {
-  display: flex;
-  flex-flow: row nowrap;
-  align-items: center;
-  margin: 0 0 45px;
-}
-#examples .example .hover {
-  text-align: center;
-  margin: 0 auto;
-  padding: 0;
-  transition: all 0.1s ease-in-out;
-  position: relative;
-}
-#examples .example .hover:before,
-#examples .example .hover:after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  width: 0px;
-  height: 2px;
-  margin: 5px 0 0;
-  transition: all 0.2s ease-in-out;
-  transition-duration: 0.25;
-  opacity: 0;
-  background-color: #fe0068;
-}
-#examples .example .hover.hover-1:before,
-#examples .example .hover.hover-1:after {
-  left: 0;
-}
-
-#examples .example:hover {
-  cursor: pointer;
-}
-#examples .example:hover .hover:before,
-#examples .example:hover .hover:after {
-  width: 100%;
-  opacity: 1;
-}
+/* --------------------- Buttons --------------------------*/
 .colorButtonSave {
   background-color: #e90066;
   width: 200px;
@@ -139,36 +101,4 @@ body {
   bottom: 820px;
   left: 350px;
   position: absolute;
-}
-
-
-.scrollbox {
-	float: left;
-  max-height: 200px;
-  margin: 4rem 2rem;
-  overflow: auto;
-	width: 250px;
-
-	background:
-		/* Shadow covers */
-		linear-gradient(white 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-		
-		/* Shadows */
-		radial-gradient(50% 0, farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(50% 100%,farthest-side, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background:
-		/* Shadow covers */
-		linear-gradient(white 30%, rgba(255,255,255,0)),
-		linear-gradient(rgba(255,255,255,0), white 70%) 0 100%,
-		
-		/* Shadows */
-		radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
-		radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
-	background-repeat: no-repeat;
-	background-color: white;
-	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-	
-	/* Opera doesn’t support this in the shorthand */
-	background-attachment: local, local, scroll, scroll;
 }
