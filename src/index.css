@@ -94,7 +94,7 @@ body {
   border-radius: 8px;
 }
 .form {
-  width: 800px;
+  width: 810px;
 }
 
 .input {
@@ -124,4 +124,19 @@ body {
 }
 .bienvenida {
   margin-left: 315px;
+}
+
+.backView {
+  height: 289px;
+  background-color:#000df1 ;
+}
+
+.stepper {
+  height: 100px;
+}
+
+.logo-gratis {
+  bottom: 820px;
+  left: 350px;
+  position: absolute;
 }
