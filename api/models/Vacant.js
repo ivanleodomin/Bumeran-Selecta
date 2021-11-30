@@ -5,33 +5,29 @@ class Vacant extends S.Model {}
 
 Vacant.init(
   {
-    Country: {
+    country: {
       type: S.STRING,
-      allowNull: false,
     },
-    Area: {
+    area: {
       type: S.STRING,
-      allowNull: false,
     },
-    Job: {
+    job: {
       type: S.STRING,
-      allowNull: false,
     },
-    Vacant: {
+    vacant: {
       type: S.INTEGER,
-      allowNull: false,
       validate: {
         isNumeric: true,
       },
     },
-    Description: {
+    description: {
       type: S.TEXT,
-      allowNull: false,
       validate: {
         min: 40,
+        max: 513,
       },
     },
-    State: {
+    state: {
       type: S.STRING,
       defaultValue: "Iniciada",
     },

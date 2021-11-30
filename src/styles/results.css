@@ -1,0 +1,24 @@
+.col {
+  margin: 15px;
+  background-color: #ffff;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  height: auto;
+  transition:0.3s;
+  box-shadow: 0px 0px 5px 1px grey;
+  
+}
+.grid {
+  margin-top: 65px;
+  height: 65%;
+}
+
+.corrusel-cards {
+  overflow: auto;
+  height: 100%;
+}
+
+.corrusel-cards::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}

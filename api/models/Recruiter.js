@@ -17,19 +17,18 @@ Recruiter.init(
     },
     ranking: {
       type: DataTypes.VIRTUAL,
-      get() {
-        return Review.findAll({
+      async get() {
+        const reviews = await Review.findAll({
           where: {
             RecruiterId: this.getDataValue("id"),
           },
-        }).then((reviews) => {
-          if(!reviews.length) return null
-          let acc = 0;
-          reviews.forEach((element) => {
-            acc += element.score;
-          });
-          return acc / reviews.length;
         });
+        if (!reviews.length) return 0;
+        let acc = 0;
+        reviews.forEach((element) => {
+          acc += element.score;
+        });
+        return acc / reviews.length;
       },
     },
   },

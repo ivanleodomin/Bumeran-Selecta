@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { VacantController } = require("../controllers/vacantController")
+const { VacantController } = require("../controllers/VacantController.js")
 
 
 router.get('/', VacantController.getAll) // este metodo es para obtener todas las vacantes
