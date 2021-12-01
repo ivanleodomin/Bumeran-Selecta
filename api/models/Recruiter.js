@@ -15,22 +15,11 @@ Recruiter.init(
     residence: {
       type: DataTypes.STRING,
     },
-    ranking: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        return Review.findAll({
-          where: {
-            RecruiterId: this.getDataValue("id"),
-          },
-        }).then((reviews) => {
-          if(!reviews.length) return null
-          let acc = 0;
-          reviews.forEach((element) => {
-            acc += element.score;
-          });
-          return acc / reviews.length;
-        });
-      },
+    country: {
+      type: DataTypes.STRING,
+    },
+    city: {
+      type: DataTypes.STRING,
     },
   },
   {
@@ -38,5 +27,22 @@ Recruiter.init(
     modelName: "Recruiter",
   }
 );
+
+Recruiter.prototype.getRanking = async function () {
+  const reviews = await Review.findAll({
+    where: {
+      RecruiterId: this.id,
+    },
+  });
+  if (!reviews.length) return 0;
+  else {
+    let acc = 0;
+    reviews.forEach((element) => {
+      acc += element.score;
+    });
+    console.log(acc);
+    return acc / reviews.length;
+  }
+};
 
 module.exports = Recruiter;

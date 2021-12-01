@@ -20,6 +20,10 @@ class AreaController {
     await Area.destroy({ where: { id: req.params.id } });
     res.sendStatus(204);
   }
+
+  static async getById(req, res) {
+    res.send(await Area.findByPk(req.params.id));
+  }
 }
 
 module.exports = AreaController;

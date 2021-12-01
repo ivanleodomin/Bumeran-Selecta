@@ -1,0 +1,35 @@
+.col {
+  margin: 15px;
+  background-color: #ffff;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  height: 600px;
+  transition:0.3s;
+  box-shadow: 0px 0px 5px 1px grey;
+}
+.grid {
+  margin-top: 65px;
+  height: 80%;
+}
+
+.corrusel-cards {
+  overflow: auto;
+  height: 100%;
+}
+
+.scrollbox {
+  background-image: linear-gradient(to top, white, white),
+    linear-gradient(to top, white, white),
+    linear-gradient(to top, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0)),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(255, 255, 255, 0));
+  background-position: bottom center, top center, bottom center, top center;
+  background-color: white;
+  background-repeat: no-repeat;
+  background-size: 100% 20px, 100% 20px, 100% 10px, 100% 10px;
+  background-attachment: local, local, scroll, scroll;
+}
+
+.corrusel-cards::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}

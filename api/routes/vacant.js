@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { VacantController } = require("../controllers/vacantController")
+const { VacantController } = require("../controllers/VacantController.js")
 
 
 router.get('/', VacantController.getAll) // este metodo es para obtener todas las vacantes
@@ -12,8 +12,8 @@ router.put('/:id', VacantController.updateVacantByIdParams) // este metodo es pa
 
 router.delete('/:id', VacantController.deleteVacantByIdParams) // este metodo es para eliminar una vacante
 
-router.put('/:id/addRecruiter',) // este metodo es para agregar un Recruiter a una vacante
+router.put('/:id/addRecruiter',VacantController.addRecruiter) // este metodo es para agregar un Recruiter a una vacante
 
-router.get('/:id/showRanking',) // este metodo es para mostrar los mejores candidatos para dicha vacante
+router.get('/:id/showRanking',VacantController.showRanking) // este metodo es para mostrar los mejores candidatos para dicha vacante
 
 module.exports = router; 

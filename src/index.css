@@ -2,6 +2,100 @@
 @tailwind components;
 @tailwind utilities;
 
-body{
-    height: 100%;
+body {
+  height: 100%;
+  background-color: rgb(237, 241, 247);
+  font-family: "Hind Vadodara", sans-serif;
+}
+
+/* --------------------- Buttons --------------------------*/
+.colorButtonSave {
+  background-color: #e90066;
+  width: 200px;
+  font-family: "Hind Vadodara", sans-serif;
+  height: 48px;
+  line-height: 18px;
+  font-size: 16px;
+  font-style: normal;
+  margin-left: 30px;
+}
+.colorButtonFormCancel {
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 18px;
+  background-color: white;
+  font-family: "Hind Vadodara", sans-serif;
+  border: 1px solid #e90066;
+  color: #e90066;
+  width: 200px;
+  height: 48px;
+  margin-left: 100px;
+}
+
+.buttons {
+  width: 800px;
+  position: static;
+  height: 50px;
+  left: 188px;
+  top: 504px;
+  flex: none;
+  order: 5;
+  align-self: center;
+  flex-grow: 0;
+  margin: 32px 0px;
+}
+.buttonAdd {
+  background: #0a26ee;
+  border-radius: 8px;
+  height: 35px;
+  width: 78px;
+}
+.buttonBlue {
+  background-color: #0a26ee;
+  width: 160px;
+  height: 48px;
+  border-radius: 8px;
+}
+.form {
+  width: 810px;
+}
+.label {
+  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  align-items: center;
+}
+
+.navbar {
+  background-color: white;
+}
+
+.logo {
+  width: 242px;
+  height: 42px;
+  margin-top: 18px;
+}
+.bienvenida {
+  margin-left: 315px;
+}
+
+.backView {
+  height: 289px;
+  background-color: #000df1;
+}
+
+.stepper {
+  height: 100px;
+}
+
+.logo-gratis {
+  bottom: 750px;
+  left: 350px;
+  position: absolute;
+}
+
+.rosa {
+  background: #F13D89;
 }

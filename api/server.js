@@ -13,6 +13,6 @@ app.use("/api", routes)
 
 db.sync({ force: false }).then(() =>
   app.listen(3001, () => {
-    console.log("listening port 3000");
+    console.log("listening port 3001");
   })
 );
