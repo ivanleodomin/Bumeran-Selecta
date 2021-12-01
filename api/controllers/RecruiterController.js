@@ -95,11 +95,15 @@ class RecruiterController {
 
     review.setVacant(vacant);
     recruiter.addReview(review);
-
+    
     res.send(await Review.findByPk(review.id));
   }
 
   static async getAll(req, res) {
+    
+    const {seniority, area} = req.query;
+
+    console.log(seniority, area)
     const rec = await Recruiter.findAll();
     res.send(rec);
   }

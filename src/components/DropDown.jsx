@@ -8,7 +8,6 @@ function Dropdown({ data, name, action, reset }) {
   const [nameButton, setNameButton] = React.useState("");
 
   React.useEffect(() => {
-    console.log(reset)
     if (reset.reset) {
       setNameButton("")
       reset.setReset(false)
