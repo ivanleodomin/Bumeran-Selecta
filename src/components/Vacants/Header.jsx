@@ -12,7 +12,7 @@ const HeaderRecruiters = ({ areas, seniorities, pais }) => {
   const [reset, setReset] = React.useState(false);
   const dispatch = useDispatch();
 
-  const handleTrash = (areas) => {
+  const handleTrash = () => {
     dispatch(resetSeniority());
     dispatch(resetArea());
     setReset(true);
@@ -49,7 +49,7 @@ const HeaderRecruiters = ({ areas, seniorities, pais }) => {
           </button>
         </div>
         <div className="newRecruiter">
-          <Link to="/recruiter-form">
+          <Link to="/vacant-form">
             <button className="fas fa-plus-circle"></button>
             <span>Nuevo</span>
           </Link>

@@ -21,36 +21,33 @@ const VacantsAdd = () => {
         seniority: seniority.value,
         description: description.value,
       })
-      .then(() => prompt("succesfully"))
-      .catch(() => prompt("negative"));
+      .then(() => alert("succesfully"))
+      .catch(() => alert("negative"));
   };
   return (
     <>
-      <div className="w-full absolute backView justify-center pt-4 pb-4 px-96">
-        
-      </div>
+      <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
       <section className="pt-24 py-1 bg-blueGray-50">
         <div className="form px-4 mx-auto mt-6">
           <div
             className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
-            style={{ top: "40px" }}
+            style={{ top: "5px" }}
           >
-            <div className="rounded-t bg-white mb-0 px-6 py-6">
+            <img
+              className="logo-gratis"
+              src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
+            />
+            <div className="rounded-t bg-white px-6 py-6">
               <div
-                className="text-center flex justify-between"
+                className="text-center flex justify-center"
                 style={{
-                  marginLeft: "30px",
                   marginTop: "20px",
                 }}
               >
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Nueva Vacante
+                  Generar una nueva Vacante
                 </h6>
               </div>
-              <img
-                className="logo-gratis"
-                src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
-              />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-white">
               <form onSubmit={handleSubmit}>
@@ -65,7 +62,7 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
-                        className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
                         {...country}
                       >
@@ -80,14 +77,14 @@ const VacantsAdd = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
                         Localidad
                       </label>
                       <select
                         type="text"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         {...location}
                       >
@@ -99,27 +96,27 @@ const VacantsAdd = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
                         Numero de Vacantes
                       </label>
                       <input
                         type="number"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         {...vacants}
                       />
                     </div>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
                         Area
                       </label>
                       <select
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...area}
                       >
                         <option>Administración, Contabilidad y Finanzas</option>
@@ -150,13 +147,13 @@ const VacantsAdd = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
                         Seniority
                       </label>
                       <select
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 input"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
                       >
                         <option>Jefetura</option>
@@ -167,7 +164,7 @@ const VacantsAdd = () => {
                     </div>
                     <div className="relative w-full mb-3">
                       <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2"
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
                         Descripcion
@@ -176,7 +173,7 @@ const VacantsAdd = () => {
                         type="text"
                         rows={5}
                         cols={5}
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 inputDescription"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
                         {...description}
                       />
@@ -188,7 +185,7 @@ const VacantsAdd = () => {
                         </button>
                       </Link>
                       <button
-                        className="text-white rounded-md colorButtonSave"
+                        className="text-white rounded-md colorButtonSave hover:bg-pink-600 active:bg-blue-800"
                         type="submit"
                       >
                         Guardar
