@@ -1,19 +1,19 @@
 import Dropdown from "../DropDown";
 import React from "react";
 import { Link } from "react-router-dom";
-import { addArea } from "../../features/areaSlice";
-import { addSeniority } from "../../features/senioritys";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { resetArea } from "../../features/areaSlice";
-import { resetSeniority } from "../../features/senioritys";
+import { resetArea, addArea } from "../../features/areaSlice";
+import { resetSeniority, addSeniority } from "../../features/senioritys";
+import { addCountry, resetCountry } from "../../features/countrySlice";
 
-const HeaderRecruiters = ({ areas, seniorities, pais }) => {
+const HeaderRecruiters = ({ areas, seniorities, countries }) => {
   const [reset, setReset] = React.useState(false);
 
   const dispatch = useDispatch();
 
-  const handleTrash = (areas) => {
+  const handleTrash = () => {
+    dispatch(resetCountry());
     dispatch(resetSeniority());
     dispatch(resetArea());
     setReset(true);
@@ -37,8 +37,8 @@ const HeaderRecruiters = ({ areas, seniorities, pais }) => {
         />
         <Dropdown
           name="Pais"
-          data={seniorities}
-          action={addSeniority}
+          data={countries}
+          action={addCountry}
           reset={{ reset, setReset }}
         />
         <div>

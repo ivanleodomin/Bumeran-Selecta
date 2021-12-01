@@ -1,8 +1,6 @@
-const { Recruiter, Review, Vacant, Area, Seniority } = require("../models");
+const { Recruiter, Review, Vacant, Area, Seniority,Country } = require("../models");
 const getareas = require("../utils/getInstancesAreas");
-const idConversorDataRev = require("../utils/idConversorDataRev");
 const getSeniorities = require("../utils/getInstancesSeniorities");
-const { lte } = require("sequelize/dist/lib/operators");
 
 class RecruiterController {
   static async creatRecruiter(req, res) {
@@ -28,13 +26,16 @@ class RecruiterController {
         seniorityOp3,
       ]);
 
+      const countryInstance = await Country.findByPk(country)
+
       const newRec = await Recruiter.create({
         firstName,
         lastName,
-        country,
         city,
       });
 
+      newRec.setCountry(countryInstance)
+      
       newRec.setAreaOp1(area1);
       newRec.setAreaOp2(area2);
       newRec.setAreaOp3(area3);
@@ -95,17 +96,45 @@ class RecruiterController {
 
     review.setVacant(vacant);
     recruiter.addReview(review);
-    
+
     res.send(await Review.findByPk(review.id));
   }
 
   static async getAll(req, res) {
-    
-    const {seniority, area} = req.query;
+    try {
+      const { seniority, area, country } = req.query;
+      const page = parseInt(req.query.page) - 1;
 
-    console.log(seniority, area)
-    const rec = await Recruiter.findAll();
-    res.send(rec);
+      const where = {}
+
+      if(!seniority) where.seniorityOp1 = seniority
+
+      const rec = await Recruiter.findAndCountAll({
+        where,
+        offset: page * 10,
+        limit: 10,
+      });
+      res.send(rec.rows);
+    } catch {
+      res.sendStatus(500);
+    }
+  }
+
+
+  static async test(req, res){
+    const { seniority, area, country } = req.query;
+    const page = parseInt(req.query.page) - 1;
+
+    const where = {}
+
+    if(!seniority) where.seniorityOp1Id = seniority
+
+    const rec = await Recruiter.findAndCountAll({
+      where,
+      offset: page * 10,
+      limit: 10,
+    });
+    res.send(rec.rows);
   }
 }
 

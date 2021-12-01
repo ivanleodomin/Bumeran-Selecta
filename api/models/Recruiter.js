@@ -12,9 +12,6 @@ Recruiter.init(
     lastName: {
       type: DataTypes.STRING,
     },
-    residence: {
-      type: DataTypes.STRING,
-    },
     country: {
       type: DataTypes.STRING,
     },

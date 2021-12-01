@@ -4,8 +4,12 @@ const Seniority = require("./Seniority");
 const Review = require("./Review");
 const Vacant = require("./Vacant");
 const Country = require("./Country");
+const City = require("./City");
 
 Vacant.belongsTo(Recruiter, { as: "Recruiter"}) 
+
+Recruiter.belongsTo(Country, { as: "Country"})
+City.belongsTo(Country, { as: "Country"})
 
 Recruiter.belongsTo(Area, { as: "AreaOp1" });
 Recruiter.belongsTo(Area, { as: "AreaOp2" });
@@ -19,4 +23,4 @@ Recruiter.hasMany(Review, { as: "Review"})
 Review.belongsTo(Vacant, { as: "Vacant"})   
 
 
-module.exports = { Recruiter, Area, Seniority, Review, Vacant, Country };
+module.exports = { Recruiter, Area, Seniority, Review, Vacant, Country, City };

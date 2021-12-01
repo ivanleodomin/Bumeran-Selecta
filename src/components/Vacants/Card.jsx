@@ -3,7 +3,7 @@ import "../../styles/card.css";
 import { useHistory } from "react-router-dom";
 
 function Card({ vacants }) {
-
+  console.log("vacante", vacants)
   const history = useHistory()
   return (
     <div
