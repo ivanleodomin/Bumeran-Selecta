@@ -3,6 +3,7 @@ const Area = require("./Area");
 const Seniority = require("./Seniority");
 const Review = require("./Review");
 const Vacant = require("./Vacant");
+const Country = require("./Country");
 
 Vacant.belongsTo(Recruiter, { as: "Recruiter"}) 
 
@@ -18,4 +19,4 @@ Recruiter.hasMany(Review, { as: "Review"})
 Review.belongsTo(Vacant, { as: "Vacant"})   
 
 
-module.exports = { Recruiter, Area, Seniority, Review, Vacant };
+module.exports = { Recruiter, Area, Seniority, Review, Vacant, Country };
