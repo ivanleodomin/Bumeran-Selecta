@@ -4,24 +4,22 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const VacantsAdd = () => {
-  const country = useHook("");
   const location = useHook("");
   const vacants = useHook("");
-  const area = useHook("");
-  const seniority = useHook("");
   const description = useHook("");
 
-  const [areas, setAreas] = React.useState("");
-  const [seniorities, setSeniorities] = React.useState("");
+  const [areas, setAreas] = React.useState([]);
+  const [seniorities, setSeniorities] = React.useState([]);
+  const [country, setCountries] = React.useState([]);
 
   const handleSubmit = () => {
     axios
       .post("/api/vacant/add", {
-        country: country.value,
+        country: country,
         location: location.value,
         vacants: vacants.value,
-        area: area.value,
-        seniority: seniority.value,
+        area: areas,
+        seniority: seniorities,
         description: description.value,
       })
       .then(() => alert("succesfully"))
@@ -39,9 +37,15 @@ const VacantsAdd = () => {
       .then((info) => info.data)
       .then((data) => setSeniorities(data))
 
+    axios
+      .get("/api/country") 
+      .then((info) => info.data) 
+      .then((data) => setCountries(data))
+
+    axios
+      .get("/api/cities")
   }, []);
-  console.log(areas);
-  console.log(seniorities)
+  console.log(country)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -84,13 +88,9 @@ const VacantsAdd = () => {
                         placeholder="Pais de la Vacante"
                         {...country}
                       >
-                        <option>Argentina</option>
-                        <option>Chile</option>
-                        <option>Ecuador</option>
-                        <option>Mexico</option>
-                        <option>Perú</option>
-                        <option>Panamá</option>
-                        <option>Venezuela</option>
+                        {country?.map((countries) => {
+                          return <option>{countries.name}</option>
+                        })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -135,32 +135,10 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...area}
                       >
-                        <option>Administración, Contabilidad y Finanzas</option>
-                        <option>Aduana y Comercio Exterior</option>
-                        <option>
-                          Atención al Cliente, Call Center y Telemarketing
-                        </option>
-                        <option>Comercial, Ventas y Negocios</option>
-                        <option>
-                          Comunicación, Relaciones Institucionales y Públicas
-                        </option>
-                        <option>Gastronomía y Turismo</option>
-                        <option>Gerencia y Dirección General</option>
-                        <option>Ingeniería Civil y Construcción</option>
-                        <option>Ingenierías</option>
-                        <option>Legales</option>
-                        <option>Marketing y Publicidad</option>
-                        <option>Minería, Petróleo y Gas</option>
-                        <option>Producción y Manufactura</option>
-                        <option>Recursos Humanos y Capacitación</option>
-                        <option>Salud, Medicina, Enfermería y Farmacia</option>
-                        <option>Secretarias y Recepción</option>
-                        <option>Seguros</option>
-                        <option>
-                          Tecnología, Sistemas y Telecomunicaciones
-                        </option>
+                        {areas?.map((area) => {
+                          return <option>{area.name}</option>
+                        })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -172,9 +150,10 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...seniority}
-                      >
-                        {}
+                        >
+                        {seniorities?.map((seniority) => {
+                          return <option>{seniority.name}</option>
+                        })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
