@@ -2,7 +2,6 @@ const { Recruiter, Review, Vacant, Area, Seniority } = require("../models");
 const getareas = require("../utils/getInstancesAreas");
 const idConversorDataRev = require("../utils/idConversorDataRev");
 const getSeniorities = require("../utils/getInstancesSeniorities");
-const { lte } = require("sequelize/dist/lib/operators");
 
 class RecruiterController {
   static async creatRecruiter(req, res) {
@@ -95,17 +94,21 @@ class RecruiterController {
 
     review.setVacant(vacant);
     recruiter.addReview(review);
-    
+
     res.send(await Review.findByPk(review.id));
   }
 
   static async getAll(req, res) {
-    
-    const {seniority, area} = req.query;
+    const { seniority, area, country } = req.query;
+    const page = parseInt(req.query.page) - 1;
 
-    console.log(seniority, area)
-    const rec = await Recruiter.findAll();
-    res.send(rec);
+    const where = {};
+
+    const rec = await Recruiter.findAndCountAll({
+      offset: page * 10,
+      limit: 10,
+    });
+    res.send(rec.rows);
   }
 }
 
