@@ -11,6 +11,9 @@ const VacantsAdd = () => {
   const seniority = useHook("");
   const description = useHook("");
 
+  const [areas, setAreas] = React.useState("");
+  const [seniorities, setSeniorities] = React.useState("");
+
   const handleSubmit = () => {
     axios
       .post("/api/vacant/add", {
@@ -24,6 +27,21 @@ const VacantsAdd = () => {
       .then(() => alert("succesfully"))
       .catch(() => alert("negative"));
   };
+
+  React.useEffect(() => {
+    axios
+      .get("/api/area")
+      .then((info) => info.data)
+      .then((data) => setAreas(data));
+
+    axios
+      .get("/api/seniority")
+      .then((info) => info.data)
+      .then((data) => setSeniorities(data))
+
+  }, []);
+  console.log(areas);
+  console.log(seniorities)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -156,10 +174,7 @@ const VacantsAdd = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
                       >
-                        <option>Jefetura</option>
-                        <option>SemiSenior/Senior</option>
-                        <option>Gerente/Director</option>
-                        <option>Training/Junior</option>
+                        {}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">

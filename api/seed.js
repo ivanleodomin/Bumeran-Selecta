@@ -1,4 +1,4 @@
-const areas = require("./utils/fakedataAreas.json");
+const areas = require("./utils/Areas.json");
 const seniorities = require("./utils/fakedataSeniorities.json");
 const vacants = require("./utils/fakedataVacants.json")
 const countries = require("./utils/Countries.json")

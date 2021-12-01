@@ -1,17 +1,14 @@
 [
     {
-        "name": "junior"
+        "name" :"Jefetura"
     },
     {
-        "name": "senior"
+        "name" :"SemiSenior/Senior"
     },
     {
-        "name": "semi-senior"
+        "name" :"Gerente/Director"
     },
     {
-        "name": "gerente"
-    },
-    {
-        "name": "jefe"
+        "name" :"Training/Junior"
     }
 ]
