@@ -46,8 +46,10 @@ body {
   margin: 32px 0px;
 }
 .buttonAdd {
-  background: #e90066;
+  background: #0a26ee;
   border-radius: 8px;
+  height: 35px;
+  width: 78px;
 }
 .buttonBlue {
   background-color: #0a26ee;
@@ -58,16 +60,7 @@ body {
 .form {
   width: 810px;
 }
-
-.input {
-  height: 50px;
-}
-.inputDescription {
-  height: 153px;
-}
-
 .label {
-  position: absolute;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
@@ -80,8 +73,8 @@ body {
 }
 
 .logo {
-  width: 230px;
-  height: 35px;
+  width: 242px;
+  height: 42px;
   margin-top: 18px;
 }
 .bienvenida {
@@ -98,7 +91,11 @@ body {
 }
 
 .logo-gratis {
-  bottom: 820px;
+  bottom: 750px;
   left: 350px;
   position: absolute;
+}
+
+.rosa {
+  background: #F13D89;
 }
