@@ -9,11 +9,13 @@ const Recruiters = () => {
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [recruiters, setRecruiter] = React.useState([]);
+  const [countries, setCountries] = React.useState([]);
 
   const area = useSelector((state) => state.area).value;
   const seniority = useSelector((state) => state.seniority).value;
+  const country = useSelector((state) => state.country).value;
 
-  console.log(area, seniority);
+
   React.useEffect(() => {
     axios
       .get("/api/area")
@@ -32,12 +34,18 @@ const Recruiters = () => {
         console.log("data",data)
         setRecruiter(data);
       })
+
+      axios
+      .get("/api/country")
+      .then((res) => res.data)
+      .then((data) => setCountries(data))
+      
       .catch((error) => console.error(error))
-  }, [area, seniority]);
+  }, [area, seniority, country]);
 
   return (
     <>
-      <Header areas={areas} seniorities={seniorities} />
+      <Header areas={areas} seniorities={seniorities} countries={countries} />
       <Results recruiters={recruiters} />
     </>
   );

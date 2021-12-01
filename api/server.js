@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routes) 
 
-db.sync({ force: true }).then(() =>
+db.sync({ force: false }).then(() =>
   app.listen(3001, () => {
     console.log("listening port 3001");
   })
