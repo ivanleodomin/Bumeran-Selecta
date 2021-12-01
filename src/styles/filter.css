@@ -70,7 +70,7 @@ li{
 }
 
 .dropdown ul::-webkit-scrollbar {
-  width: 6px;
+  width: 3px;
   height: 6px;
 }
 .dropdown ul::-webkit-scrollbar-thumb {

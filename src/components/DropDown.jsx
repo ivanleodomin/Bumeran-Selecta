@@ -1,19 +1,23 @@
 import React from "react";
 import "../styles/filter.css";
-import {useDispatch} from "react-redux"
-import {setArea} from "../states/area"
-/* import {setSenioritie} from "../states/senioritie"
-import {setCountry} from "../states/country" */
+import { useDispatch } from "react-redux";
 
-function Dropdown({ data, name }) {
-  const dispatch = useDispatch()
+function Dropdown({ data, name, action, reset }) {
+  const dispatch = useDispatch();
   const [show, setShow] = React.useState(false);
   const [nameButton, setNameButton] = React.useState("");
 
-  const filter = (name) =>{
-    setNameButton(name)
-    dispatch(setArea(name))
-  }
+  React.useEffect(() => {
+    if (reset.reset) {
+      setNameButton("")
+      reset.setReset(false)
+    }
+  }, [reset]);
+
+  const filter = (name) => {
+    setNameButton(name);
+    dispatch(action(name));
+  };
 
   return (
     <div
@@ -35,7 +39,7 @@ function Dropdown({ data, name }) {
         <ul className={show && "show"}>
           {data?.map((item) => {
             return (
-              <li className="item" onClick={()=>filter(item.name)}>
+              <li className="item" onClick={() => filter(item.name)}>
                 <span>{item.name}</span>
               </li>
             );

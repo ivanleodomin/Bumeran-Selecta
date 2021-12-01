@@ -6,6 +6,9 @@
   align-items: center;
 }
 
+
+/*Targeta por defecto*/
+
 .no-select {
   text-align: center;
   display: block;
@@ -22,4 +25,11 @@
 
 .no-select span{
   color: rgb(233, 0, 102); 
+}
+
+
+/*informacion del reclutador*/
+
+.info{
+  overflow: auto
 }
