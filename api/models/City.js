@@ -1,9 +1,9 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
 
-class Country extends Model {}
+class City extends Model {}
 
-Country.init(
+City.init(
   {
     name: {
       type: DataTypes.STRING,
@@ -11,8 +11,8 @@ Country.init(
   },
   {
     sequelize: db,
-    modelName: "Country",
+    modelName: "City",
   }
 );
 
-module.exports = Country;
+module.exports = City;

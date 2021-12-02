@@ -1,13 +1,27 @@
-import React, { useState } from "react";
-import countries from "../../assets/countries.json";
+import React from "react";
 import axios from "axios";
-
+import { Link } from "react-router-dom";
 import { useHook } from "../../hooks/useHook";
 
 const RecruitersAdd = () => {
+  const [areas, setAreas] = React.useState([]);
+  const [seniorities, setSeniorities] = React.useState([]);
+  const [countries, setCountries] = React.useState([]);
+  const [city, setCity] = React.useState([]);
+
+  React.useEffect(() => {
+    axios.get("/api/area").then((info) => setAreas(info.data));
+
+    axios.get("/api/seniority").then((info) => setSeniorities(info.data));
+
+    axios.get("/api/country").then((info) => setCountries(info.data));
+
+    /* axios.get("/api/cities").then((info) => setCountries(info.data)); */
+  }, []);
+
   const firstName = useHook("");
   const lastName = useHook("");
-  const residence = useHook("");
+  const country = useHook("");
   /* const city = useHook(""); */
   const AreaOp1Id = useHook("");
   const AreaOp2Id = useHook("");
@@ -16,246 +30,238 @@ const RecruitersAdd = () => {
   const SeniorityOp2Id = useHook("");
   const SeniorityOp3Id = useHook("");
 
+  console.log(country, "country");
   const handleSubmit = () => {
     axios
-      .post("/api/recruiter/", {
+      .post("/api/recruiter", {
         firstName: firstName.value,
         lastName: lastName.value,
-        residence: residence.value,
-        /* city: city.value, */
-        AreaOp1Id: AreaOp1Id.value,
-        AreaOp2Id: AreaOp2Id.value,
-        AreaOp3Id: AreaOp3Id.value,
-        SeniorityOp1Id: SeniorityOp1Id.value,
-        SeniorityOp2Id: SeniorityOp2Id.value,
-        SeniorityOp3Id: SeniorityOp3Id.value,
+        country: country.value,
+        areaOp1: AreaOp1Id.value,
+        areaOp2: AreaOp2Id.value,
+        areaOp3: AreaOp3Id.value,
+        seniorityOp1: SeniorityOp1Id.value,
+        seniorityOp2: SeniorityOp2Id.value,
+        seniorityOp3: SeniorityOp3Id.value,
       })
       .then(() => prompt("succesfully"))
       .catch(() => prompt("negative"));
   };
-
-  const [idCity, setIdCity] = useState(-1);
-  const handlerLoadCities = (e) => {
-    const option = e.target.value;
-
-    setIdCity(option);
-  };
-
   return (
-    <section className=" py-1 bg-blueGray-50">
-      <div className="w-full lg:w-8/12 px-4 mx-auto mt-6">
-        <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-          <div className="rounded-t bg-white mb-0 px-6 py-6">
-            <div className="text-center flex justify-between">
-              <h6 className="text-blueGray-700 text-xl font-bold">
-                Nuevo Reclutador
-              </h6>
+    <>
+      <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
+      <section className="pt-24 py-1 bg-blueGray-50">
+        <div className="form px-4 mx-auto mt-6">
+          <div
+            className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
+            style={{ top: "5px" }}
+          >
+            <img
+              className="logo-gratis-R"
+              src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
+            />
+            <div className="rounded-t bg-white px-6 py-6">
+              <div
+                className="text-center flex justify-center"
+                style={{
+                  marginTop: "20px",
+                }}
+              >
+                <h6 className="text-blueGray-700 text-xl font-bold">
+                  Generar una nueva Vacante
+                </h6>
+              </div>
+            </div>
+            <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-white">
+              <form onSubmit={handleSubmit}>
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-12/12 px-4">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
+                        htmlFor="grid-password"
+                      >
+                        Nombre
+                      </label>
+                      <input
+                        type="text"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Nombre"
+                        {...firstName}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
+                        htmlFor="grid-password"
+                      >
+                        Apellido
+                      </label>
+                      <input
+                        type="text"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Apellido"
+                        {...lastName}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs mb-2 label"
+                        htmlFor="grid-password"
+                      >
+                        Pais
+                      </label>
+                      <select
+                        type="text"
+                        className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Pais de la Vacante"
+                        {...country}
+                      >
+                        {countries?.map((countriess) => {
+                          return (
+                            <option value={countriess.id}>
+                              {countriess.name}
+                            </option>
+                          );
+                        })}
+                      </select>
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
+                        htmlFor="grid-password"
+                      >
+                        Ciudad
+                      </label>
+                      <select
+                        type="text"
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Localidad de la Vacante"
+                      >
+                        <option>Buenos Aires</option>
+                        <option>Santa fé</option>
+                        <option>Salta</option>
+                        <option>Jujuy</option>
+                      </select>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block   label" for="grid-first-name">
+                          Area
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...AreaOp1Id}
+                        >
+                          {areas?.map((area) => {
+                            return <option value={area.id}>{area.name}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label class="block  label" for="grid-last-name">
+                          Seniority
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...SeniorityOp1Id}
+                        >
+                          {seniorities?.map((seniority) => {
+                            return (
+                              <option value={seniority.id}>
+                                {seniority.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block   label" for="grid-first-name">
+                          Area 2
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...AreaOp2Id}
+                        >
+                          {areas?.map((area) => {
+                            return <option value={area.id}>{area.name}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label class="block  label" for="grid-last-name">
+                          Seniority 2
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...SeniorityOp2Id}
+                        >
+                          {seniorities?.map((seniority) => {
+                            return (
+                              <option value={seniority.id}>
+                                {seniority.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <div class="flex flex-wrap -mx-3 mb-6">
+                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label class="block   label" for="grid-first-name">
+                          Area 3
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...AreaOp3Id}
+                        >
+                          {areas?.map((area) => {
+                            return <option value={area.id}>{area.name}</option>;
+                          })}
+                        </select>
+                      </div>
+                      <div class="w-full md:w-1/2 px-3">
+                        <label class="block  label" for="grid-last-name">
+                          Seniority 3
+                        </label>
+                        <select
+                          className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                          {...SeniorityOp3Id}
+                        >
+                          {seniorities?.map((seniority) => {
+                            return (
+                              <option value={seniority.id}>
+                                {seniority.name}
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+                    </div>
+                    <div className="buttons">
+                      <Link to="/home">
+                        <button className="rounded-md colorButtonFormCancel font-semibold">
+                          Cancelar
+                        </button>
+                      </Link>
+                      <button
+                        className="text-white rounded-md colorButtonSave hover:bg-pink-600 active:bg-blue-800"
+                        type="submit"
+                      >
+                        Guardar
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
-          <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-            <form onSubmit={handleSubmit}>
-              <div className="flex flex-wrap">
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label className="text-blueGray-600 text-xs font-bold mb-2">
-                      Nombre
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                      placeholder="Nombre"
-                      {...firstName}
-                    />
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Apellido
-                    </label>
-                    <input
-                      id="name"
-                      type="text"
-                      className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                      placeholder="Nombre"
-                      {...lastName}
-                    />
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      País
-                    </label>
-                    <div className="flex-shrink w-full inline-block relative">
-                      <select
-                        id="country"
-                        name="country"
-                        onClick={handlerLoadCities}
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                      >
-                        <option value={-1}> Seleccione un País </option>
-                        {countries.map((country, i) => (
-                          <option key={"countries" + i} value={i} {...residence}>
-                            {country.name}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Ciudad
-                    </label>
-                    <div className="flex-shrink w-full inline-block relative">
-                {/*       <select
-                        id="city"
-                        name="city"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                      >
-                        <option value={-1}> Seleccione una ciudad </option>
-                        {idCity > -1 &&
-                          countries[idCity].cities.map((city, i) => (
-                            <option key={"cities" + i} value="" {...city}>
-                              {city}
-                            </option>
-                          ))}
-                      </select> */}
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Area de Preferencia
-                    </label>
-                    <div className="flex-shrink w-full inline-block relative">
-                      <select
-                        id="city"
-                        name="city"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...AreaOp1Id}
-                      >
-                        <option>Seleccionar Area de Preferencia</option>
-                        <option id="1">Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                      <select
-                        id="city"
-                        name="city"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...AreaOp2Id}
-                      >
-                        <option >Seleccionar Area de Preferencia</option>
-                        <option>Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                      <select
-                        id="city"
-                        name="city"
-                        className=" appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...AreaOp3Id}
-                      >
-                        <option>Seleccionar Area de Preferencia</option>
-                        <option>Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full lg:w-6/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Grado de profesión 
-                    </label>
-                    <div className="flex-shrink w-full inline-block relative">
-                      <select
-                        id="city"
-                        name="city"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...SeniorityOp1Id}
-                      >
-                        <option>Seleccionar Area de Preferencia</option>
-                        <option>Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                      <select
-                        id="city"
-                        name="city"
-                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...SeniorityOp2Id}
-                      >
-                        <option>Seleccionar Area de Preferencia</option>
-                        <option>Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                      <select
-                        id="city"
-                        name="city"
-                        className=" appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"
-                        {...SeniorityOp3Id}
-                      >
-                        <option>Seleccionar Area de Preferencia</option>
-                        <option>Junior</option>
-                        <option>Senior</option>
-                        <option>Gerente</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="flex flex-wrap">
-                <div className="w-full lg:w-12/12 px-4">
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    ></label>
-                    <textarea className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500"></textarea>
-                  </div>
-                  <button
-                    className="bg-blue-600 text-gray-200 px-2 py-2 rounded-md"
-                    type="submit"
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    className="text-gray-200 px-2 py-2 rounded-md bottom-card"
-                    style={{ backgroundColor: "#E90066" }}
-                    type="submit"
-                  >
-                    Aceptar
-                  </button>
-                </div>
-              </div>
-            </form>
-          </div>
         </div>
-      </div>
-    </section>
+      </section>
+      <div className="h-48"></div>
+    </>
   );
 };
 

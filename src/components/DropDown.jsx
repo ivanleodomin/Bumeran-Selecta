@@ -9,8 +9,8 @@ function Dropdown({ data, name, action, reset }) {
 
   React.useEffect(() => {
     if (reset.reset) {
-      setNameButton("")
-      reset.setReset(false)
+      setNameButton("");
+      reset.setReset(false);
     }
   }, [reset]);
 

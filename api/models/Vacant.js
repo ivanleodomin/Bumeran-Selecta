@@ -5,12 +5,6 @@ class Vacant extends S.Model {}
 
 Vacant.init(
   {
-    country: {
-      type: S.STRING,
-    },
-    area: {
-      type: S.STRING,
-    },
     job: {
       type: S.STRING,
     },

@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/view.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 
 function View() {
   const id = useLocation().pathname.slice(9);
@@ -12,6 +12,11 @@ function View() {
       .then((res) => res.data)
       .then((data) => setVacant(data));
   }, [id]);
+
+  const onClickButton = () => {
+    axios.delete(`/api/vacant/${id}`)
+  }
+
   return (
     <>
       <div className="view">
@@ -26,7 +31,15 @@ function View() {
             />
           </div>
         ) : (
-          <div className="info">{vacant.country}</div>
+          <div>
+            <div className="info">{vacant.country}</div>
+            <Link to={`/vacant-edit/${vacant.id}`}>
+              <h1>put</h1>
+            </Link>
+            <button className="text-white font-bold py-2 px-3 buttonAdd" onClick={onClickButton}>
+              Vacante
+            </button>
+          </div>
         )}
       </div>
     </>

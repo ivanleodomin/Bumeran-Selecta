@@ -1,31 +1,34 @@
 import React from "react";
-import { useHook } from "../../hooks/useHook";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const VacantsAdd = () => {
-
-  const vacants = useHook("");
-  const country = useHook("");
-  const seniority = useHook("");
-  const area = useHook("");
-  const description = useHook("")
+const VacantEdit = () => {
+  const id = useLocation().pathname.slice(13);
 
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
-  const [countries, setCountries] = React.useState([]);
+  const [country, setCountries] = React.useState([]);
 
-  const handleSubmit = () => {
-    axios
-      .post("/api/vacant/add", {
-        country: country.value,
-        vacant: vacants.value,
-        area: area.value,
-        job: seniority.value,
-        description: description.value,
-      })
-      .then(() => alert("succesfully"))
-      .catch(() => alert("negative"));
+  const [vacants, setVacants] = React.useState("");
+  const [description, setDescription] = React.useState("");
+  const [valueAreas, setValueAreas] = React.useState("");
+  const [valueSeniorities, setValueSeniorities] = React.useState("");
+  const [valueCountries, setValueCountries] = React.useState("");
+
+  const onChangeAreas = (e) => {
+    setValueAreas(e.target.value);
+  };
+  const onChangeSeniorities = (e) => {
+    setValueSeniorities(e.target.value);
+  };
+  const onChangeDescription = (e) => {
+    setDescription(e.target.value);
+  };
+  const onChangeCountries = (e) => {
+    setValueCountries(e.target.value);
+  };
+  const onChangeVacants = (e) => {
+    setVacants(e.target.value);
   };
 
   React.useEffect(() => {
@@ -37,13 +40,41 @@ const VacantsAdd = () => {
     axios
       .get("/api/seniority")
       .then((info) => info.data)
-      .then((data) => setSeniorities(data))
+      .then((data) => setSeniorities(data));
 
     axios
-      .get("/api/country") 
-      .then((info) => info.data) 
-      .then((data) => setCountries(data))
+      .get("/api/country")
+      .then((info) => info.data)
+      .then((data) => setCountries(data));
+
+    axios
+      .get(`/api/vacant/${id}`)
+      .then((info) => info.data)
+      .then((data) => {
+        setDescription(data.description);
+        setVacants(data.vacant);
+        setValueAreas(data.area);
+        setValueCountries(data.country);
+        setValueSeniorities(data.job);
+      });
   }, []);
+
+  console.log(valueAreas, "AREA");
+  
+
+  /* const handleSubmit = () => {
+    axios
+      .post("/api/vacant/add", {
+        country: country,
+        vacants: vacants,
+        area: areas,
+        seniority: seniorities,
+        description: description,
+      })
+      .then(() => alert("succesfully"))
+      .catch(() => alert("negative"));
+  }; */
+
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -53,10 +84,6 @@ const VacantsAdd = () => {
             className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
             style={{ top: "5px" }}
           >
-            <img
-              className="logo-gratis"
-              src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
-            />
             <div className="rounded-t bg-white px-6 py-6">
               <div
                 className="text-center flex justify-center"
@@ -65,12 +92,12 @@ const VacantsAdd = () => {
                 }}
               >
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Generar una nueva Vacante
+                  Edicion de la vacante n{id}
                 </h6>
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-white">
-              <form onSubmit={handleSubmit}>
+              <form /* onSubmit={handleSubmit} */>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
@@ -84,10 +111,11 @@ const VacantsAdd = () => {
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        {...country}
+                        onChange={onChangeCountries}
+                        value={valueCountries}
                       >
-                        {countries?.map((countriess) => {
-                          return <option>{countriess.name}</option>
+                        {country?.map((countries) => {
+                          return <option>{countries.name}</option>;
                         })}
                       </select>
                     </div>
@@ -102,7 +130,6 @@ const VacantsAdd = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                      
                       >
                         <option>Buenos Aires</option>
                         <option>Santa fé</option>
@@ -121,7 +148,8 @@ const VacantsAdd = () => {
                         type="number"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
-                        {...vacants}
+                        onChange={onChangeVacants}
+                        value={vacants}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -133,10 +161,11 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...area}
+                        onChange={onChangeAreas}
+                        value={valueAreas}
                       >
                         {areas?.map((area) => {
-                          return <option>{area.name}</option>
+                          return <option>{area.name}</option>;
                         })}
                       </select>
                     </div>
@@ -149,10 +178,11 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...seniority}
-                        >
+                        onChange={onChangeSeniorities}
+                        value={valueSeniorities}
+                      >
                         {seniorities?.map((seniority) => {
-                          return <option>{seniority.name}</option>
+                          return <option>{seniority.name}</option>;
                         })}
                       </select>
                     </div>
@@ -169,7 +199,8 @@ const VacantsAdd = () => {
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
-                        {...description}
+                        onChange={onChangeDescription}
+                        value={description}
                       />
                     </div>
                     <div className="buttons">
@@ -197,4 +228,4 @@ const VacantsAdd = () => {
   );
 };
 
-export default VacantsAdd;
+export default VacantEdit;
