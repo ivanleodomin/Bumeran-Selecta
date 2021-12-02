@@ -1,15 +1,18 @@
-const { Vacant, Recruiter, City, Review, Area } = require("../models");
+const { Vacant, Recruiter, City, Review, Area, Country } = require("../models");
 
 class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    const { areaId, cityId } = req.body;
+    const { areaId, cityId, countryId } = req.body;
     const vacant = await Vacant.create(req.body);
     const city = await City.findByPk(cityId);
+    const country = await Country.findByPk(countryId);
     const area = await Area.findByPk(areaId);
     const created = await vacant.setCity(city);
+
     await vacant.setArea(area);
+    await vacant.setCountry(country);
     res.status(201).send(created);
   }
 
@@ -25,13 +28,18 @@ class VacantController {
             as: "Recruiter",
           },
           {
+            model: Country,
+            attributes: ["id", "name"],
+            as: "Country",
+          },
+          {
             model: City,
-            attributes: ["name"],
+            attributes: ["id", "name"],
             as: "City",
           },
           {
             model: Area,
-            attributes: ["name"],
+            attributes: ["id", "name"],
             as: "Area",
           },
         ],
@@ -83,7 +91,7 @@ class VacantController {
       vacant.setRecruiter(recruiter);
 
       await Vacant.update(
-        { State: "Cubierta" },
+        { state: "Cubierta" },
         { where: { id: id }, returning: true }
       );
 
