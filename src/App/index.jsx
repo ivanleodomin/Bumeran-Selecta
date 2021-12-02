@@ -8,6 +8,8 @@ import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
 import VacantsAdd from "../views/Vacant/VacantsAdd";
 import Recruiters from "../views/Recruiter/Recruiters";
+import VacantEdit from "../views/Vacant/VacantEdit"
+import RecruiterEdit from "../views/Recruiter/RecruiterEdit"
 
 function App() {
   return (
@@ -22,6 +24,12 @@ function App() {
         </Route>
         <Route exact path="/vacant-form">
           <VacantsAdd />
+        </Route>
+        <Route exact path="/vacant-edit/:id">
+          <VacantEdit />
+        </Route>
+        <Route exact path="/recruiter-edit/:id">
+          <RecruiterEdit />
         </Route>
         <Route path="/recruiters">
           <Recruiters />
