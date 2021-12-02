@@ -12,6 +12,11 @@ function View() {
       .then((res) => res.data)
       .then((data) => setVacant(data));
   }, [id]);
+
+  const onClickButton = () => {
+    axios.delete(`/api/vacant/${id}`)
+  }
+
   return (
     <>
       <div className="view">
@@ -31,6 +36,9 @@ function View() {
             <Link to={`/vacant-edit/${vacant.id}`}>
               <h1>put</h1>
             </Link>
+            <button className="text-white font-bold py-2 px-3 buttonAdd" onClick={onClickButton}>
+              Vacante
+            </button>
           </div>
         )}
       </div>
