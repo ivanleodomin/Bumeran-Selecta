@@ -7,6 +7,7 @@ const RecruitersAdd = () => {
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
+  const [city, setCity] = React.useState([]);
 
   React.useEffect(() => {
     axios.get("/api/area").then((info) => setAreas(info.data));
@@ -14,11 +15,14 @@ const RecruitersAdd = () => {
     axios.get("/api/seniority").then((info) => setSeniorities(info.data));
 
     axios.get("/api/country").then((info) => setCountries(info.data));
+
+    /* axios.get("/api/cities").then((info) => setCountries(info.data)); */
   }, []);
 
   const firstName = useHook("");
   const lastName = useHook("");
   const country = useHook("");
+  /* const city = useHook(""); */
   const AreaOp1Id = useHook("");
   const AreaOp2Id = useHook("");
   const AreaOp3Id = useHook("");
