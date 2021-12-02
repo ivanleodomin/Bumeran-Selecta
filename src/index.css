@@ -34,7 +34,7 @@ body {
 }
 
 .buttons {
-  width: 800px;
+  width: 600px;
   position: static;
   height: 50px;
   left: 188px;
@@ -43,7 +43,7 @@ body {
   order: 5;
   align-self: center;
   flex-grow: 0;
-  margin: 32px 0px;
+  margin: 40px 0px 2px 0px;
 }
 .buttonAdd {
   background: #0a26ee;
@@ -96,7 +96,7 @@ body {
   position: absolute;
 }
 .logo-gratis-R {
-  bottom: 933px;
+  bottom: 770px;
   left: 350px;
   position: absolute;
 }
