@@ -8,6 +8,7 @@ import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
 import VacantsAdd from "../views/Vacant/VacantsAdd";
 import Recruiters from "../views/Recruiter/Recruiters";
+import Form from "../components/Forms/Form";
 
 function App() {
   return (
@@ -32,13 +33,14 @@ function App() {
         <Route path="/stadistics">
           <Statistics />
         </Route>    
-        <Route exact path="/">
+          <Route exact path="/">
           <Redirect to="/home" />
         </Route>
         <Route component={NotFound} />
         <Route path="*">
           <Redirect to="/404" />
         </Route>
+
       </Switch>
     </>
   );

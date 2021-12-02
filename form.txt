@@ -1,0 +1,12 @@
+Forms validation Hooks 
+1ero) Vamos a empezar con pseudocodigo para tener un entendimiento mas concreto y la posibilidad de comunicarlo abiertamente, 
+
+Submit => 
+
+SMT (State management Tool)=> va a tener 2 branches => States & Errors 
+Si hay Errores se van a desplegar bajo los inputs 
+
+States => Propios de cada input 
+OnSubmit => Vamos a checkear que no halla errores => De haberlos la operacion no deber poder continuar y los mensajes de error se le tienen que desplegar al user debajo de los inputs 
+
+Si a un form le agregamos como prop => noValidate => No cumple con la validacion default que viene establecida por el type del input 

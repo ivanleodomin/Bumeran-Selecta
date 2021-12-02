@@ -1,29 +1,38 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHook } from "../../hooks/useHook";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import useFormPro from "../../hooks/useFormPro";
+import validate from "../../components/ValidateForms/validateVacants";
+
 
 const VacantsAdd = () => {
-  const country = useHook("");
-  const location = useHook("");
-  const vacants = useHook("");
-  const area = useHook("");
-  const seniority = useHook("");
-  const description = useHook("");
+ 
+  const {handleSubmit, value, error} = useFormPro(validate) 
+  const [values, setValues] = useState({country:'', location:'', vacants:'', area:'', seniority:'', description:''})
+   
+  const country = values.country
+  console.log(country)
+   const location = values.location
+   const vacants = values.vacants
+   const area = values.area
+   const seniority = values.seniority
+   const description = values.description   
 
-  const handleSubmit = () => {
-    axios
-      .post("/api/vacant/add", {
-        country: country.value,
-        location: location.value,
-        vacants: vacants.value,
-        area: area.value,
-        seniority: seniority.value,
-        description: description.value,
-      })
-      .then(() => alert("succesfully"))
-      .catch(() => alert("negative"));
-  };
+
+  //const [error, setError] = useState({country:'', location:'', vacants:'', area:'', seniority:'', description:''})
+
+  const handleChange = (e) =>{
+   const {value, name} = e.target
+   console.log(value)
+   console.log(name);
+    setValues({
+      ...values,
+      [name]: value
+    }) 
+    
+  }
+
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -62,6 +71,9 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
+                        name='country'
+                        value={values.country}
+                        onChange={handleChange}
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
                         {...country}
@@ -75,6 +87,9 @@ const VacantsAdd = () => {
                         <option>Venezuela</option>
                       </select>
                     </div>
+                    {error.country && <p className='bg-red-500 '
+                    >{error.country}</p>}
+
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
@@ -84,6 +99,8 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
+                        name='location'
+                        onChange={handleChange}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         {...location}
@@ -103,6 +120,8 @@ const VacantsAdd = () => {
                       </label>
                       <input
                         type="number"
+                        name='vacants'
+                        onChange={handleChange}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         {...vacants}
@@ -118,6 +137,8 @@ const VacantsAdd = () => {
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...area}
+                        name='area'
+                        onChange={handleChange}
                       >
                         <option>Administración, Contabilidad y Finanzas</option>
                         <option>Aduana y Comercio Exterior</option>
@@ -153,6 +174,8 @@ const VacantsAdd = () => {
                         Seniority
                       </label>
                       <select
+                      name='seniority'
+                      onChange={handleChange}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
                       >
@@ -171,6 +194,8 @@ const VacantsAdd = () => {
                       </label>
                       <textarea
                         type="text"
+                        name='description'
+                        onChange={handleChange}
                         rows={5}
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
