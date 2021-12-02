@@ -22,30 +22,12 @@ class VacantController {
         attributes: ["id", "job", "state", "description", "vacant"],
         where: { id: req.params.id },
         include: [
-          {
-            model: Recruiter,
-            attributes: ["firstName", "lastName"],
-            as: "Recruiter",
-          },
-          {
-            model: Country,
-            attributes: ["id", "name"],
-            as: "Country",
-          },
-          {
-            model: City,
-            attributes: ["id", "name"],
-            as: "City",
-          },
-          {
-            model: Area,
-            attributes: ["id", "name"],
-            as: "Area",
-          },
+          {model: Recruiter, attributes: ["firstName", "lastName"], as: "Recruiter" },
+          { model: Country, attributes: ["id", "name"], as: "Country" },
+          { model: City, attributes: ["id", "name"], as: "City" },
+          { model: Area, attributes: ["id", "name"], as: "Area" },
         ],
       });
-
-      console.log(vacant);
 
       return res.send(vacant);
     } catch (err) {
