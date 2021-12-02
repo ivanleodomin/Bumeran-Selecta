@@ -6,11 +6,13 @@ const Vacant = require("./Vacant");
 const Country = require("./Country");
 const City = require("./City");
 
-Vacant.belongsTo(Recruiter, { as: "Recruiter"}) 
+Vacant.belongsTo(Recruiter, { as: "Recruiter" });
 
-Recruiter.belongsTo(City, { as: "City"})
-Vacant.belongsTo(City, { as: "City"})
-City.belongsTo(Country, { as: "Country"})
+Recruiter.belongsTo(City, { as: "City" });
+Recruiter.belongsTo(Country, { as: "Country" });
+Vacant.belongsTo(City, { as: "City" });
+Vacant.belongsTo(Country, { as: "Country" });
+City.belongsTo(Country, { as: "Country" });
 
 Vacant.belongsTo(Area, { as: "Area" });
 
@@ -22,8 +24,7 @@ Recruiter.belongsTo(Seniority, { as: "SeniorityOp1" });
 Recruiter.belongsTo(Seniority, { as: "SeniorityOp2" });
 Recruiter.belongsTo(Seniority, { as: "SeniorityOp3" });
 
-Recruiter.hasMany(Review, { as: "Review"})
-Review.belongsTo(Vacant, { as: "Vacant"})   
-
+Recruiter.hasMany(Review, { as: "Review" });
+Review.belongsTo(Vacant, { as: "Vacant" });
 
 module.exports = { Recruiter, Area, Seniority, Review, Vacant, Country, City };
