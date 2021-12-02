@@ -2,6 +2,7 @@ import React from "react";
 import axios from "axios";
 import "../../styles/view.css";
 import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function View() {
   const id = useLocation().pathname.slice(12);
@@ -27,9 +28,10 @@ function View() {
         </div>
       ) : (
         <div className="info">
-
           <h1>{recruiter.firstName}</h1>
-
+          <Link to={`/recruiter-edit/${recruiter.id}`}>
+            <h1>put</h1>
+          </Link>
         </div>
       )}
     </div>
