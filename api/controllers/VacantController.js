@@ -1,15 +1,18 @@
-const { Vacant, Recruiter, City, Review, Area } = require("../models");
+const { Vacant, Recruiter, City, Review, Area, Country } = require("../models");
 
 class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    const { areaId, cityId } = req.body;
+    const { areaId, cityId, countryId } = req.body;
     const vacant = await Vacant.create(req.body);
     const city = await City.findByPk(cityId);
+    const country = await Country.findByPk(countryId);
     const area = await Area.findByPk(areaId);
     const created = await vacant.setCity(city);
+
     await vacant.setArea(area);
+    await vacant.setCountry(country);
     res.status(201).send(created);
   }
 
@@ -19,25 +22,12 @@ class VacantController {
         attributes: ["id", "job", "state", "description", "vacant"],
         where: { id: req.params.id },
         include: [
-          {
-            model: Recruiter,
-            attributes: ["firstName", "lastName"],
-            as: "Recruiter",
-          },
-          {
-            model: City,
-            attributes: ["name"],
-            as: "City",
-          },
-          {
-            model: Area,
-            attributes: ["name"],
-            as: "Area",
-          },
+          {model: Recruiter, attributes: ["firstName", "lastName"], as: "Recruiter" },
+          { model: Country, attributes: ["id", "name"], as: "Country" },
+          { model: City, attributes: ["id", "name"], as: "City" },
+          { model: Area, attributes: ["id", "name"], as: "Area" },
         ],
       });
-
-      console.log(vacant);
 
       return res.send(vacant);
     } catch (err) {
@@ -83,7 +73,7 @@ class VacantController {
       vacant.setRecruiter(recruiter);
 
       await Vacant.update(
-        { State: "Cubierta" },
+        { state: "Cubierta" },
         { where: { id: id }, returning: true }
       );
 
