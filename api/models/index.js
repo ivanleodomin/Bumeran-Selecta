@@ -8,8 +8,11 @@ const City = require("./City");
 
 Vacant.belongsTo(Recruiter, { as: "Recruiter"}) 
 
-Recruiter.belongsTo(Country, { as: "Country"})
+Recruiter.belongsTo(City, { as: "City"})
+Vacant.belongsTo(City, { as: "City"})
 City.belongsTo(Country, { as: "Country"})
+
+Vacant.belongsTo(Area, { as: "Area" });
 
 Recruiter.belongsTo(Area, { as: "AreaOp1" });
 Recruiter.belongsTo(Area, { as: "AreaOp2" });

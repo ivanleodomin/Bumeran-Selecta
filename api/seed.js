@@ -23,7 +23,7 @@ async function seed() {
 
     await Area.bulkCreate(areas);
     await Seniority.bulkCreate(seniorities);
-    await Vacant.bulkCreate(vacants);
+    //await Vacant.bulkCreate(vacants);
 
     console.log("aggregated test data");
     return process.exit(0);

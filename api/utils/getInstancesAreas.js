@@ -12,7 +12,6 @@ async function getAreas(areasId) {
     const instance = await Area.findOne({ where: { id: id } });
     instances.push(instance);
   }
-
   return instances;
 }
 

@@ -16,4 +16,7 @@ router.put('/:id/addRecruiter',VacantController.addRecruiter) // este metodo es 
 
 router.get('/:id/showRanking',VacantController.showRanking) // este metodo es para mostrar los mejores candidatos para dicha vacante
 
+router.post('/:id/doneProcess',VacantController.doneProcess) // este metodo es para mostrar los mejores candidatos para dicha vacante
+
+
 module.exports = router; 

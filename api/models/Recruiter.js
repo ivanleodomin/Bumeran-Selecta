@@ -15,9 +15,6 @@ Recruiter.init(
     country: {
       type: DataTypes.STRING,
     },
-    city: {
-      type: DataTypes.STRING,
-    },
   },
   {
     sequelize: db,
@@ -37,9 +34,13 @@ Recruiter.prototype.getRanking = async function () {
     reviews.forEach((element) => {
       acc += element.score;
     });
-    console.log(acc);
+    console.log(acc / reviews.length);
     return acc / reviews.length;
   }
 };
+
+Recruiter.getBests = async function (vacant){
+  console.log("aca", vacant)
+}
 
 module.exports = Recruiter;
