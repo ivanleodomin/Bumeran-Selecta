@@ -97,4 +97,4 @@ Recruiter.getBests = async function (vacant) {
   return bests;
 };
 
-module.exports = Recruiter;
+module.exports = Recruiter;;
