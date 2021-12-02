@@ -75,6 +75,7 @@ const VacantsAdd = () => {
             style={{ top: "5px" }}
           >
             <img
+              alt="pj"
               className="logo-gratis"
               src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
             />
