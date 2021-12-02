@@ -73,7 +73,7 @@ class VacantController {
       vacant.setRecruiter(recruiter);
 
       await Vacant.update(
-        { state: "Cubierta" },
+        { state: "Asignada" },
         { where: { id: id }, returning: true }
       );
 
@@ -111,9 +111,9 @@ class VacantController {
     const { id } = req.params;
     const vacant = await Vacant.findByPk(id);
 
-    Recruiter.getBests(vacant);
+   const recruiters = await Recruiter.getBests(vacant);
 
-    res.send(vacant);
+    res.send(recruiters);
   }
 }
 
