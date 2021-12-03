@@ -37,7 +37,9 @@ class VacantController {
 
   static async getAll(req, res, next) {
     try {
-      const vacant = await Vacant.findAll();
+      const vacant = await Vacant.findAll({
+        include: [{model: Country, attributes: ["name"], as: "Country"}]
+      });
       return res.status(200).send(vacant);
     } catch (err) {
       next(err);

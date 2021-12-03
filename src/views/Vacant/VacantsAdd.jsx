@@ -64,7 +64,6 @@ const VacantsAdd = () => {
       .catch(() => alert("negative"));
   };
 
-  console.log(area.value)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
