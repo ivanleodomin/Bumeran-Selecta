@@ -1,68 +1,74 @@
 [
-    {
-        "firstName": "Ivan",
-        "lastName": "Linari",
-        "residence": "Argentina",
-        "areaOp1Id": 4,
-        "areaOp2Id": 1,
-        "areaOp3Id":3,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 1,	
-        "seniorityOp3Id": 3
-      },
-      {
-        "firstName": "Juan",
-        "lastName": "Perez",
-        "residence": "Colombia",
-        "areaOp1Id": 2,
-        "areaOp2Id": 2,
-        "areaOp3Id":1,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 2,	
-        "seniorityOp3Id": 3
-      },
-      {
-        "firstName": "Macarena",
-        "lastName": "Colombo",
-        "residence": "Venezuela",
-        "areaOp1Id": 3,
-        "areaOp2Id": 2,
-        "areaOp3Id":1,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 2,	
-        "seniorityOp3Id": 3
-      },
-      {
-        "firstName": "Jorge",
-        "lastName": "Gutierres",
-        "residence": "Argentina",
-        "areaOp1Id": 3,
-        "areaOp2Id": 2,
-        "areaOp3Id":1,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 2,	
-        "seniorityOp3Id": 3
-      },
-      {
-        "firstName": "Fernando",
-        "lastName": "Avarez",
-        "residence": "Mexico",
-        "areaOp1Id": 3,
-        "areaOp2Id": 1,
-        "areaOp3Id":2,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 2,	
-        "seniorityOp3Id": 3
-      },
-      {
-        "firstName": "Dario",
-        "lastName": "Markez",
-        "residence": "Venezuela",
-        "areaOp1Id": 1,
-        "areaOp2Id": 2,
-        "areaOp3Id":3,
-        "seniorityOp1Id": 1,
-        "seniorityOp2Id": 2,	
-        "seniorityOp3Id": 3
-      }
+  {
+    "firstName": "Dianemarie",
+    "lastName": "Kosey",
+    "countryId": 1,
+    "cityId": 1,
+    "areaOp1": 2,
+    "areaOp2": 1,
+    "areaOp3": 3,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  },
+  {
+    "firstName": "Olwen",
+    "lastName": "Saint",
+    "countryId": 1,
+    "cityId": 1,
+    "areaOp1": 2,
+    "areaOp2": 1,
+    "areaOp3": 3,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  },
+  {
+    "firstName": "Claudina",
+    "lastName": "Eiser",
+    "countryId": 6,
+    "cityId": 216,
+    "areaOp1": 2,
+    "areaOp2": 1,
+    "areaOp3": 3,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  },
+  {
+    "firstName": "Josemaria",
+    "lastName": "Listorti",
+    "countryId": 6,
+    "cityId": 216,
+    "areaOp1": 1,
+    "areaOp2": 2,
+    "areaOp3": 3,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  },
+  {
+    "firstName": "Pedro",
+    "lastName": "Sanz",
+    "countryId": 6,
+    "cityId": 216,
+    "areaOp1": 1,
+    "areaOp2": 3,
+    "areaOp3": 2,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  },
+  {
+    "firstName": "Charly",
+    "lastName": "Spinetta",
+    "countryId": 6,
+    "cityId": 216,
+    "areaOp1": 1,
+    "areaOp2": 3,
+    "areaOp3": 2,
+    "seniorityOp1": 1,
+    "seniorityOp2": 2,
+    "seniorityOp3": 3
+  }
 ]

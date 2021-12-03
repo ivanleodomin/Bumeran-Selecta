@@ -13,17 +13,53 @@ const VacantsAdd = () => {
   const seniority = useHook("");
   const area = useHook("");
   const description = useHook("")
+  const cityy = useHook("");
+  const [countryy, setCountryy] = React.useState("")
 
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
+  const [city, setCity] = React.useState([]);
+  const [states, setStates] = React.useState(true);
+
+  
+  const handleChangePais = (e) => {
+    if (e.target.value === "Elija una opcion") {
+      setStates(true);
+    } else {
+      axios
+      .get(`/api/country/${e.target.value}`)
+      .then((info) => setCity(info.data));
+      setCountryy(e.target.value)
+      setStates(false);
+    }
+  };
+  
+  React.useEffect(() => {
+    axios
+    .get("/api/area")
+    .then((info) => info.data)
+    .then((data) => setAreas(data));
+    
+    axios
+    .get("/api/seniority")
+    .then((info) => info.data)
+    .then((data) => setSeniorities(data))
+    
+    axios
+    .get("/api/country") 
+    .then((info) => info.data) 
+    .then((data) => setCountries(data))
+  }, []);
 
   const handleSubmit = () => {
     axios
       .post("/api/vacant/add", {
         country: country.value,
         vacant: vacants.value,
-        area: area.value,
+        areaId: area.value,
+        countryId: countryy,
+        cityId: cityy.value,
         job: seniority.value,
         description: description.value,
       })
@@ -31,22 +67,7 @@ const VacantsAdd = () => {
       .catch(() => alert("negative"));
   };
 
-  React.useEffect(() => {
-    axios
-      .get("/api/area")
-      .then((info) => info.data)
-      .then((data) => setAreas(data));
-
-    axios
-      .get("/api/seniority")
-      .then((info) => info.data)
-      .then((data) => setSeniorities(data))
-
-    axios
-      .get("/api/country") 
-      .then((info) => info.data) 
-      .then((data) => setCountries(data))
-  }, []);
+  console.log(area.value)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -57,6 +78,7 @@ const VacantsAdd = () => {
             style={{ top: "5px" }}
           >
             <img
+              alt="pj"
               className="logo-gratis"
               src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
             />
@@ -76,7 +98,7 @@ const VacantsAdd = () => {
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
-                    <div className="relative w-full mb-3">
+                  <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
                         htmlFor="grid-password"
@@ -88,10 +110,15 @@ const VacantsAdd = () => {
                         name='country'
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        {...country}
+                        onChange={handleChangePais}
                       >
+                        <option defaultValue>Elija una opcion</option>
                         {countries?.map((countriess) => {
-                          return <option>{countriess.name}</option>
+                          return (
+                            <option value={countriess.id}>
+                              {countriess.name}
+                            </option>
+                          );
                         })}
                       </select>
                     </div>
@@ -102,19 +129,22 @@ const VacantsAdd = () => {
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
                         htmlFor="grid-password"
                       >
-                        Localidad
+                        Ciudad
                       </label>
                       <select
                         type="text"
                         name='location'
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                      
+                        disabled={states}
+                        {...cityy}
                       >
-                        <option>Buenos Aires</option>
-                        <option>Santa fé</option>
-                        <option>Salta</option>
-                        <option>Jujuy</option>
+                        <option defaultValue>Elija una opcion</option>
+                        {city?.map((cities) => {
+                          return (
+                            <option value={cities.id}>{cities.name}</option>
+                          );
+                        })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -144,8 +174,9 @@ const VacantsAdd = () => {
                         {...area}
                         name='area'
                       >
+                        <option defaultValue>Elija una opcion</option>
                         {areas?.map((area) => {
-                          return <option>{area.name}</option>
+                          return <option value={area.id}>{area.name}</option>
                         })}
                       </select>
                     </div>
@@ -161,6 +192,7 @@ const VacantsAdd = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
                         >
+                          <option defaultValue>Elija una opcion</option>
                         {seniorities?.map((seniority) => {
                           return <option>{seniority.name}</option>
                         })}

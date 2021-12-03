@@ -8,21 +8,12 @@ const RecruitersAdd = () => {
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
   const [city, setCity] = React.useState([]);
-
-  React.useEffect(() => {
-    axios.get("/api/area").then((info) => setAreas(info.data));
-
-    axios.get("/api/seniority").then((info) => setSeniorities(info.data));
-
-    axios.get("/api/country").then((info) => setCountries(info.data));
-
-    /* axios.get("/api/cities").then((info) => setCountries(info.data)); */
-  }, []);
+  const [states, setStates] = React.useState(true);
+  const [countryy, setCountryy] = React.useState("")
 
   const firstName = useHook("");
   const lastName = useHook("");
-  const country = useHook("");
-  /* const city = useHook(""); */
+  const cityy = useHook("");
   const AreaOp1Id = useHook("");
   const AreaOp2Id = useHook("");
   const AreaOp3Id = useHook("");
@@ -30,23 +21,41 @@ const RecruitersAdd = () => {
   const SeniorityOp2Id = useHook("");
   const SeniorityOp3Id = useHook("");
 
-  console.log(country, "country");
-  const handleSubmit = () => {
-    axios
-      .post("/api/recruiter", {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        country: country.value,
-        areaOp1: AreaOp1Id.value,
-        areaOp2: AreaOp2Id.value,
-        areaOp3: AreaOp3Id.value,
-        seniorityOp1: SeniorityOp1Id.value,
-        seniorityOp2: SeniorityOp2Id.value,
-        seniorityOp3: SeniorityOp3Id.value,
-      })
-      .then(() => prompt("succesfully"))
-      .catch(() => prompt("negative"));
+  React.useEffect(() => {
+    axios.get("/api/area").then((info) => setAreas(info.data));
+
+    axios.get("/api/seniority").then((info) => setSeniorities(info.data));
+
+    axios.get("/api/country").then((info) => setCountries(info.data));
+  }, []);
+
+  const handleChangePais = (e) => {
+    if (e.target.value === "Elija una opcion") {
+      setStates(true);
+    } else {
+      axios
+        .get(`/api/country/${e.target.value}`)
+        .then((info) => setCity(info.data));
+      setCountryy(e.target.value)
+      setStates(false);
+    }
   };
+
+  const handleSubmit = () => {
+    axios.post("/api/recruiter", {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      countryId: countryy,
+      cityId: cityy.value,
+      areaOp1: AreaOp1Id.value,
+      areaOp2: AreaOp2Id.value,
+      areaOp3: AreaOp3Id.value,
+      seniorityOp1: SeniorityOp1Id.value,
+      seniorityOp2: SeniorityOp2Id.value,
+      seniorityOp3: SeniorityOp3Id.value,
+    });
+  };
+
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
@@ -68,7 +77,7 @@ const RecruitersAdd = () => {
                 }}
               >
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Generar una nueva Vacante
+                  Generar un nuevo Reclutador
                 </h6>
               </div>
             </div>
@@ -115,8 +124,9 @@ const RecruitersAdd = () => {
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        {...country}
+                        onChange={handleChangePais}
                       >
+                        <option selected>Elija una opcion</option>
                         {countries?.map((countriess) => {
                           return (
                             <option value={countriess.id}>
@@ -137,11 +147,15 @@ const RecruitersAdd = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
+                        disabled={states}
+                        {...cityy}
                       >
-                        <option>Buenos Aires</option>
-                        <option>Santa fé</option>
-                        <option>Salta</option>
-                        <option>Jujuy</option>
+                        <option selected>Elija una opcion</option>
+                        {city?.map((cities) => {
+                          return (
+                            <option value={cities.id}>{cities.name}</option>
+                          );
+                        })}
                       </select>
                     </div>
                     <div class="flex flex-wrap -mx-3 mb-6">
