@@ -3,6 +3,7 @@ const { DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
 const Vacant = require("./Vacant");
 const Review = require("./Review");
+const skillsCal = require("../utils/skillsCal.js");
 
 class Recruiter extends Model {}
 
@@ -39,37 +40,16 @@ Recruiter.prototype.getRanking = async function () {
 };
 
 Recruiter.getBests = async function (vacant) {
-  //excluyente
+  
   const recruiters = await Recruiter.findAll({
     where: { CountryId: vacant.CountryId },
   });
 
-  //calculo de puntaje
-
-  const expertiseCalc = (nivel, experticia) => {
-    if (nivel == 1) return (experticia = 4);
-    else if (nivel == 2) return (experticia = 3);
-    else if (nivel == 3) return (experticia = 2);
-    else if (nivel == 4) return (experticia = 1);
-  };
-
   const bests = [];
 
   for (let recruiter of recruiters) {
-    let area = 0;
-    let experticia = 0;
+    const { area, experticia } = await skillsCal(recruiter, vacant);
 
-    if (recruiter.AreaOp1Id === vacant.AreaId) {
-      area = 3;
-      expertiseCalc(recruiter.SeniorityOp1Id, experticia);
-    } else if (recruiter.AreaOp2Id === vacant.AreaId) {
-      area = 2;
-      expertiseCalc(recruiter.SeniorityOp1Id, experticia);
-    } else if (recruiter.AreaOp3Id === vacant.AreaId) {
-      area = 1;
-      expertiseCalc(recruiter.SeniorityOp3Id, experticia);
-    }
-    //vacante : cubierta = asignada
     const actividad = await Vacant.findAndCountAll({
       where: { RecruiterId: recruiter.id, state: "Asignada" },
     });
