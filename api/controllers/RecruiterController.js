@@ -80,7 +80,7 @@ class RecruiterController {
     });
 
     const activeVacancies = await Vacant.findAll({
-      where: { RecruiterId: id, state: "Cubierta" },
+      where: { RecruiterId: id, state: "Asignada" },
     });
 
     recruiter.dataValues.ranking = await recruiter.getRanking();

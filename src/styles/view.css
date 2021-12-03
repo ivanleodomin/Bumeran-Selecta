@@ -6,6 +6,9 @@
   align-items: center;
 }
 
+.rec{
+  color: rgb(21, 204, 174)
+}
 
 /*Targeta por defecto*/
 
@@ -32,4 +35,13 @@
 
 .info{
   overflow: auto
+}
+
+ul {
+  list-style: square inside;
+}
+
+
+.estado{
+  color:rgb(233, 0, 102)
 }

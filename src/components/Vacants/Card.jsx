@@ -3,7 +3,6 @@ import "../../styles/card.css";
 import { useHistory } from "react-router-dom";
 
 function Card({ vacants }) {
-  console.log("vacante", vacants)
   const history = useHistory()
   return (
     <div
@@ -11,10 +10,10 @@ function Card({ vacants }) {
       onClick={() => history.push(`/vacants/${vacants.id}`)}
     >
       <div className="preview transform motion-safe:hover:scale-110">
-        <div className="fullName">{`${vacants.country} ${vacants.job}`}</div>
-        <div className="seniority">nada</div>
-        <div className="area">nada</div>
-        <div className="ranking">✩✩✩✩✩</div>
+        <div className="fullName">{`${vacants.job}`}</div>
+        <div className="seniority">{vacants.state}</div>
+        <div className="area">{vacants.Country?.name}</div>
+        <div className="vacantes">vacantes disponibles: {vacants.vacant}</div>
       </div>
       <div className="bottom-card"></div>
     </div>
