@@ -2,6 +2,7 @@ import axios from "axios";
 import React from "react";
 import "../../styles/card.css"
 import { useHistory } from "react-router-dom";
+import { useEffect } from "react";
 
 function Card({ recruiter }) {
   const history = useHistory();

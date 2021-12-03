@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHook } from "../../hooks/useHook";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import useFormPro from "../../hooks/useFormPro";
+import validate from "../../components/ValidateForms/validateVacants";
+
 
 const VacantsAdd = () => {
 
@@ -82,6 +85,7 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
+                        name='country'
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
                         {...country}
@@ -91,6 +95,8 @@ const VacantsAdd = () => {
                         })}
                       </select>
                     </div>
+           
+
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
@@ -100,6 +106,7 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
+                        name='location'
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                       
@@ -119,6 +126,7 @@ const VacantsAdd = () => {
                       </label>
                       <input
                         type="number"
+                        name='vacants'
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         {...vacants}
@@ -134,6 +142,7 @@ const VacantsAdd = () => {
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...area}
+                        name='area'
                       >
                         {areas?.map((area) => {
                           return <option>{area.name}</option>
@@ -148,6 +157,7 @@ const VacantsAdd = () => {
                         Seniority
                       </label>
                       <select
+                      name='seniority'
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
                         >
@@ -165,6 +175,7 @@ const VacantsAdd = () => {
                       </label>
                       <textarea
                         type="text"
+                        name='description'
                         rows={5}
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"

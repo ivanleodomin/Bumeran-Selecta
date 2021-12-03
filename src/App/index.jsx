@@ -11,6 +11,7 @@ import Recruiters from "../views/Recruiter/Recruiters";
 import VacantEdit from "../views/Vacant/VacantEdit"
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit"
 
+
 function App() {
   return (
     <>
@@ -40,13 +41,14 @@ function App() {
         <Route path="/stadistics">
           <Statistics />
         </Route>    
-        <Route exact path="/">
+          <Route exact path="/">
           <Redirect to="/home" />
         </Route>
         <Route component={NotFound} />
         <Route path="*">
           <Redirect to="/404" />
         </Route>
+
       </Switch>
     </>
   );

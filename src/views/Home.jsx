@@ -1,5 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineQuestionCircle } from "react-icons/ai";
+import ReactTooltip from 'react-tooltip'
+
 
 const Home = () => {
   return (
@@ -8,6 +11,22 @@ const Home = () => {
         <div className="md:flex md:justify-center md:space-x-8 md:px-14">
           <Link to="/vacants">
             <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
+            <button className="text-black-900 px-4 py-2 rounded text-2xl absolute  "
+                data-tip data-for='buttonToolTipVacants'
+                >
+                  <AiOutlineQuestionCircle />
+                </button>
+                <ReactTooltip 
+              
+                id='buttonToolTipVacants' 
+                place='top'
+                type='info'
+                effect='solid'
+                className='rosa'
+                >
+                  Haciendo click en este boton continua a la sección de Reclutadores, donde puede ver los ruclutadores mas idoneos para su busqueda tomando en cuenta su area de especialidad, su nivel de experticia y las calificaciones previas que se le hayan otorgado 🤣 .  
+
+                </ReactTooltip>
               <div className="w-sm">
                 <div className="mt-4 text-black-600 text-center">
                   <h1 className="text-m font-bold">Vacantes</h1>
@@ -22,6 +41,19 @@ const Home = () => {
           </Link>
           <Link to="/recruiters">
             <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
+            <button className="text-black-900 px-4 py-2 rounded text-2xl absolute "
+                data-tip data-for='buttonToolTipRecruiters'
+                >
+                  <AiOutlineQuestionCircle />
+                </button>
+                <ReactTooltip id='buttonToolTipRecruiters' 
+                place='top'
+                type='info'
+                effect='float'
+                >
+                  Es por acaaaaaaaaaaaaa PerraBadbitches all on my grind Thun
+
+                </ReactTooltip>
               <div className="w-sm">
                 <div className="mt-4 text-black-600 text-center">
                   <h1 className="text-m font-bold">Reclutadores</h1>
@@ -35,7 +67,23 @@ const Home = () => {
             </div>
           </Link>
           <Link to="/stadistics">
-            <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
+            <div
+              className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0"
+
+            >
+                <button className=" text-black-900 px-4 py-2 rounded text-2xl absolute "
+                data-tip data-for='buttonToolTipStatistics'
+                >
+                  <AiOutlineQuestionCircle />
+                </button>
+                <ReactTooltip id='buttonToolTipStatistics' 
+                place='top'
+                type='info'
+                effect='float'
+                >
+                  Es por acaaaaaaaaaaaaa PerraBadbitches all on my grind Thun
+
+                </ReactTooltip>
               <div className="w-sm">
                 <div className="mt-4 text-black-600 text-center">
                   <h1 className="text-m font-bold">Estadisticas</h1>
