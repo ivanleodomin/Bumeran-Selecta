@@ -33,7 +33,7 @@ Recruiter.prototype.getRanking = async function () {
     reviews.forEach((element) => {
       acc += element.score;
     });
-    console.log(acc / reviews.length);
+
     return acc / reviews.length;
   }
 };
@@ -77,17 +77,10 @@ Recruiter.getBests = async function (vacant) {
     const instance = await Recruiter.findByPk(recruiter.id);
     const rank = await instance.getRanking();
 
-
-    console.log("area", area)
-    console.log("experticia", experticia)
-    console.log("rank", rank)
-    console.log("actividad", actividad.count)
-
     recruiter.dataValues.position = area + experticia + rank - actividad.count;
     bests.push(recruiter);
   }
 
-  console.log(bests);
   bests.sort((recruiterA, recruiterB) => {
     if (recruiterA.position < recruiterB.position) return 1;
     if (recruiterA.position > recruiterB.position) return -1;
@@ -97,4 +90,4 @@ Recruiter.getBests = async function (vacant) {
   return bests;
 };
 
-module.exports = Recruiter;;
+module.exports = Recruiter;
