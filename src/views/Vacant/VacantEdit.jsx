@@ -8,12 +8,16 @@ const VacantEdit = () => {
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [country, setCountries] = React.useState([]);
+  const [city, setCity] = React.useState([]);
 
   const [vacants, setVacants] = React.useState("");
   const [description, setDescription] = React.useState("");
   const [valueAreas, setValueAreas] = React.useState("");
   const [valueSeniorities, setValueSeniorities] = React.useState("");
   const [valueCountries, setValueCountries] = React.useState("");
+  const [cityValue, setCityValue] = React.useState("");
+  const [idCountry, setIdCountry] = React.useState("");
+  const [areaValue, setAreaValue] = React.useState("");
 
   const onChangeAreas = (e) => {
     setValueAreas(e.target.value);
@@ -30,7 +34,10 @@ const VacantEdit = () => {
   const onChangeVacants = (e) => {
     setVacants(e.target.value);
   };
-
+  const onChangeCities = (e) => {
+    setCityValue(e.target.value);
+  };
+  console.log(valueSeniorities, "sen");
   React.useEffect(() => {
     axios
       .get("/api/area")
@@ -54,18 +61,24 @@ const VacantEdit = () => {
         setDescription(data.description);
         setVacants(data.vacant);
         setValueAreas(data.area);
-        setValueCountries(data.country);
+        setIdCountry(data.Country.id);
+        setValueCountries(data.Country.name);
+        setCityValue(data.City.name);
         setValueSeniorities(data.job);
-      });
-  }, []);
+        setAreaValue(data.Area.name);
+      })
+      .then(() =>
+        axios
+          .get(`/api/country/${idCountry}`)
+          .then((info) => info.data)
+          .then((data) => setCity(data))
+      );
+  }, [idCountry, areaValue]);
 
-  console.log(valueAreas, "AREA");
-  
-
-  /* const handleSubmit = () => {
+  const handleSubmit = () => {
     axios
-      .post("/api/vacant/add", {
-        country: country,
+      .put(`/api/vacant/${id}`, {
+        /* job: */
         vacants: vacants,
         area: areas,
         seniority: seniorities,
@@ -73,7 +86,7 @@ const VacantEdit = () => {
       })
       .then(() => alert("succesfully"))
       .catch(() => alert("negative"));
-  }; */
+  };
 
   return (
     <>
@@ -97,7 +110,7 @@ const VacantEdit = () => {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-white">
-              <form /* onSubmit={handleSubmit} */>
+              <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
@@ -113,10 +126,9 @@ const VacantEdit = () => {
                         placeholder="Pais de la Vacante"
                         onChange={onChangeCountries}
                         value={valueCountries}
+                        disabled
                       >
-                        {country?.map((countries) => {
-                          return <option>{countries.name}</option>;
-                        })}
+                        <option>{valueCountries}</option>;
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -130,11 +142,12 @@ const VacantEdit = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
+                        onChange={onChangeCities}
+                        value={cityValue}
                       >
-                        <option>Buenos Aires</option>
-                        <option>Santa fé</option>
-                        <option>Salta</option>
-                        <option>Jujuy</option>
+                        {city?.map((citi) => {
+                          return <option>{citi.name}</option>;
+                        })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -163,9 +176,11 @@ const VacantEdit = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         onChange={onChangeAreas}
                         value={valueAreas}
+                        /* defaultValue={areaValue} */
                       >
+                        <option defaultValue>{areaValue}</option>
                         {areas?.map((area) => {
-                          return <option>{area.name}</option>;
+                          return <option value={area.id}>{area.name}</option>;
                         })}
                       </select>
                     </div>
