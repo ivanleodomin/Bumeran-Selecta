@@ -1,3 +1,4 @@
+const { NOEXPAND } = require("sequelize/dist/lib/table-hints");
 const {
   Recruiter,
   Review,
@@ -124,6 +125,17 @@ class RecruiterController {
       limit: 10,
     });
     res.send(rec.rows);
+  }
+
+  static async deleteById(req, res) {
+    const { id } = req.params;
+    await Vacant.update(
+      { RecruiterId: null, state: "Iniciada" },
+      { where: { RecruiterId: id } }
+    );
+
+    await Recruiter.destroy({ where: { id: id } });
+    res.sendStatus(204);
   }
 }
 

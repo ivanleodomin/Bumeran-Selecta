@@ -1,6 +1,14 @@
 import React from "react";
 import "../styles/filter.css";
 import { useDispatch } from "react-redux";
+/*
+  Dropdown: este componente trabaja con estados globales usando la herramienta redux,
+  props: 
+    data: arreglo de strings con el nombre de los items desplegables
+    name: placeholder del dropdown
+    action: accion de redux para realizar el dispach con el nombre del item elegidos
+    reset: accion de redux para realizar un reseteo del estado a su valor por defecto
+*/
 
 function Dropdown({ data, name, action, reset }) {
   const dispatch = useDispatch();
@@ -37,9 +45,9 @@ function Dropdown({ data, name, action, reset }) {
       </div>
       <div>
         <ul className={show && "show"}>
-          {data?.map((item) => {
+          {data?.map((item, i) => {
             return (
-              <li className="item" onClick={() => filter(item.name)}>
+              <li key={i} className="item" onClick={() => filter(item.name)}>
                 <span>{item.name}</span>
               </li>
             );
