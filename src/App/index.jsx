@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router";
 import Home from "../views/Home";
 import Vacants from "../views/Vacant/Vacants";
@@ -7,10 +7,9 @@ import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
 import VacantsAdd from "../views/Vacant/VacantsAdd";
-import Recruiters from "../views/Recruiter/Recruiters";
-import VacantEdit from "../views/Vacant/VacantEdit"
-import RecruiterEdit from "../views/Recruiter/RecruiterEdit"
-
+import VacantEdit from "../views/Vacant/VacantEdit";
+import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
+const Recruiters = lazy(() => import("../views/Recruiter/Recruiters"));
 
 function App() {
   return (
@@ -33,22 +32,23 @@ function App() {
           <RecruiterEdit />
         </Route>
         <Route path="/recruiters">
-          <Recruiters />
+          <Suspense fallback={<h1>cargando...</h1>}>
+            <Recruiters />
+          </Suspense>
         </Route>
         <Route path="/vacants">
           <Vacants />
         </Route>
         <Route path="/stadistics">
           <Statistics />
-        </Route>    
-          <Route exact path="/">
+        </Route>
+        <Route exact path="/">
           <Redirect to="/home" />
         </Route>
         <Route component={NotFound} />
         <Route path="*">
           <Redirect to="/404" />
         </Route>
-
       </Switch>
     </>
   );

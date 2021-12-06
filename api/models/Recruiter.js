@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 const { DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
 const Vacant = require("./Vacant");

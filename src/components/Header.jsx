@@ -1,21 +1,14 @@
-import Dropdown from "../DropDown";
+import Dropdown from "./DropDown";
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
-import { resetArea, addArea } from "../../features/areaSlice";
-import { resetSeniority, addSeniority } from "../../features/senioritys";
-import { addCountry, resetCountry } from "../../features/countrySlice";
 
-const HeaderRecruiters = ({ areas, seniorities, countries }) => {
+const HeaderRecruiters = ({ filters, resets, adds }) => {
   const [reset, setReset] = React.useState(false);
-
   const dispatch = useDispatch();
-
   const handleTrash = () => {
-    dispatch(resetCountry());
-    dispatch(resetSeniority());
-    dispatch(resetArea());
+    resets.map((reset) => dispatch(reset()));
     setReset(true);
   };
 
@@ -23,24 +16,15 @@ const HeaderRecruiters = ({ areas, seniorities, countries }) => {
     <div className="body-page">
       <div className="filters">
         <i className="fas fa-search"></i>
-        <Dropdown
-          name="Areas"
-          data={areas}
-          action={addArea}
-          reset={{ reset, setReset }}
-        />
-        <Dropdown
-          name="Grado"
-          data={seniorities}
-          action={addSeniority}
-          reset={{ reset, setReset }}
-        />
-        <Dropdown
-          name="Pais"
-          data={countries}
-          action={addCountry}
-          reset={{ reset, setReset }}
-        />
+        {filters.map((filter, i) => {
+          console.log(filter)
+         return  <Dropdown
+            name={filter.name}
+            data={filter.data}
+            action={adds[i]}
+            reset={{ reset, setReset }}
+          />;
+        })}
         <div>
           <button
             onClick={handleTrash}
