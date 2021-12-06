@@ -22,7 +22,11 @@ class VacantController {
         attributes: ["id", "job", "state", "description", "vacant"],
         where: { id: req.params.id },
         include: [
-          {model: Recruiter, attributes: ["firstName", "lastName"], as: "Recruiter" },
+          {
+            model: Recruiter,
+            attributes: ["firstName", "lastName"],
+            as: "Recruiter",
+          },
           { model: Country, attributes: ["id", "name"], as: "Country" },
           { model: City, attributes: ["id", "name"], as: "City" },
           { model: Area, attributes: ["id", "name"], as: "Area" },
@@ -38,7 +42,7 @@ class VacantController {
   static async getAll(req, res, next) {
     try {
       const vacant = await Vacant.findAll({
-        include: [{model: Country, attributes: ["name"], as: "Country"}]
+        include: [{ model: Country, attributes: ["name"], as: "Country" }],
       });
       return res.status(200).send(vacant);
     } catch (err) {
@@ -58,8 +62,11 @@ class VacantController {
 
   static async deleteVacantByIdParams(req, res, next) {
     try {
-      const vacant = await Vacant.findByPk(req.params.id);
+      /* const vacant = await Vacant.findByPk(req.params.id);
       await vacant.destroy();
+      return res.status(204).send("Vacant deleted successfully"); */
+      const { id } = req.params;
+      await Vacant.destroy({ where: { id: id } });
       return res.status(204).send("Vacant deleted successfully");
     } catch (err) {
       next(err);
@@ -113,7 +120,7 @@ class VacantController {
     const { id } = req.params;
     const vacant = await Vacant.findByPk(id);
 
-   const recruiters = await Recruiter.getBests(vacant);
+    const recruiters = await Recruiter.getBests(vacant);
 
     res.send(recruiters);
   }

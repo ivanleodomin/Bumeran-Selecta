@@ -1,11 +1,14 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/view.css";
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, useHistory, Link } from "react-router-dom";
+import swal from "sweetalert";
 
 function View() {
   const id = useLocation().pathname.slice(9);
   const [vacant, setVacant] = React.useState("");
+  const history = useHistory();
+
   React.useEffect(() => {
     axios
       .get(`/api/vacant/${id}`)
@@ -13,8 +16,20 @@ function View() {
       .then((data) => setVacant(data));
   }, [id]);
 
-  const onClickButton = () => {
-    axios.delete(`/api/vacant/${id}`);
+  const handleDelete = async () => {
+    swal({
+      title: "¿Eliminar vacante?",
+      text: "Cuidado! estas a punto de eliminar una vacante, recuerda que una vez eliminada no abra vuelta atras",
+      icon: "warning",
+      buttons: ["Cancelar", "Eliminar"],
+    }).then(async (res) => {
+      if (res) {
+        swal({ text: "Eliminado", icon: "succes" });
+        await axios.delete(`/api/vacant/${id}`);
+        history.push("/vacants");
+        window.location.href = window.location.href;
+      }
+    });
   };
 
   return (
@@ -38,7 +53,10 @@ function View() {
                   Editar
                 </button>
               </Link>
-              <button className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700">
+              <button
+                className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
+                onClick={handleDelete}
+              >
                 Borrar
               </button>
             </div>
