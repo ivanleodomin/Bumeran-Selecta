@@ -1,43 +1,24 @@
 import React from "react";
 import axios from "axios";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useHistory } from "react-router-dom";
+import { useHook } from "../../hooks/useStates";
 
 const VacantEdit = () => {
   const id = useLocation().pathname.slice(13);
+  const history = useHistory();
 
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
-  const [country, setCountries] = React.useState([]);
   const [city, setCity] = React.useState([]);
 
-  const [vacants, setVacants] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [valueAreas, setValueAreas] = React.useState("");
-  const [valueSeniorities, setValueSeniorities] = React.useState("");
-  const [valueCountries, setValueCountries] = React.useState("");
-  const [cityValue, setCityValue] = React.useState("");
-  const [idCountry, setIdCountry] = React.useState("");
-  const [areaValue, setAreaValue] = React.useState("");
+  const valueVacants = useHook("");
+  const valueAreas = useHook("");
+  const valueCity = useHook("");
+  const valueDescription = useHook("");
+  const valueSeniorities = useHook("");
+  const valueCountries = useHook("");
+  const nameCountry = useHook("");
 
-  const onChangeAreas = (e) => {
-    setValueAreas(e.target.value);
-  };
-  const onChangeSeniorities = (e) => {
-    setValueSeniorities(e.target.value);
-  };
-  const onChangeDescription = (e) => {
-    setDescription(e.target.value);
-  };
-  const onChangeCountries = (e) => {
-    setValueCountries(e.target.value);
-  };
-  const onChangeVacants = (e) => {
-    setVacants(e.target.value);
-  };
-  const onChangeCities = (e) => {
-    setCityValue(e.target.value);
-  };
-  console.log(valueSeniorities, "sen");
   React.useEffect(() => {
     axios
       .get("/api/area")
@@ -50,42 +31,35 @@ const VacantEdit = () => {
       .then((data) => setSeniorities(data));
 
     axios
-      .get("/api/country")
-      .then((info) => info.data)
-      .then((data) => setCountries(data));
-
-    axios
       .get(`/api/vacant/${id}`)
       .then((info) => info.data)
       .then((data) => {
-        setDescription(data.description);
-        setVacants(data.vacant);
-        setValueAreas(data.area);
-        setIdCountry(data.Country.id);
-        setValueCountries(data.Country.name);
-        setCityValue(data.City.name);
-        setValueSeniorities(data.job);
-        setAreaValue(data.Area.name);
+        nameCountry.setValor(data.Country.name);
+        valueCountries.setValor(data.Country.id);
+        valueAreas.setValor(data.Area.id);
+        valueCity.setValor(data.City.id);
+        valueVacants.setValor(data.vacant);
+        valueDescription.setValor(data.description);
+        valueSeniorities.setValor(data.job);
       })
       .then(() =>
         axios
-          .get(`/api/country/${idCountry}`)
+          .get(`/api/country/${valueCountries.value}`)
           .then((info) => info.data)
           .then((data) => setCity(data))
       );
-  }, [idCountry, areaValue]);
+  }, [valueCountries.value]);
 
   const handleSubmit = () => {
-    axios
-      .put(`/api/vacant/${id}`, {
-        /* job: */
-        vacants: vacants,
-        area: areas,
-        seniority: seniorities,
-        description: description,
-      })
-      .then(() => alert("succesfully"))
-      .catch(() => alert("negative"));
+    axios.put(`/api/vacant/${id}`, {
+      vacant: valueVacants.value,
+      job: valueSeniorities.value,
+      description: valueSeniorities.value,
+      AreaId: valueAreas.value,
+      CityId: valueCity.value,
+      CountryId: valueCountries.value,
+    });
+    history.push("/vacants");
   };
 
   return (
@@ -124,11 +98,11 @@ const VacantEdit = () => {
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={onChangeCountries}
-                        value={valueCountries}
+                        onChange={valueCountries.onChange}
+                        value={valueCountries.value}
                         disabled
                       >
-                        <option>{valueCountries}</option>;
+                        <option>{nameCountry.value}</option>;
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -142,11 +116,13 @@ const VacantEdit = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                        onChange={onChangeCities}
-                        value={cityValue}
+                        onChange={valueCity.onChange}
+                        value={valueCity.value}
                       >
-                        {city?.map((citi) => {
-                          return <option>{citi.name}</option>;
+                        {city?.map((cities) => {
+                          return (
+                            <option value={cities.id}>{cities.name}</option>
+                          );
                         })}
                       </select>
                     </div>
@@ -161,8 +137,8 @@ const VacantEdit = () => {
                         type="number"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
-                        onChange={onChangeVacants}
-                        value={vacants}
+                        onChange={valueVacants.onChange}
+                        value={valueVacants.value}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -174,11 +150,9 @@ const VacantEdit = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        onChange={onChangeAreas}
-                        value={valueAreas}
-                        /* defaultValue={areaValue} */
+                        onChange={valueAreas.onChange}
+                        value={valueAreas.value}
                       >
-                        <option defaultValue>{areaValue}</option>
                         {areas?.map((area) => {
                           return <option value={area.id}>{area.name}</option>;
                         })}
@@ -193,8 +167,8 @@ const VacantEdit = () => {
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        onChange={onChangeSeniorities}
-                        value={valueSeniorities}
+                        onChange={valueSeniorities.onChange}
+                        value={valueSeniorities.value}
                       >
                         {seniorities?.map((seniority) => {
                           return <option>{seniority.name}</option>;
@@ -214,8 +188,8 @@ const VacantEdit = () => {
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
-                        onChange={onChangeDescription}
-                        value={description}
+                        onChange={valueDescription.onChange}
+                        value={valueDescription.value}
                       />
                     </div>
                     <div className="buttons">

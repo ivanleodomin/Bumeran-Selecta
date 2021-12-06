@@ -63,7 +63,6 @@ const VacantsAdd = () => {
       .then(() => alert("succesfully"))
       .catch(() => alert("negative"));
   };
-
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
