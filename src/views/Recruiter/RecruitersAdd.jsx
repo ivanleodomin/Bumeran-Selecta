@@ -1,9 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useHook } from "../../hooks/useHook";
 
 const RecruitersAdd = () => {
+
+  const history = useHistory()
+
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
@@ -53,7 +56,8 @@ const RecruitersAdd = () => {
       seniorityOp1: SeniorityOp1Id.value,
       seniorityOp2: SeniorityOp2Id.value,
       seniorityOp3: SeniorityOp3Id.value,
-    });
+    })
+    history.push("/recruiters")
   };
 
   return (
@@ -167,6 +171,7 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp1Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
@@ -180,6 +185,7 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp1Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
                               <option value={seniority.id}>
@@ -199,6 +205,7 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp2Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
@@ -212,6 +219,7 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp2Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
                               <option value={seniority.id}>
@@ -231,6 +239,7 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp3Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
@@ -244,8 +253,10 @@ const RecruitersAdd = () => {
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp3Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
+                            
                               <option value={seniority.id}>
                                 {seniority.name}
                               </option>
