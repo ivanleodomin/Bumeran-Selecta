@@ -1,4 +1,5 @@
-const  Seniority  = require("../models/Seniority");
+const Seniority = require("../models/Seniority");
+const Vacant = require("../models/Vacant");
 
 async function expertiseCalc(id) {
   const degree = await Seniority.findByPk(id);
@@ -24,4 +25,15 @@ async function skillsCal(recruiter, vacant) {
   return points;
 }
 
-module.exports = skillsCal;
+async function calcActivity(recruiterId) {
+  const actividad = await Vacant.findAndCountAll({
+    where: { RecruiterId: recruiterId, state: "Asignada" },
+  });
+
+  if (actividad.rows === 3) return 0.5;
+  if (actividad.rows === 2) return 0.25;
+  if (actividad.rows === 1) return 0.15;
+  if (actividad.rows === 0) return 0;
+}
+
+module.exports = { skillsCal, calcActivity };

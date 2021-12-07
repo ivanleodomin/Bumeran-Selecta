@@ -15,6 +15,7 @@ Vacant.belongsTo(Country, { as: "Country" });
 City.belongsTo(Country, { as: "Country" });
 
 Vacant.belongsTo(Area, { as: "Area" });
+Vacant.belongsTo(Seniority, { as: "Seniority" });
 
 Recruiter.belongsTo(Area, { as: "AreaOp1" });
 Recruiter.belongsTo(Area, { as: "AreaOp2" });

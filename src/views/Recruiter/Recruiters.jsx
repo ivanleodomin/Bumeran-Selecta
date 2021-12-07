@@ -57,6 +57,7 @@ const Recruiters = () => {
         ]}
         resets={[resetArea, resetCountry, resetSeniority]}
         adds={[addArea, addSeniority, addCountry]}
+        routeButton="/recruiter-form"
       />
       <Results datas={recruiters} View={View} Card={Card} />
     </>
