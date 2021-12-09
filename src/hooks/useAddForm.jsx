@@ -1,6 +1,6 @@
 import React from "react";
 
-export const useHook = () => {
+export const useAddForm = () => {
   const [value, setValue] = React.useState("");
 
   const onChange = (e) => {

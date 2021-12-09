@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useHistory } from "react-router-dom";
-import { useHook } from "../../hooks/useHook";
+import { useAddForm } from "../../hooks/useAddForm";
 
 const RecruitersAdd = () => {
 
@@ -14,15 +14,15 @@ const RecruitersAdd = () => {
   const [states, setStates] = React.useState(true);
   const [countryy, setCountryy] = React.useState("")
 
-  const firstName = useHook("");
-  const lastName = useHook("");
-  const cityy = useHook("");
-  const AreaOp1Id = useHook("");
-  const AreaOp2Id = useHook("");
-  const AreaOp3Id = useHook("");
-  const SeniorityOp1Id = useHook("");
-  const SeniorityOp2Id = useHook("");
-  const SeniorityOp3Id = useHook("");
+  const firstName = useAddForm("");
+  const lastName = useAddForm("");
+  const cityy = useAddForm("");
+  const AreaOp1Id = useAddForm("");
+  const AreaOp2Id = useAddForm("");
+  const AreaOp3Id = useAddForm("");
+  const SeniorityOp1Id = useAddForm("");
+  const SeniorityOp2Id = useAddForm("");
+  const SeniorityOp3Id = useAddForm("");
 
   React.useEffect(() => {
     axios.get("/api/area").then((info) => setAreas(info.data));

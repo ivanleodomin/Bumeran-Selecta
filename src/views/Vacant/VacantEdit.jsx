@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { useHook } from "../../hooks/useStates";
+import { useEditForm } from "../../hooks/useEditForm";
 
 const VacantEdit = () => {
   const id = useLocation().pathname.slice(13);
@@ -11,13 +11,13 @@ const VacantEdit = () => {
   const [seniorities, setSeniorities] = React.useState([]);
   const [city, setCity] = React.useState([]);
 
-  const valueVacants = useHook("");
-  const valueAreas = useHook("");
-  const valueCity = useHook("");
-  const valueDescription = useHook("");
-  const valueSeniorities = useHook("");
-  const valueCountries = useHook("");
-  const nameCountry = useHook("");
+  const valueVacants = useEditForm("");
+  const valueAreas = useEditForm("");
+  const valueCity = useEditForm("");
+  const valueDescription = useEditForm("");
+  const valueSeniorities = useEditForm("");
+  const valueCountries = useEditForm("");
+  const nameCountry = useEditForm("");
 
   React.useEffect(() => {
     axios
@@ -51,15 +51,16 @@ const VacantEdit = () => {
   }, [valueCountries.value]);
 
   const handleSubmit = () => {
-    axios.put(`/api/vacant/${id}`, {
-      vacant: valueVacants.value,
-      job: valueSeniorities.value,
-      description: valueSeniorities.value,
-      AreaId: valueAreas.value,
-      CityId: valueCity.value,
-      CountryId: valueCountries.value,
-    });
-    history.push("/vacants");
+    axios
+      .put(`/api/vacant/${id}`, {
+        vacant: valueVacants.value,
+        job: valueSeniorities.value,
+        description: valueSeniorities.value,
+        AreaId: valueAreas.value,
+        CityId: valueCity.value,
+        CountryId: valueCountries.value,
+      })
+      .then(history.push("/vacants"));
   };
 
   return (

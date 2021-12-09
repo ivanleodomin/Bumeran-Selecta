@@ -1,18 +1,18 @@
 import React from "react";
-import { useHook } from "../../hooks/useHook";
+import { useAddForm } from "../../hooks/useAddForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const VacantsAdd = () => {
 
-  const vacants = useHook("");
-  const country = useHook("");
-  const seniority = useHook("");
-  const area = useHook("");
-  const description = useHook("")
-  const cityy = useHook("");
-  const [countryy, setCountryy] = React.useState("")
+  const vacants = useAddForm("");
+  const country = useAddForm("");
+  const seniority = useAddForm("");
+  const area = useAddForm("");
+  const description = useAddForm("")
+  const cityy = useAddForm("");
 
+  const [countryy, setCountryy] = React.useState("")
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);

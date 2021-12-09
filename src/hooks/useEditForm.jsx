@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export const useHook = (type) => {
+export const useEditForm = (type) => {
   const [value, setValue] = useState("");
   const onChange = (event) => {
     setValue(event.target.value);
