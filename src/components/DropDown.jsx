@@ -44,7 +44,7 @@ function Dropdown({ data, name, action, reset }) {
         </span>
       </div>
       <div>
-        <ul className={show && "show"}>
+        <ul className={show ? "show" : ""}>
           {data?.map((item, i) => {
             return (
               <li key={i} className="item" onClick={() => filter(item.name)}>

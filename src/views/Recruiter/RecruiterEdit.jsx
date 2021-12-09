@@ -24,7 +24,6 @@ function RecruiterEdit() {
     }
   };
 
-  console.log(city, "PAIS");
   React.useEffect(() => {
     axios.get("/api/country").then((info) => setCountries(info.data));
 

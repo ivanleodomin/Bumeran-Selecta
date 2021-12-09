@@ -22,7 +22,6 @@ function View() {
         await swal({ text: "Eliminado", icon: "success" });
         await axios.delete(`/api/recruiter/${id}`);
         history.push("/recruiters");
-        window.location.href = window.location.href;
       }
     });
   };

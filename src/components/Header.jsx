@@ -17,13 +17,15 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
       <div className="filters">
         <i className="fas fa-search"></i>
         {filters.map((filter, i) => {
-          console.log(filter)
-         return  <Dropdown
-            name={filter.name}
-            data={filter.data}
-            action={adds[i]}
-            reset={{ reset, setReset }}
-          />;
+          return (
+            <Dropdown
+              key={i}
+              name={filter.name}
+              data={filter.data}
+              action={adds[i]}
+              reset={{ reset, setReset }}
+            />
+          );
         })}
         <div>
           <button

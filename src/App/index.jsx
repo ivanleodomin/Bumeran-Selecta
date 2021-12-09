@@ -9,6 +9,7 @@ import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
 import VacantsAdd from "../views/Vacant/VacantsAdd";
 import VacantEdit from "../views/Vacant/VacantEdit";
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
+import LinkRecruiter from "../views/Vacant/LinkRecruiter";
 const Recruiters = lazy(() => import("../views/Recruiter/Recruiters"));
 
 function App() {
@@ -36,8 +37,16 @@ function App() {
             <Recruiters />
           </Suspense>
         </Route>
-        <Route path="/vacants">
+        {/*Preguntar*/}
+        <Route path="/vacants/:id">
           <Vacants />
+        </Route>
+        <Route path="/vacants/">
+          <Vacants />
+        </Route>
+        {/*Preguntar*/}
+        <Route exact path="/link-recruiter/:id">
+          <LinkRecruiter />
         </Route>
         <Route path="/stadistics">
           <Statistics />

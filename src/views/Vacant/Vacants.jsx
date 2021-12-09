@@ -6,32 +6,32 @@ import Results from "../../components/Results";
 import Card from "../../components/Vacants/Card";
 import { useSelector } from "react-redux";
 import { resetArea } from "../../features/areaSlice";
-import { resetSeniority } from "../../features/senioritys";
+import { resetState } from "../../features/stateSlice";
 import { addArea } from "../../features/areaSlice";
-import { addSeniority } from "../../features/senioritys";
+import { addState } from "../../features/stateSlice";
 import { resetCountry, addCountry } from "../../features/countrySlice";
 
 const Vacants = () => {
+  const state = [
+    { name: "Finalizada" },
+    { name: "Asignada" },
+    { name: "Iniciada" },
+  ];
   const [vacants, setVacants] = React.useState([]);
-  const [seniorities, setSeniorities] = React.useState([]);
   const [areas, setAreas] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
 
   const areaName = useSelector((state) => state.area).value;
-  const seniorityName = useSelector((state) => state.seniority).value;
+  const stateName = useSelector((state) => state.state).value;
   const countryName = useSelector((state) => state.country).value;
 
   React.useEffect(() => {
     axios
-      .get("/api/vacant")
+      .get(
+        `/api/vacant?area=${areaName}&state=${stateName}&country=${countryName}`
+      )
       .then((res) => res.data)
       .then((data) => setVacants(data))
-      .catch((error) => console.error(error));
-
-    axios
-      .get("/api/seniority")
-      .then((res) => res.data)
-      .then((data) => setSeniorities(data))
       .catch((error) => console.error(error));
 
     axios
@@ -45,18 +45,19 @@ const Vacants = () => {
       .then((res) => res.data)
       .then((data) => setCountries(data))
       .catch((error) => console.error(error));
-  }, [areaName, seniorityName, countryName]);
+  }, [areaName, stateName, countryName]);
 
   return (
     <>
+      <h1>ABM DE VACANTES</h1>
       <Header
         filters={[
           { name: "Areas", data: areas },
-          { name: "Estado", data: seniorities },
+          { name: "Estado", data: state },
           { name: "Pais", data: countries },
         ]}
-        resets={[resetArea, resetCountry, resetSeniority]}
-        adds={[addArea, addSeniority, addCountry]}
+        resets={[resetArea, resetCountry, resetState]}
+        adds={[addArea, addState, addCountry]}
         routeButton="/vacant-form"
       />
       <Results datas={vacants} View={View} Card={Card} />

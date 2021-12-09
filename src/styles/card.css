@@ -48,3 +48,30 @@
  font-size: 13;
   color:rgb(66, 66, 66);
 }
+
+.button-reclut{
+  background-color: #4CAF50; /* Green */
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 5px
+}
+
+
+.button-info{
+  background-color: rgb(60, 60, 253); /* Green */
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 2px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  margin: 5px
+}

@@ -15,7 +15,6 @@ const useFormPro = (validate) =>{
   
    const handleChange = (e) =>{
    const {value, name} = e.target
-    console.log(value);
     setValue({
       ...value,
       [name]: [value]
