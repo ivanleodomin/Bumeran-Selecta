@@ -34,7 +34,6 @@ function RecruiterEdit() {
       .get(`/api/recruiter/${id}`)
       .then((info) => info.data)
       .then((data) => {
-        console.log(data);
         firstName.setValor(data.firstName);
         lastName.setValor(data.lastName);
         countryy.setValor(data.Country.id);
@@ -68,18 +67,6 @@ function RecruiterEdit() {
       .then(history.push("/recruiters"));
   };
 
-  console.log(`
-  ${firstName.value}, "firstName"
-  ${lastName.value}, "lastName"
-  ${countryy.value}, "countryy"
-  ${cityy.value}, "cityy"
-  ${AreaOp1Id.value}, "AreaOp1Id"
-  ${AreaOp2Id.value}, "AreaOp2Id"
-  ${AreaOp3Id.value}, "AreaOp3Id"
-  ${SeniorityOp1Id.value}, "SeniorityOp1Id"
-  ${SeniorityOp2Id.value}, "SeniorityOp2Id"
-  ${SeniorityOp3Id.value}, "SeniorityOp3Id"
-  `)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
@@ -112,7 +99,6 @@ function RecruiterEdit() {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Nombre
                       </label>
@@ -126,7 +112,6 @@ function RecruiterEdit() {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Apellido
                       </label>
@@ -140,7 +125,6 @@ function RecruiterEdit() {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Pais
                       </label>
@@ -152,7 +136,6 @@ function RecruiterEdit() {
                         {...countryy}
                       >
                         {countries?.map((countriess) => {
-                          console.log(countriess);
                           return (
                             <option value={countriess.id}>
                               {countriess.name}
@@ -164,7 +147,6 @@ function RecruiterEdit() {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Ciudad
                       </label>
@@ -182,9 +164,9 @@ function RecruiterEdit() {
                         })}
                       </select>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area
                         </label>
                         <select
@@ -196,8 +178,8 @@ function RecruiterEdit() {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority
                         </label>
                         <select
@@ -214,9 +196,9 @@ function RecruiterEdit() {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 2
                         </label>
                         <select
@@ -228,8 +210,8 @@ function RecruiterEdit() {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 2
                         </label>
                         <select
@@ -246,9 +228,9 @@ function RecruiterEdit() {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 3
                         </label>
                         <select
@@ -260,8 +242,8 @@ function RecruiterEdit() {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 3
                         </label>
                         <select

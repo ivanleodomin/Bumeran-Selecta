@@ -92,7 +92,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Nombre
                       </label>
@@ -106,7 +105,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Apellido
                       </label>
@@ -120,7 +118,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Pais
                       </label>
@@ -143,7 +140,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Ciudad
                       </label>
@@ -162,9 +158,9 @@ const RecruitersAdd = () => {
                         })}
                       </select>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area
                         </label>
                         <select
@@ -177,8 +173,8 @@ const RecruitersAdd = () => {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority
                         </label>
                         <select
@@ -196,9 +192,9 @@ const RecruitersAdd = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 2
                         </label>
                         <select
@@ -211,8 +207,8 @@ const RecruitersAdd = () => {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 2
                         </label>
                         <select
@@ -230,9 +226,9 @@ const RecruitersAdd = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 3
                         </label>
                         <select
@@ -245,8 +241,8 @@ const RecruitersAdd = () => {
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 3
                         </label>
                         <select

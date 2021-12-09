@@ -78,7 +78,7 @@ function View() {
               {recruiter?.activeVacancies?.map((vacante) => {
                 return (
                   <li>
-                    Puesto: {vacante.job} Description: {vacante.description}
+                    Puesto: {vacante.title} Description: {vacante.description}
                   </li>
                 );
               })}
@@ -88,7 +88,7 @@ function View() {
               {recruiter?.history?.map((vacante) => {
                 return (
                   <li>
-                    Puesto: {vacante.job} Description: {vacante.description}
+                    Puesto: {vacante.title} Description: {vacante.description}
                   </li>
                 );
               })}

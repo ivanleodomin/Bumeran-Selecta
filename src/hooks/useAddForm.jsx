@@ -6,5 +6,6 @@ export const useAddForm = () => {
   const onChange = (e) => {
     setValue(e.target.value);
   };
+
   return { value, onChange };
 };
