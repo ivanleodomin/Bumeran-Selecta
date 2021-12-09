@@ -1,16 +1,26 @@
-const { Vacant, Recruiter, City, Review, Area, Country } = require("../models");
+const {
+  Vacant,
+  Recruiter,
+  City,
+  Review,
+  Area,
+  Country,
+  Seniority,
+} = require("../models");
 
 class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    const { areaId, cityId, countryId } = req.body;
+    const { areaId, cityId, countryId, seniorityId } = req.body;
     const vacant = await Vacant.create(req.body);
     const city = await City.findByPk(cityId);
     const country = await Country.findByPk(countryId);
+    const degree = await Seniority.findByPk(seniorityId);
     const area = await Area.findByPk(areaId);
     const created = await vacant.setCity(city);
 
+    await vacant.setSeniority(degree)
     await vacant.setArea(area);
     await vacant.setCountry(country);
     res.status(201).send(created);
@@ -30,6 +40,7 @@ class VacantController {
           { model: Country, attributes: ["id", "name"], as: "Country" },
           { model: City, attributes: ["id", "name"], as: "City" },
           { model: Area, attributes: ["id", "name"], as: "Area" },
+          { model: Seniority, attributes: ["id", "name"], as: "Seniority" },
         ],
       });
 
@@ -62,9 +73,6 @@ class VacantController {
 
   static async deleteVacantByIdParams(req, res, next) {
     try {
-      /* const vacant = await Vacant.findByPk(req.params.id);
-      await vacant.destroy();
-      return res.status(204).send("Vacant deleted successfully"); */
       const { id } = req.params;
       await Vacant.destroy({ where: { id: id } });
       return res.status(204).send("Vacant deleted successfully");

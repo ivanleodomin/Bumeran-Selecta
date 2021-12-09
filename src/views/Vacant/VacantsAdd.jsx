@@ -19,45 +19,45 @@ const VacantsAdd = () => {
   const [city, setCity] = React.useState([]);
   const [states, setStates] = React.useState(true);
 
-  
   const handleChangePais = (e) => {
     if (e.target.value === "Elija una opcion") {
       setStates(true);
     } else {
       axios
-      .get(`/api/country/${e.target.value}`)
-      .then((info) => setCity(info.data));
-      setCountryy(e.target.value)
+        .get(`/api/country/${e.target.value}`)
+        .then((info) => setCity(info.data));
+      setCountryy(e.target.value);
       setStates(false);
     }
   };
-  
+
   React.useEffect(() => {
     axios
-    .get("/api/area")
-    .then((info) => info.data)
-    .then((data) => setAreas(data));
-    
+      .get("/api/area")
+      .then((info) => info.data)
+      .then((data) => setAreas(data));
+
     axios
-    .get("/api/seniority")
-    .then((info) => info.data)
-    .then((data) => setSeniorities(data))
-    
+      .get("/api/seniority")
+      .then((info) => info.data)
+      .then((data) => setSeniorities(data));
+
     axios
-    .get("/api/country") 
-    .then((info) => info.data) 
-    .then((data) => setCountries(data))
+      .get("/api/country")
+      .then((info) => info.data)
+      .then((data) => setCountries(data));
   }, []);
 
   const handleSubmit = () => {
     axios
       .post("/api/vacant/add", {
+        job: puesto.value,
         country: country.value,
         vacant: vacants.value,
         areaId: area.value,
         countryId: countryy,
         cityId: cityy.value,
-        job: seniority.value,
+        seniorityId: seniority.value,
         description: description.value,
       })
       .then(() => alert("succesfully"))
@@ -93,7 +93,24 @@ const VacantsAdd = () => {
               <form onSubmit={handleSubmit}>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
-                  <div className="relative w-full mb-3">
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
+                        htmlFor="grid-password"
+                      >
+                        Puesto
+                      </label>
+                      <input
+                        type="text"
+                        name="puesto"
+                        rows={5}
+                        cols={5}
+                        className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Puesto"
+                        {...puesto}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
                         htmlFor="grid-password"
@@ -102,7 +119,7 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
-                        name='country'
+                        name="country"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
                         onChange={handleChangePais}
@@ -117,8 +134,6 @@ const VacantsAdd = () => {
                         })}
                       </select>
                     </div>
-           
-
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
@@ -128,7 +143,7 @@ const VacantsAdd = () => {
                       </label>
                       <select
                         type="text"
-                        name='location'
+                        name="location"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         disabled={states}
@@ -151,7 +166,7 @@ const VacantsAdd = () => {
                       </label>
                       <input
                         type="number"
-                        name='vacants'
+                        name="vacants"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         {...vacants}
@@ -167,11 +182,11 @@ const VacantsAdd = () => {
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...area}
-                        name='area'
+                        name="area"
                       >
                         <option defaultValue>Elija una opcion</option>
                         {areas?.map((area) => {
-                          return <option value={area.id}>{area.name}</option>
+                          return <option value={area.id}>{area.name}</option>;
                         })}
                       </select>
                     </div>
@@ -183,13 +198,13 @@ const VacantsAdd = () => {
                         Seniority
                       </label>
                       <select
-                      name='seniority'
+                        name="seniority"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         {...seniority}
-                        >
-                          <option defaultValue>Elija una opcion</option>
+                      >
+                        <option defaultValue>Elija una opcion</option>
                         {seniorities?.map((seniority) => {
-                          return <option>{seniority.name}</option>
+                          return <option  value={seniority.id}>{seniority.name}</option>;
                         })}
                       </select>
                     </div>
@@ -202,7 +217,7 @@ const VacantsAdd = () => {
                       </label>
                       <textarea
                         type="text"
-                        name='description'
+                        name="description"
                         rows={5}
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"

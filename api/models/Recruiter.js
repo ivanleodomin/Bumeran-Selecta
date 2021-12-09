@@ -1,8 +1,7 @@
 const { DataTypes, Model } = require("sequelize");
 const db = require("../config/db");
-const Vacant = require("./Vacant");
 const Review = require("./Review");
-const skillsCal = require("../utils/skillsCal.js");
+const { skillsCal, calcActivity } = require("../utils/skillsCal.js");
 
 class Recruiter extends Model {}
 
@@ -27,7 +26,7 @@ Recruiter.prototype.getRanking = async function () {
       RecruiterId: this.id,
     },
   });
-  if (!reviews.length) return 0;
+  if (reviews.length <= 3) return 3;
   else {
     let acc = 0;
     reviews.forEach((element) => {
@@ -39,7 +38,6 @@ Recruiter.prototype.getRanking = async function () {
 };
 
 Recruiter.getBests = async function (vacant) {
-  
   const recruiters = await Recruiter.findAll({
     where: { CountryId: vacant.CountryId },
   });
@@ -48,15 +46,12 @@ Recruiter.getBests = async function (vacant) {
 
   for (let recruiter of recruiters) {
     const { area, experticia } = await skillsCal(recruiter, vacant);
-
-    const actividad = await Vacant.findAndCountAll({
-      where: { RecruiterId: recruiter.id, state: "Asignada" },
-    });
-
+    const actividad = calcActivity(recruiter.id);
     const instance = await Recruiter.findByPk(recruiter.id);
     const rank = await instance.getRanking();
 
-    recruiter.dataValues.position = area + experticia + rank - actividad.count;
+    const points = area * 0.2 + experticia * 0.3 + rank * 0.6;
+    recruiter.dataValues.position = points - points * actividad; 
     bests.push(recruiter);
   }
 

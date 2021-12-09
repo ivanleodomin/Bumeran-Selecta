@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 
-const HeaderRecruiters = ({ filters, resets, adds }) => {
+const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
   const [reset, setReset] = React.useState(false);
   const dispatch = useDispatch();
   const handleTrash = () => {
@@ -34,7 +34,7 @@ const HeaderRecruiters = ({ filters, resets, adds }) => {
           </button>
         </div>
         <div className="newRecruiter">
-          <Link to="/recruiter-form">
+          <Link to={routeButton}>
             <button className="fas fa-plus-circle"></button>
             <span>Nuevo</span>
           </Link>

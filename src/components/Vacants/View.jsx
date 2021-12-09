@@ -53,6 +53,11 @@ function View() {
                   Editar
                 </button>
               </Link>
+              <Link to={`/add-recruiter/${vacant.id}`}>
+                <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
+                  Agregar Reclutador
+                </button>
+              </Link>
               <button
                 className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
                 onClick={handleDelete}

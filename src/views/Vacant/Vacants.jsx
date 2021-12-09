@@ -57,6 +57,7 @@ const Vacants = () => {
         ]}
         resets={[resetArea, resetCountry, resetSeniority]}
         adds={[addArea, addSeniority, addCountry]}
+        routeButton="/vacant-form"
       />
       <Results datas={vacants} View={View} Card={Card} />
       <div className="h-64"></div>
