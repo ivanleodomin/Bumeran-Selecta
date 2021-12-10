@@ -10,4 +10,5 @@ router.get("/:id", RecruiterController.getById); //Obtiene informacion detallada
 
 router.delete("/:id", RecruiterController.deleteById); //Elimina el reclutador que tenga como id el parametro
 
+router.put("/:id", RecruiterController.updateRecruiterByIdParams); //Actualiza los datos del reclutador
 module.exports = router;

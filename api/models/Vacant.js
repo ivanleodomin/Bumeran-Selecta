@@ -5,7 +5,7 @@ class Vacant extends S.Model {}
 
 Vacant.init(
   {
-    job: {
+    title: {
       type: S.STRING,
     },
     vacant: {

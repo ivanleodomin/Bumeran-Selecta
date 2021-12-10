@@ -11,7 +11,7 @@ function Card({ data }) {
       onClick={() => history.push(`/vacants/${data.id}`)}
     >
       <div className="preview transform motion-safe:hover:scale-110">
-        <div className="fullName">{`${data.job}`}</div>
+        <div className="fullName">{`${data.title}`}</div>
         <div className="seniority">{data.state}</div>
         <div className="area">{data.Country?.name}</div>
         <div className="vacantes">vacantes disponibles: {data.vacant}</div>

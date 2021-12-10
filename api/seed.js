@@ -35,12 +35,14 @@ async function seed() {
     await Seniority.bulkCreate(seniorities);
 
     for (let vacante of vacants) {
-      const { areaId, cityId, countryId } = vacante;
+      const { areaId, cityId, countryId, seniorityId } = vacante;
       const vacant = await Vacant.create(vacante);
       const city = await City.findByPk(cityId);
       const country = await Country.findByPk(countryId);
       const area = await Area.findByPk(areaId);
+      const seniority = await Seniority.findByPk(seniorityId);
       await vacant.setCity(city);
+      await vacant.setSeniority(seniority);
       await vacant.setArea(area);
       await vacant.setCountry(country);
     }

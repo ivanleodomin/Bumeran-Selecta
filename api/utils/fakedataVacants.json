@@ -3,7 +3,8 @@
     "countryId": 1,
     "cityId": 1,
     "areaId": 1,
-    "job": "Administrador",
+    "seniorityId": 3,
+    "title": "Administrador",
     "vacant": 2,
     "description": "Esto es una description"
   },
@@ -11,7 +12,8 @@
     "countryId": 1,
     "cityId": 1,
     "areaId": 1,
-    "job": "Contador",
+    "seniorityId": 2,
+    "title": "Contador",
     "vacant": 3,
     "description": "Esto es una description"
   },
@@ -19,7 +21,8 @@
     "countryId": 1,
     "cityId": 1,
     "areaId": 1,
-    "job": "Financista",
+    "seniorityId": 3,
+    "title": "Financista",
     "vacant": 2,
     "description": "Esto es una description"
   },
@@ -27,7 +30,8 @@
     "countryId": 1,
     "cityId": 1,
     "areaId": 2,
-    "job": "Comerciante",
+    "seniorityId": 1,
+    "title": "Comerciante",
     "vacant": 5,
     "description": "Esto es una description"
   },
@@ -35,7 +39,8 @@
     "countryId": 6,
     "cityId": 216,
     "areaId": 2,
-    "job": "Comerciante",
+    "seniorityId": 4,
+    "title": "Comerciante",
     "vacant": 5,
     "description": "Esto es una description"
   },
@@ -43,7 +48,8 @@
     "countryId": 4,
     "cityId": 121,
     "areaId": 2,
-    "job": "Comerciante",
+    "seniorityId": 1,
+    "title": "Comerciante",
     "vacant": 5,
     "description": "Esto es una description"
   },
@@ -51,7 +57,8 @@
     "countryId": 1,
     "cityId": 1,
     "areaId": 18,
-    "job": "Developer",
+    "seniorityId": 2,
+    "title": "Developer",
     "vacant": 5,
     "description": "Esto es una description"
   },
@@ -59,7 +66,8 @@
     "countryId": 1,
     "cityId": 20,
     "areaId": 18,
-    "job": "Ingeniero",
+    "seniorityId": 2,
+    "title": "Ingeniero",
     "vacant": 5,
     "description": "Esto es una description"
   },
@@ -67,7 +75,8 @@
     "countryId": 1,
     "cityId": 20,
     "areaId": 17,
-    "job": "Analista Actuarial",
+    "seniorityId": 3,
+    "title": "Analista Actuarial",
     "vacant": 5,
     "description": "Esto es una description"
   }

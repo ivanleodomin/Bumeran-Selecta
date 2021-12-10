@@ -77,10 +77,9 @@ function View() {
               {recruiter?.activeVacancies?.map((vacante) => {
                 return (
                   <li>
-                    Id de vacante: {vacante.Vacant.id} <br />
-                    Puesto: {vacante.Vacant.job}
-                    <br />
-                    Description: {vacante.Vacant.description}
+                    Id de vacante: {vacante?.Vacant?.id} <br />
+                    Puesto: {vacante?.Vacant?.title} <br />
+                    Description: {vacante?.Vacant?.description}
                     <br />
                   </li>
                 );
@@ -92,7 +91,7 @@ function View() {
                 return (
                   <li>
                     Id de vacante: {history.Vacant.id} <br />
-                    Puesto: {history?.Vacant?.job} <br />
+                    Puesto: {history?.Vacant?.title} <br />
                     Description: {history?.Vacant?.description} <br />
                   </li>
                 );

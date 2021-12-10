@@ -29,7 +29,7 @@ class VacantController {
   static async getById(req, res, next) {
     try {
       const vacant = await Vacant.findOne({
-        attributes: ["id", "job", "state", "description", "vacant"],
+        attributes: ["id", "title", "state", "description", "vacant"],
         where: { id: req.params.id },
         include: [
           {

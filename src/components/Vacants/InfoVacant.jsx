@@ -1,7 +1,7 @@
 export default function InfoVacant({ vacant }) {
   return (
     <>
-      <h1>Puesto: {vacant.job}</h1>
+      <h1>Puesto: {vacant.title}</h1>
       <h1>
         Estado: <span className="estado">{vacant.state}</span>
       </h1>

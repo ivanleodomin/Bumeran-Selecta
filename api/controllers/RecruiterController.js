@@ -116,7 +116,7 @@ class RecruiterController {
         where,
       });
       res.send(rec);
-    } catch(err) {
+    } catch (err) {
       console.log(err);
       res.status(500).send([]);
     }
@@ -147,6 +147,45 @@ class RecruiterController {
 
     await Recruiter.destroy({ where: { id: id } });
     res.sendStatus(204);
+  }
+
+  static async updateRecruiterByIdParams(req, res, next) {
+    try {
+      const {
+        firstName,
+        lastName,
+        cityId,
+        countryId,
+        areaOp1,
+        areaOp2,
+        areaOp3,
+        seniorityOp1,
+        seniorityOp2,
+        seniorityOp3,
+      } = req.body;
+
+      const city = await City.findByPk(cityId);
+      const country = await Country.findByPk(countryId);
+
+      const recruiter = await Recruiter.findByPk(req.params.id);
+
+      await recruiter.update({ firstName, lastName });
+
+      recruiter.setCountry(country);
+      recruiter.setCity(city);
+
+      recruiter.setAreaOp1(areaOp1);
+      recruiter.setAreaOp2(areaOp2);
+      recruiter.setAreaOp3(areaOp3);
+
+      recruiter.setSeniorityOp1(seniorityOp1);
+      recruiter.setSeniorityOp2(seniorityOp2);
+      recruiter.setSeniorityOp3(seniorityOp3);
+
+      return res.status(202).send(recruiter);
+    } catch (err) {
+      next(err);
+    }
   }
 }
 
