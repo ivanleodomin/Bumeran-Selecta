@@ -47,7 +47,7 @@ function View() {
 
   return (
     <div className="view">
-      {id === "" ? (
+      { !id ? (
         <div className="no-select">
           <h1>
             Elegí un reclutador para ver su informacion <span>acá</span>

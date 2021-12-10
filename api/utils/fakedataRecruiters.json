@@ -58,17 +58,5 @@
     "seniorityOp1": 1,
     "seniorityOp2": 2,
     "seniorityOp3": 3
-  },
-  {
-    "firstName": "Charly",
-    "lastName": "Spinetta",
-    "countryId": 6,
-    "cityId": 216,
-    "areaOp1": 1,
-    "areaOp2": 3,
-    "areaOp3": 2,
-    "seniorityOp1": 1,
-    "seniorityOp2": 2,
-    "seniorityOp3": 3
   }
 ]
