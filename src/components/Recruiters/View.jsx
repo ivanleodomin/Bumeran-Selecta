@@ -32,6 +32,8 @@ function View() {
       .then((data) => setRecruiter(data));
   }, [id]);
 
+  console.log("Recruiter", recruiter);
+
   return (
     <div className="view">
       {id === "" ? (
@@ -77,9 +79,9 @@ function View() {
               {recruiter?.activeVacancies?.map((vacante) => {
                 return (
                   <li>
-                    Id de vacante: {vacante?.Vacant?.id} <br />
-                    Puesto: {vacante?.Vacant?.title} <br />
-                    Description: {vacante?.Vacant?.description}
+                    Id de vacante: {vacante?.id} <br />
+                    Puesto: {vacante?.title} <br />
+                    Description: {vacante?.description}
                     <br />
                   </li>
                 );
