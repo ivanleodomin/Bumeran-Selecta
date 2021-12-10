@@ -5,13 +5,13 @@
   font-size: medium;
 }
 
-li{
-  background-color:white;
+li {
+  background-color: white;
 }
 
 .name {
   margin-left: 5px;
-  width: 50%;
+  width: 100%;
 }
 
 .filters {
@@ -22,7 +22,6 @@ li{
   background-color: #d5d5fd;
   position: absolute;
 }
-
 
 .dropdown {
   color: #c4c4c4;
@@ -80,7 +79,7 @@ li{
 
 .item {
   height: 18px;
-  color: black; 
+  color: black;
   margin: 8px;
   border-radius: 5px;
   font-size: 16px;
@@ -101,7 +100,7 @@ li{
 }
 
 .newRecruiter {
- font-size:15px;
+  font-size: 15px;
   width: 8%;
   height: 35px;
   display: flex;
@@ -111,6 +110,17 @@ li{
   border: blue;
   background-color: blue;
   margin-right: 5px;
+}
+
+.remove-filters {
+  border-radius: 5px;
+  color: white;
+  background-color: blue;
+  margin: 10px;
+  padding: 5px;
+  width: 50px;
+  text-align: center;
+  font-size:18px
 }
 
 .newRecruiter span {
@@ -123,7 +133,7 @@ li{
   margin: 5px;
 }
 
-.newRecruiter:hover {
+.newRecruiter:hover, .remove-filters:hover {
   background-color: rgb(55, 55, 255);
 }
 
@@ -132,7 +142,6 @@ li{
   color: blue;
 }
 
-
-.active{
-  color: black
+.active {
+  color: black;
 }

@@ -4,6 +4,9 @@ import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 
 const Home = () => {
+
+  //dispach de states redux limpiar
+  
   return (
     <div>
       <header className="bg-white-100 py-8">

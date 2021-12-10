@@ -27,18 +27,18 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
             />
           );
         })}
-        <div>
+        <div className="remove-filters">
           <button
             onClick={handleTrash}
-            className="text-white font-bold py-2 px-3 buttonAdd"
           >
             <BsFillTrashFill />
           </button>
         </div>
         <div className="newRecruiter">
           <Link to={routeButton}>
-            <button className="fas fa-plus-circle"></button>
-            <span>Nuevo</span>
+            <button className="fas fa-plus-circle">
+              <span>Nuevo</span>
+            </button>
           </Link>
         </div>
       </div>

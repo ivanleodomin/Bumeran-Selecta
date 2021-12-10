@@ -77,17 +77,23 @@ function View() {
               {recruiter?.activeVacancies?.map((vacante) => {
                 return (
                   <li>
-                    Puesto: {vacante.title} Description: {vacante.description}
+                    Id de vacante: {vacante.Vacant.id} <br />
+                    Puesto: {vacante.Vacant.job}
+                    <br />
+                    Description: {vacante.Vacant.description}
+                    <br />
                   </li>
                 );
               })}
             </ul>
             <ul className="list-disc list-inside bg-pink-200">
               <h3>Historial</h3>
-              {recruiter?.history?.map((vacante) => {
+              {recruiter?.history?.map((history) => {
                 return (
                   <li>
-                    Puesto: {vacante.title} Description: {vacante.description}
+                    Id de vacante: {history.Vacant.id} <br />
+                    Puesto: {history?.Vacant?.job} <br />
+                    Description: {history?.Vacant?.description} <br />
                   </li>
                 );
               })}
