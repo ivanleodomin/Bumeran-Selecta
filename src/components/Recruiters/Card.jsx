@@ -1,13 +1,13 @@
 import axios from "axios";
 import React from "react";
-import "../../styles/card.css"
+import "../../styles/card.css";
 import { useHistory } from "react-router-dom";
 
 function Card({ data }) {
   const history = useHistory();
   const [seniority, setSeniority] = React.useState("");
   const [area, setArea] = React.useState("");
-
+  const [ranck, setRanck] = React.useState("");
   React.useEffect(() => {
     axios
       .get(`/api/seniority/${data.SeniorityOp1Id}`)
@@ -29,7 +29,6 @@ function Card({ data }) {
         <div className="fullName">{`${data.firstName} ${data.lastName}`}</div>
         <div className="seniority">{seniority}</div>
         <div className="area">{area}</div>
-        <div className="ranking">✩✩✩✩✩</div>
       </div>
       <div className="bottom-card"></div>
     </div>
