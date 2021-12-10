@@ -4,6 +4,9 @@ import Assess from "./Assess";
 import "../../styles/view.css";
 import { useHistory, Link, useLocation } from "react-router-dom";
 import swal from "sweetalert";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
+import { AiOutlineUserAdd } from "react-icons/ai";
 
 export default function HeaderView({ vacant, id }) {
   const history = useHistory();
@@ -34,45 +37,48 @@ export default function HeaderView({ vacant, id }) {
 
     if (finish) setAssess(true);
   };
-  return (
-    <div className="justify-items-end">
-      <Assess assess={assess} vacant={vacant} />
-      <>
-        {vacant.state !== "Finalizada" && (
-          <>
-            {!vacant.Recruiter ? (
-              <>
-                {path !== "/link-recruiter" && (
-                  <Link to={`/link-recruiter/${vacant.id}`}>
-                    <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
-                      Agregar Reclutador
-                    </button>
-                  </Link>
-                )}
-              </>
-            ) : (
-              <button
-                onClick={handleFinish}
-                className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
-              >
-                Finalizar Busqueda
-              </button>
-            )}
-          </>
-        )}
-      </>
 
-      <Link to={`/vacant-edit/${vacant.id}`}>
-        <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
-          Editar
+  return (
+    <div className="w-full">
+      <Assess assess={assess} vacant={vacant} />
+      <div className="padding">
+        <>
+          {vacant.state !== "Finalizada" && (
+            <>
+              {!vacant.Recruiter ? (
+                <>
+                  {path !== "/link-recruiter" && (
+                    <Link to={`/link-recruiter/${vacant.id}`}>
+                      <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
+                        <AiOutlineUserAdd />
+                      </button>
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <button
+                  onClick={handleFinish}
+                  className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
+                >
+                  Finalizar Busqueda
+                </button>
+              )}
+            </>
+          )}
+        </>
+
+        <Link to={`/vacant-edit/${vacant.id}`}>
+          <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
+            <FiEdit />
+          </button>
+        </Link>
+        <button
+          className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
+          onClick={handleDelete}
+        >
+          <RiDeleteBinLine />
         </button>
-      </Link>
-      <button
-        className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
-        onClick={handleDelete}
-      >
-        Borrar
-      </button>
+      </div>
     </div>
   );
 }
