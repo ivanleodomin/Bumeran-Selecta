@@ -1,18 +1,19 @@
 import React from "react";
-import { useHook } from "../../hooks/useHook";
+import { useAddForm } from "../../hooks/useAddForm";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
 const VacantsAdd = () => {
-  const vacants = useHook("");
-  const country = useHook("");
-  const seniority = useHook("");
-  const area = useHook("");
-  const description = useHook("");
-  const cityy = useHook("");
-  const puesto = useHook("");
-  const [countryy, setCountryy] = React.useState("");
 
+  const titulo = useAddForm("")
+  const vacants = useAddForm("");
+  const country = useAddForm("");
+  const seniority = useAddForm("");
+  const area = useAddForm("");
+  const description = useAddForm("")
+  const cityy = useAddForm("");
+
+  const [countryy, setCountryy] = React.useState("")
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
@@ -51,7 +52,7 @@ const VacantsAdd = () => {
   const handleSubmit = () => {
     axios
       .post("/api/vacant/add", {
-        job: puesto.value,
+        title: titulo.value,
         country: country.value,
         vacant: vacants.value,
         areaId: area.value,
@@ -96,24 +97,20 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
-                        Puesto
+                        Titulo
                       </label>
                       <input
                         type="text"
-                        name="puesto"
-                        rows={5}
-                        cols={5}
+                        name="titulo"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        placeholder="Puesto"
-                        {...puesto}
+                        placeholder="Titulo"
+                        {...titulo}
                       />
                     </div>
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Pais
                       </label>
@@ -137,7 +134,6 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Ciudad
                       </label>
@@ -160,7 +156,6 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Numero de Vacantes
                       </label>
@@ -175,7 +170,6 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Area
                       </label>
@@ -193,7 +187,6 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Seniority
                       </label>
@@ -211,7 +204,6 @@ const VacantsAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Descripcion
                       </label>

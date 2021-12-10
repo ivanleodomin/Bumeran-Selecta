@@ -20,7 +20,7 @@ class VacantController {
     const area = await Area.findByPk(areaId);
     const created = await vacant.setCity(city);
 
-    await vacant.setSeniority(degree)
+    await vacant.setSeniority(degree);
     await vacant.setArea(area);
     await vacant.setCountry(country);
     res.status(201).send(created);
@@ -52,9 +52,27 @@ class VacantController {
 
   static async getAll(req, res, next) {
     try {
+      const { state, area, country } = req.query;
+      console.log(state);
+      const where = {};
+
+      if (state) where.state = state;
+      if (area) {
+        const AreaId = await Area.findOne({ where: { name: area } });
+        where.AreaId = AreaId.id;
+      }
+      if (country) {
+        const CountryId = await Country.findOne({ where: { name: country } });
+        where.CountryId = CountryId.id;
+        console.log(CountryId);
+      }
+      console.log("where", where);
+
       const vacant = await Vacant.findAll({
+        where,
         include: [{ model: Country, attributes: ["name"], as: "Country" }],
       });
+
       return res.status(200).send(vacant);
     } catch (err) {
       next(err);
@@ -131,6 +149,10 @@ class VacantController {
     const recruiters = await Recruiter.getBests(vacant);
 
     res.send(recruiters);
+  }
+
+  static async getStates(req, res) {
+    res.send(200);
   }
 }
 

@@ -1,9 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
-import { useHook } from "../../hooks/useHook";
+import { Link, useHistory } from "react-router-dom";
+import { useAddForm } from "../../hooks/useAddForm";
 
 const RecruitersAdd = () => {
+
+  const history = useHistory()
+
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
   const [countries, setCountries] = React.useState([]);
@@ -11,15 +14,15 @@ const RecruitersAdd = () => {
   const [states, setStates] = React.useState(true);
   const [countryy, setCountryy] = React.useState("")
 
-  const firstName = useHook("");
-  const lastName = useHook("");
-  const cityy = useHook("");
-  const AreaOp1Id = useHook("");
-  const AreaOp2Id = useHook("");
-  const AreaOp3Id = useHook("");
-  const SeniorityOp1Id = useHook("");
-  const SeniorityOp2Id = useHook("");
-  const SeniorityOp3Id = useHook("");
+  const firstName = useAddForm("");
+  const lastName = useAddForm("");
+  const cityy = useAddForm("");
+  const AreaOp1Id = useAddForm("");
+  const AreaOp2Id = useAddForm("");
+  const AreaOp3Id = useAddForm("");
+  const SeniorityOp1Id = useAddForm("");
+  const SeniorityOp2Id = useAddForm("");
+  const SeniorityOp3Id = useAddForm("");
 
   React.useEffect(() => {
     axios.get("/api/area").then((info) => setAreas(info.data));
@@ -53,7 +56,8 @@ const RecruitersAdd = () => {
       seniorityOp1: SeniorityOp1Id.value,
       seniorityOp2: SeniorityOp2Id.value,
       seniorityOp3: SeniorityOp3Id.value,
-    });
+    })
+    history.push("/recruiters")
   };
 
   return (
@@ -88,7 +92,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Nombre
                       </label>
@@ -102,7 +105,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Apellido
                       </label>
@@ -116,7 +118,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Pais
                       </label>
@@ -139,7 +140,6 @@ const RecruitersAdd = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Ciudad
                       </label>
@@ -158,28 +158,30 @@ const RecruitersAdd = () => {
                         })}
                       </select>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp1Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp1Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
                               <option value={seniority.id}>
@@ -190,28 +192,30 @@ const RecruitersAdd = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 2
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp2Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 2
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp2Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
                               <option value={seniority.id}>
@@ -222,30 +226,33 @@ const RecruitersAdd = () => {
                         </select>
                       </div>
                     </div>
-                    <div class="flex flex-wrap -mx-3 mb-6">
-                      <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label class="block   label" for="grid-first-name">
+                    <div className="flex flex-wrap -mx-3 mb-6">
+                      <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                        <label className="block   label" for="grid-first-name">
                           Area 3
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...AreaOp3Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
                       </div>
-                      <div class="w-full md:w-1/2 px-3">
-                        <label class="block  label" for="grid-last-name">
+                      <div className="w-full md:w-1/2 px-3">
+                        <label className="block  label" for="grid-last-name">
                           Seniority 3
                         </label>
                         <select
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           {...SeniorityOp3Id}
                         >
+                          <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
+                            
                               <option value={seniority.id}>
                                 {seniority.name}
                               </option>

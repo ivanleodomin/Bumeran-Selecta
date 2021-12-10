@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { Link, useLocation, useHistory } from "react-router-dom";
-import { useHook } from "../../hooks/useStates";
+import { useEditForm } from "../../hooks/useEditForm";
 
 const VacantEdit = () => {
   const id = useLocation().pathname.slice(13);
@@ -11,13 +11,14 @@ const VacantEdit = () => {
   const [seniorities, setSeniorities] = React.useState([]);
   const [city, setCity] = React.useState([]);
 
-  const valueVacants = useHook("");
-  const valueAreas = useHook("");
-  const valueCity = useHook("");
-  const valueDescription = useHook("");
-  const valueSeniorities = useHook("");
-  const valueCountries = useHook("");
-  const nameCountry = useHook("");
+  const valueTitle = useEditForm("");
+  const valueVacants = useEditForm("");
+  const valueAreas = useEditForm("");
+  const valueCity = useEditForm("");
+  const valueDescription = useEditForm("");
+  const valueSeniorities = useEditForm("");
+  const valueCountries = useEditForm("");
+  const nameCountry = useEditForm("");
 
   React.useEffect(() => {
     axios
@@ -40,7 +41,8 @@ const VacantEdit = () => {
         valueCity.setValor(data.City.id);
         valueVacants.setValor(data.vacant);
         valueDescription.setValor(data.description);
-        valueSeniorities.setValor(data.job);
+        valueSeniorities.setValor(data.Seniority.id);
+        valueTitle.setValor(data.title);
       })
       .then(() =>
         axios
@@ -51,17 +53,18 @@ const VacantEdit = () => {
   }, [valueCountries.value]);
 
   const handleSubmit = () => {
-    axios.put(`/api/vacant/${id}`, {
-      vacant: valueVacants.value,
-      job: valueSeniorities.value,
-      description: valueSeniorities.value,
-      AreaId: valueAreas.value,
-      CityId: valueCity.value,
-      CountryId: valueCountries.value,
-    });
-    history.push("/vacants");
+    axios
+      .put(`/api/vacant/${id}`, {
+        vacant: valueVacants.value,
+        title: valueTitle.value,
+        description: valueDescription.value,
+        AreaId: valueAreas.value,
+        CityId: valueCity.value,
+        SeniorityId: valueSeniorities.value,
+        CountryId: valueCountries.value,
+      })
+      .then(history.push("/vacants"));
   };
-
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -90,7 +93,19 @@ const VacantEdit = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs mb-2 label"
-                        htmlFor="grid-password"
+                      >
+                        Titulo
+                      </label>
+                      <input
+                        type="text"
+                        className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
+                        placeholder="Titulo"
+                        {...valueTitle}
+                      />
+                    </div>
+                    <div className="relative w-full mb-3">
+                      <label
+                        className="block text-blueGray-600 text-xs mb-2 label"
                       >
                         Pais
                       </label>
@@ -98,8 +113,7 @@ const VacantEdit = () => {
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={valueCountries.onChange}
-                        value={valueCountries.value}
+                        {...valueCountries}
                         disabled
                       >
                         <option>{nameCountry.value}</option>;
@@ -108,7 +122,6 @@ const VacantEdit = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Localidad
                       </label>
@@ -116,8 +129,7 @@ const VacantEdit = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                        onChange={valueCity.onChange}
-                        value={valueCity.value}
+                        {...valueCity}
                       >
                         {city?.map((cities) => {
                           return (
@@ -129,7 +141,6 @@ const VacantEdit = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Numero de Vacantes
                       </label>
@@ -137,21 +148,18 @@ const VacantEdit = () => {
                         type="number"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
-                        onChange={valueVacants.onChange}
-                        value={valueVacants.value}
+                        {...valueVacants}
                       />
                     </div>
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Area
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        onChange={valueAreas.onChange}
-                        value={valueAreas.value}
+                        {...valueAreas}
                       >
                         {areas?.map((area) => {
                           return <option value={area.id}>{area.name}</option>;
@@ -161,24 +169,25 @@ const VacantEdit = () => {
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Seniority
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        onChange={valueSeniorities.onChange}
-                        value={valueSeniorities.value}
+                        {...valueSeniorities}
                       >
                         {seniorities?.map((seniority) => {
-                          return <option>{seniority.name}</option>;
+                          return (
+                            <option value={seniority.id}>
+                              {seniority.name}
+                            </option>
+                          );
                         })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
                       <label
                         className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                        htmlFor="grid-password"
                       >
                         Descripcion
                       </label>
@@ -188,8 +197,7 @@ const VacantEdit = () => {
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
-                        onChange={valueDescription.onChange}
-                        value={valueDescription.value}
+                        {...valueDescription}
                       />
                     </div>
                     <div className="buttons">
