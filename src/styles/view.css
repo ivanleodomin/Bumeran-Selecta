@@ -89,7 +89,7 @@ ul {
 
 .name-recruiter {
   margin-top: 5px;
-  font-size: 25px;
+  font-size: 32px;
 }
 
 .recidence-recruiter {
@@ -98,7 +98,7 @@ ul {
 }
 
 .rec-stars, .stars-desac {
-  -webkit-text-stroke: 0.5px grey;
+  -webkit-text-stroke: 0.8px grey;
   font-size: 30px;
 }
 .rec-stars{
@@ -106,4 +106,12 @@ ul {
 }
 .stars-desac{
   color: rgb(255, 255, 255)
+}
+
+.experticia{
+  margin-top: 15px;
+}
+
+.experticia .title{
+  font-size:20px
 }

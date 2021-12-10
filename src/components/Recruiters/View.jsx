@@ -71,9 +71,9 @@ function View() {
             <h1 className="recidence-recruiter">
               {`${recruiter.Country?.name}, ${recruiter.City?.name}`}
             </h1>
-            <h1 className="rec-stars">{ranking[0]} <span className="stars-desac">{ranking[1]}</span></h1>
+            <h1 className="rec-stars">{ranking[0]}<span className="stars-desac">{ranking[1]}</span></h1>
             <div className="experticia">
-              <h1 className="list-disc list-inside bg-yellow-200">
+              <h1 className="title">
                 Areas de experticia
               </h1>
               <div>{`Area de preferencia 1: ${recruiter.AreaOp1?.name} -- ${recruiter.SeniorityOp1?.name}`}</div>
