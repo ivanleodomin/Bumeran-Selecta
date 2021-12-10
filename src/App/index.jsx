@@ -10,7 +10,7 @@ import VacantsAdd from "../views/Vacant/VacantsAdd";
 import VacantEdit from "../views/Vacant/VacantEdit";
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
 import LinkRecruiter from "../views/Vacant/LinkRecruiter";
-const Recruiters = lazy(() => import("../views/Recruiter/Recruiters"));
+import Recruiters from "../views/Recruiter/Recruiters";
 
 function App() {
   return (
@@ -32,10 +32,11 @@ function App() {
         <Route exact path="/recruiter-edit/:id">
           <RecruiterEdit />
         </Route>
+        <Route path="/recruiters/:id">
+          <Recruiters />
+        </Route>
         <Route path="/recruiters">
-          <Suspense fallback={<h1>cargando...</h1>}>
-            <Recruiters />
-          </Suspense>
+          <Recruiters />
         </Route>
         {/*Preguntar*/}
         <Route path="/vacants/:id">

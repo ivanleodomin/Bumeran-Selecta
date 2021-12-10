@@ -1,13 +1,15 @@
 import React from "react";
 import axios from "axios";
 import "../../styles/view.css";
-import { useLocation, useHistory, Link } from "react-router-dom";
+import { useParams, useHistory, Link } from "react-router-dom";
 import swal from "sweetalert";
 
 function View() {
-  const id = useLocation().pathname.slice(12);
-  const [recruiter, setRecruiter] = React.useState("");
+  const { id } = useParams();
+  const [recruiter, setRecruiter] = React.useState({});
+  const [ranking, setRanking] = React.useState([]);
   const history = useHistory();
+  console.log(id)
 
   const handleDelete = async () => {
     swal({
@@ -29,10 +31,18 @@ function View() {
     axios
       .get(`/api/recruiter/${id}`)
       .then((res) => res.data)
-      .then((data) => setRecruiter(data));
+      .then((data) => setRecruiter(data))
+      .then((data) => {
+        if (recruiter.ranking === 1) setRanking(["★","★★★★"]);
+        if (recruiter.ranking === 2) setRanking(["★★", "★★★"]);
+        if (recruiter.ranking === 3) setRanking(["★★★", "★★"]);
+        if (recruiter.ranking === 4) setRanking(["★★★★", "★"]);
+        if (recruiter.ranking === 5) setRanking(["★★★★★", ""]);
+      })
   }, [id]);
 
   console.log("Recruiter", recruiter);
+
 
   return (
     <div className="view">
@@ -47,60 +57,58 @@ function View() {
           />
         </div>
       ) : (
-        <div className="p-5">
-          <div className="justify-items-end">
+        <div className="view">
+          <div className="header-buttons-recruiter">
             <Link to={`/recruiter-edit/${recruiter.id}`}>
-              <button className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
-                Editar
-              </button>
+              <button className="edit-button-rec">Editar</button>
             </Link>
-            <button
-              className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
-              onClick={handleDelete}
-            >
+            <button className="delete-button-rec" onClick={handleDelete}>
               Borrar
             </button>
           </div>
-          <h1>Nombre: {`${recruiter.firstName} ${recruiter.lastName}`}</h1>
-          <h1>
-            Residencia: {`${recruiter.Country?.name} ${recruiter.City?.name}`}
-          </h1>
-          <div className="experticia">
-            <h1 className="list-disc list-inside bg-yellow-200">
-              Areas de experticia
+          <div className="data-recruiter">
+            <h1 className="name-recruiter">{`${recruiter.firstName} ${recruiter.lastName}`}</h1>
+            <h1 className="recidence-recruiter">
+              {`${recruiter.Country?.name}, ${recruiter.City?.name}`}
             </h1>
-            <h3>{`Area de preferencia 1: ${recruiter.AreaOp1?.name} -- ${recruiter.SeniorityOp1?.name}`}</h3>
-            <h3>{`Area de preferencia 2: ${recruiter.AreaOp2?.name} -- ${recruiter.SeniorityOp2?.name}`}</h3>
-            <h3>{`Area de preferencia 3: ${recruiter.AreaOp3?.name} -- ${recruiter.SeniorityOp3?.name}`}</h3>
+            <h1 className="rec-stars">{ranking[0]} <span className="stars-desac">{ranking[1]}</span></h1>
+            <div className="experticia">
+              <h1 className="list-disc list-inside bg-yellow-200">
+                Areas de experticia
+              </h1>
+              <div>{`Area de preferencia 1: ${recruiter.AreaOp1?.name} -- ${recruiter.SeniorityOp1?.name}`}</div>
+              <div>{`Area de preferencia 2: ${recruiter.AreaOp2?.name} -- ${recruiter.SeniorityOp2?.name}`}</div>
+              <div>{`Area de preferencia 3: ${recruiter.AreaOp3?.name} -- ${recruiter.SeniorityOp3?.name}`}</div>
+            </div>
+            <div className="">
+              <ul className="list-disc list-inside bg-blue-200">
+                <h3>Vacantes activas</h3>
+                {recruiter?.activeVacancies?.map((vacante) => {
+                  return (
+                    <li>
+                      Id de vacante: {vacante?.id} <br />
+                      Puesto: {vacante?.title} <br />
+                      Description: {vacante?.description}
+                      <br />
+                    </li>
+                  );
+                })}
+              </ul>
+              <ul className="list-disc list-inside bg-pink-200">
+                <h3>Historial</h3>
+                {recruiter?.history?.map((history) => {
+                  return (
+                    <li>
+                      Id de vacante: {history.Vacant.id} <br />
+                      Puesto: {history?.Vacant?.title} <br />
+                      Description: {history?.Vacant?.description} <br />
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+            <h1>Ranking: {recruiter.ranking}</h1>
           </div>
-          <div className="">
-            <ul className="list-disc list-inside bg-blue-200">
-              <h3>Vacantes activas</h3>
-              {recruiter?.activeVacancies?.map((vacante) => {
-                return (
-                  <li>
-                    Id de vacante: {vacante?.id} <br />
-                    Puesto: {vacante?.title} <br />
-                    Description: {vacante?.description}
-                    <br />
-                  </li>
-                );
-              })}
-            </ul>
-            <ul className="list-disc list-inside bg-pink-200">
-              <h3>Historial</h3>
-              {recruiter?.history?.map((history) => {
-                return (
-                  <li>
-                    Id de vacante: {history.Vacant.id} <br />
-                    Puesto: {history?.Vacant?.title} <br />
-                    Description: {history?.Vacant?.description} <br />
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
-          <h1>Ranking: {recruiter.ranking}</h1>
         </div>
       )}
     </div>
