@@ -1,4 +1,3 @@
-const { NOEXPAND } = require("sequelize/dist/lib/table-hints");
 const {
   Recruiter,
   Review,
@@ -94,20 +93,31 @@ class RecruiterController {
   static async getAll(req, res) {
     try {
       const { seniority, area, country } = req.query;
-      const page = parseInt(req.query.page) - 1;
 
       const where = {};
 
-      if (!seniority) where.seniorityOp1 = seniority;
+      if (seniority) {
+        const seniorityOp1 = await Seniority.findOne({
+          where: { name: seniority },
+        });
+        where.seniorityOp1Id = seniorityOp1.id;
+      }
+      if (area) {
+        const AreaOp1Id = await Area.findOne({ where: { name: area } });
+        where.AreaOp1Id = AreaOp1Id.id;
+      }
+      if (country) {
+        const CountryId = await Country.findOne({ where: { name: country } });
+        where.CountryId = CountryId.id;
+      }
 
-      const rec = await Recruiter.findAndCountAll({
+      console.log(where);
+      const rec = await Recruiter.findAll({
         where,
-        offset: page * 10,
-        limit: 10,
       });
-      res.send(rec.rows);
+      res.send(rec);
     } catch {
-      res.sendStatus(500);
+      res.status(500).send([]);
     }
   }
 

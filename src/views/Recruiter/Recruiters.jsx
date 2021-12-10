@@ -32,7 +32,7 @@ const Recruiters = () => {
 
     axios
       .get(
-        `/api/recruiter?page=1&area=Ingenieria&seniority=senior&country=argentina`
+        `/api/recruiter?area=${areaName}&seniority=${seniorityName}&country=${countryName}`
       )
       .then((res) => res.data)
       .then((data) => {

@@ -35,4 +35,8 @@ async function calcActivity(recruiterId) {
   if (actividad.count === 0) return 0;
 }
 
-module.exports = { skillsCal, calcActivity };
+function sortByRanking(recruiters){
+    return 0
+}
+
+module.exports = { skillsCal, calcActivity,sortByRanking};
