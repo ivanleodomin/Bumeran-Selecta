@@ -3,13 +3,15 @@ import axios from "axios";
 import "../../styles/view.css";
 import { useParams, useHistory, Link } from "react-router-dom";
 import swal from "sweetalert";
+import { RiDeleteBinLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 
 function View() {
   const { id } = useParams();
   const [recruiter, setRecruiter] = React.useState({});
   const [ranking, setRanking] = React.useState([]);
   const history = useHistory();
-  console.log(id)
+  console.log(id);
 
   const handleDelete = async () => {
     swal({
@@ -33,16 +35,15 @@ function View() {
       .then((res) => res.data)
       .then((data) => setRecruiter(data))
       .then((data) => {
-        if (recruiter.ranking === 1) setRanking(["★","★★★★"]);
+        if (recruiter.ranking === 1) setRanking(["★", "★★★★"]);
         if (recruiter.ranking === 2) setRanking(["★★", "★★★"]);
         if (recruiter.ranking === 3) setRanking(["★★★", "★★"]);
         if (recruiter.ranking === 4) setRanking(["★★★★", "★"]);
         if (recruiter.ranking === 5) setRanking(["★★★★★", ""]);
-      })
+      });
   }, [id]);
 
   console.log("Recruiter", recruiter);
-
 
   return (
     <div className="view">
@@ -60,10 +61,15 @@ function View() {
         <div className="view">
           <div className="header-buttons-recruiter">
             <Link to={`/recruiter-edit/${recruiter.id}`}>
-              <button className="edit-button-rec">Editar</button>
+              <button className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
+                <FiEdit />
+              </button>
             </Link>
-            <button className="delete-button-rec" onClick={handleDelete}>
-              Borrar
+            <button
+              className="m-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-red-500 hover:bg-red-700"
+              onClick={handleDelete}
+            >
+              <RiDeleteBinLine />
             </button>
           </div>
           <div className="data-recruiter">
@@ -71,14 +77,30 @@ function View() {
             <h1 className="recidence-recruiter">
               {`${recruiter.Country?.name}, ${recruiter.City?.name}`}
             </h1>
-            <h1 className="rec-stars">{ranking[0]}<span className="stars-desac">{ranking[1]}</span></h1>
+            <h1 className="rec-stars">
+              {ranking[0]}
+              <span className="stars-desac">{ranking[1]}</span>
+            </h1>
             <div className="experticia">
-              <h1 className="title">
-                Areas de experticia
-              </h1>
-              <div>{`Area de preferencia 1: ${recruiter.AreaOp1?.name} -- ${recruiter.SeniorityOp1?.name}`}</div>
-              <div>{`Area de preferencia 2: ${recruiter.AreaOp2?.name} -- ${recruiter.SeniorityOp2?.name}`}</div>
-              <div>{`Area de preferencia 3: ${recruiter.AreaOp3?.name} -- ${recruiter.SeniorityOp3?.name}`}</div>
+              <h1 className="title">Areas de experticia</h1>
+              <table class="experticia-table">
+                <tr>
+                  <th>Area</th>
+                  <th>Grado</th>
+                </tr>
+                <tr>
+                  <td>{recruiter.AreaOp1?.name}</td>
+                  <td>{recruiter.SeniorityOp1?.name}</td>
+                </tr>
+                <tr>
+                  <td>{recruiter.AreaOp2?.name}</td>
+                  <td>{recruiter.SeniorityOp2?.name}</td>
+                </tr>
+                <tr>
+                  <td>{recruiter.AreaOp3?.name}</td>
+                  <td>{recruiter.SeniorityOp3?.name}</td>
+                </tr>
+              </table>
             </div>
             <div className="">
               <ul className="list-disc list-inside bg-blue-200">
