@@ -49,7 +49,7 @@ const Vacants = () => {
 
   return (
     <>
-      <h1>ABM DE VACANTES</h1>
+      {/* <h1>ABM DE VACANTES</h1> */}
       <Header
         filters={[
           { name: "Areas", data: areas },

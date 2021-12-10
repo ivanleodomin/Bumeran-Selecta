@@ -91,12 +91,12 @@ body {
 }
 
 .logo-gratis {
-  bottom: 750px;
+  bottom: 805px;
   left: 350px;
   position: absolute;
 }
 .logo-gratis-R {
-  bottom: 770px;
+  bottom: 750px;
   left: 350px;
   position: absolute;
 }
@@ -107,4 +107,8 @@ body {
 
 .tutorial{
   color: black;
+}
+
+.padding {
+  padding-left: 1000px;
 }

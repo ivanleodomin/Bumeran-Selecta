@@ -1,9 +1,11 @@
 import React from "react";
 import { useAddForm } from "../../hooks/useAddForm";
 import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const VacantsAdd = () => {
+
+  const history = useHistory()
 
   const titulo = useAddForm("")
   const vacants = useAddForm("");
@@ -61,8 +63,7 @@ const VacantsAdd = () => {
         seniorityId: seniority.value,
         description: description.value,
       })
-      .then(() => alert("succesfully"))
-      .catch(() => alert("negative"));
+      .then(history.push("/vacants"))
   };
   return (
     <>

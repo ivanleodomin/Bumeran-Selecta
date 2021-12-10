@@ -1,7 +1,7 @@
 export default function InfoVacant({ vacant }) {
   return (
-    <>
-      <h1>Puesto: {vacant.title}</h1>
+    <div className="label space-y-8">
+      <h1 className="font-bold">Titulo: {vacant.title}</h1>
       <h1>
         Estado: <span className="estado">{vacant.state}</span>
       </h1>
@@ -19,6 +19,6 @@ export default function InfoVacant({ vacant }) {
           <span className="estado">No asignado</span>
         )}
       </h1>
-    </>
+    </div>
   );
 }

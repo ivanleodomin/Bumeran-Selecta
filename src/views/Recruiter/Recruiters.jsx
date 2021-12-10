@@ -49,7 +49,7 @@ const Recruiters = () => {
 
   return (
     <>
-      <h1>ABM DE RECLUTADORES</h1>
+      {/* <h1>ABM DE RECLUTADORES</h1> */}
       <Header
         filters={[
           { name: "Areas", data: areas },
