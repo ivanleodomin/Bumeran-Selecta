@@ -33,13 +33,16 @@ function View() {
     axios
       .get(`/api/recruiter/${id}`)
       .then((res) => res.data)
-      .then((data) => setRecruiter(data))
       .then((data) => {
-        if (recruiter.ranking === 1) setRanking(["★", "★★★★"]);
-        if (recruiter.ranking === 2) setRanking(["★★", "★★★"]);
-        if (recruiter.ranking === 3) setRanking(["★★★", "★★"]);
-        if (recruiter.ranking === 4) setRanking(["★★★★", "★"]);
-        if (recruiter.ranking === 5) setRanking(["★★★★★", ""]);
+        setRecruiter(data);
+        return data;
+      })
+      .then((data) => {
+        if (data.ranking === 1) setRanking(["★", "★★★★"]);
+        if (data.ranking === 2) setRanking(["★★", "★★★"]);
+        if (data.ranking === 3) setRanking(["★★★", "★★"]);
+        if (data.ranking === 4) setRanking(["★★★★", "★"]);
+        if (data.ranking === 5) setRanking(["★★★★★", ""]);
       });
   }, [id]);
 
@@ -47,7 +50,7 @@ function View() {
 
   return (
     <div className="view">
-      { !id ? (
+      {!id ? (
         <div className="no-select">
           <h1>
             Elegí un reclutador para ver su informacion <span>acá</span>
