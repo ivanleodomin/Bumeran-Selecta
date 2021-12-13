@@ -13,6 +13,7 @@ class VacantController {
 
   static async createVacant(req, res, next) {
     const { areaId, cityId, countryId, seniorityId } = req.body;
+
     const vacant = await Vacant.create(req.body);
     const city = await City.findByPk(cityId);
     const country = await Country.findByPk(countryId);
@@ -23,6 +24,7 @@ class VacantController {
     await vacant.setSeniority(degree);
     await vacant.setArea(area);
     await vacant.setCountry(country);
+
     res.status(201).send(created);
   }
 
@@ -105,10 +107,11 @@ class VacantController {
       const { recruiterId } = req.body;
       const vacant = await Vacant.findByPk(id);
       const recruiter = await Recruiter.findByPk(recruiterId);
+      const date = new Date().toISOString().split("T")[0];
       vacant.setRecruiter(recruiter);
 
       await Vacant.update(
-        { state: "Asignada" },
+        { state: "Asignada", assignmentDate: date },
         { where: { id: id }, returning: true }
       );
 
@@ -121,6 +124,7 @@ class VacantController {
   static async doneProcess(req, res) {
     const id = req.params.id;
     const { score } = req.body;
+    const date = new Date().toISOString().split("T")[0];
 
     const vacant = await Vacant.findByPk(id);
     const recruiter = await Recruiter.findByPk(vacant.RecruiterId);
@@ -134,7 +138,10 @@ class VacantController {
       score: score,
     });
 
-    await Vacant.update({ state: "Finalizada" }, { where: { id: id } });
+    await Vacant.update(
+      { state: "Finalizada", finishtDate: date },
+      { where: { id: id } }
+    );
 
     review.setVacant(vacant);
     recruiter.addReview(review);

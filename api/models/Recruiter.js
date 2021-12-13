@@ -26,7 +26,7 @@ Recruiter.prototype.getRanking = async function () {
       RecruiterId: this.id,
     },
   });
-  if (reviews.length <= 3) return 3;
+  if (!reviews.length) return 0;
   else {
     let acc = 0;
     reviews.forEach((element) => {
