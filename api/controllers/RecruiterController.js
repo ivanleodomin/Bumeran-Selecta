@@ -24,6 +24,7 @@ class RecruiterController {
       seniorityOp2,
       seniorityOp3,
     } = req.body;
+    console.log(req.body, "BODY")
 
     const [area1, area2, area3] = await getareas([areaOp1, areaOp2, areaOp3]);
 
@@ -60,12 +61,12 @@ class RecruiterController {
       attributes: ["id", "firstName", "lastName"],
       where: { id: id },
       include: [
-        { model: Area, as: "AreaOp1", attributes: ["name"] },
-        { model: Area, as: "AreaOp2", attributes: ["name"] },
-        { model: Area, as: "AreaOp3", attributes: ["name"] },
-        { model: Seniority, as: "SeniorityOp1", attributes: ["name"] },
-        { model: Seniority, as: "SeniorityOp2", attributes: ["name"] },
-        { model: Seniority, as: "SeniorityOp3", attributes: ["name"] },
+        { model: Area, as: "AreaOp1", attributes: ["id", "name"] },
+        { model: Area, as: "AreaOp2", attributes: ["id", "name"] },
+        { model: Area, as: "AreaOp3", attributes: ["id", "name"] },
+        { model: Seniority, as: "SeniorityOp1", attributes: ["id", "name"] },
+        { model: Seniority, as: "SeniorityOp2", attributes: ["id", "name"] },
+        { model: Seniority, as: "SeniorityOp3", attributes: ["id", "name"] },
         { model: City, as: "City", attributes: ["id", "name"] },
         { model: Country, as: "Country", attributes: ["id", "name"] },
       ],
@@ -111,7 +112,6 @@ class RecruiterController {
         where.CountryId = CountryId.id;
       }
 
-      console.log(where);
       const rec = await Recruiter.findAll({
         where,
       });
@@ -163,10 +163,9 @@ class RecruiterController {
         seniorityOp2,
         seniorityOp3,
       } = req.body;
-
-      const city = await City.findByPk(cityId);
+      
       const country = await Country.findByPk(countryId);
-
+      const city = await City.findByPk(cityId);
       const recruiter = await Recruiter.findByPk(req.params.id);
 
       await recruiter.update({ firstName, lastName });

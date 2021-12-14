@@ -1,72 +1,20 @@
 import React from "react";
-import axios from "axios";
-import { Link, useHistory, useLocation } from "react-router-dom";
-import { useEditForm } from "../../hooks/useEditForm";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 function RecruiterEdit() {
-  const id = useLocation().pathname.slice(16);
-  const history = useHistory();
+  
+  const {
+    form,
+    handleChange,
+    handleSubmit,
+    city,
+    seniorities,
+    countries,
+    areas,
+  } = useForm("editRecruiter");
 
-  const [areas, setAreas] = React.useState([]);
-  const [seniorities, setSeniorities] = React.useState([]);
-  const [countries, setCountries] = React.useState([]);
-  const [city, setCity] = React.useState([]);
-
-  const countryy = useEditForm("");
-  const firstName = useEditForm("");
-  const lastName = useEditForm("");
-  const cityy = useEditForm("");
-  const AreaOp1Id = useEditForm("");
-  const AreaOp2Id = useEditForm("");
-  const AreaOp3Id = useEditForm("");
-  const SeniorityOp1Id = useEditForm("");
-  const SeniorityOp2Id = useEditForm("");
-  const SeniorityOp3Id = useEditForm("");
-
-  React.useEffect(() => {
-    axios.get("/api/area").then((info) => setAreas(info.data));
-
-    axios.get("/api/seniority").then((info) => setSeniorities(info.data));
-
-    axios.get("/api/country").then((info) => setCountries(info.data));
-
-    axios
-      .get(`/api/recruiter/${id}`)
-      .then((info) => info.data)
-      .then((data) => {
-        firstName.setValor(data.firstName);
-        lastName.setValor(data.lastName);
-        countryy.setValor(data.Country.id);
-        cityy.setValor(data.City.id);
-        AreaOp1Id.setValor(data.AreaOp1.id);
-        AreaOp2Id.setValor(data.AreaOp2.id);
-        AreaOp3Id.setValor(data.AreaOp3.id);
-        SeniorityOp1Id.setValor(data.SeniorityOp1.id);
-        SeniorityOp2Id.setValor(data.SeniorityOp2.id);
-        SeniorityOp3Id.setValor(data.SeniorityOp3.id);
-      })
-      .then(() => axios.get(`/api/country/${countryy.value}`))
-      .then((info) => info.data)
-      .then((data) => setCity(data));
-  }, [countryy.value]);
-
-  const handleSubmit = () => {
-    axios
-      .put(`/api/recruiter/${id}`, {
-        firstName: firstName.value,
-        lastName: lastName.value,
-        countryId: countryy.value,
-        cityId: cityy.value,
-        areaOp1: AreaOp1Id.value,
-        areaOp2: AreaOp2Id.value,
-        areaOp3: AreaOp3Id.value,
-        seniorityOp1: SeniorityOp1Id.value,
-        seniorityOp2: SeniorityOp2Id.value,
-        seniorityOp3: SeniorityOp3Id.value,
-      })
-      .then(history.push("/recruiters"));
-  };
-
+  console.log(form, "form");
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
@@ -97,43 +45,43 @@ function RecruiterEdit() {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Nombre
                       </label>
                       <input
+                        name="firstName"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Nombre"
-                        {...firstName}
+                        onChange={handleChange}
+                        value={form.firstName}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Apellido
                       </label>
                       <input
+                        name="lastName"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Apellido"
-                        {...lastName}
+                        onChange={handleChange}
+                        value={form.lastName}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs mb-2 label">
                         Pais
                       </label>
                       <select
+                        name="countryId"
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
                         disabled
-                        {...countryy}
+                        onChange={handleChange}
+                        value={form.countryId}
                       >
                         {countries?.map((countriess) => {
                           return (
@@ -145,18 +93,17 @@ function RecruiterEdit() {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Ciudad
                       </label>
                       <select
+                        name="cityId"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                        {...cityy}
+                        onChange={handleChange}
+                        value={form.cityId}
                       >
-                        <option selected>Elija una opcion</option>
                         {city?.map((cities) => {
                           return (
                             <option value={cities.id}>{cities.name}</option>
@@ -166,12 +113,12 @@ function RecruiterEdit() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block   label" for="grid-first-name">
-                          Area
-                        </label>
+                        <label className="block label">Area</label>
                         <select
+                          name="areaOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp1Id}
+                          onChange={handleChange}
+                          value={form.areaOp1}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -179,12 +126,12 @@ function RecruiterEdit() {
                         </select>
                       </div>
                       <div className="w-full md:w-1/2 px-3">
-                        <label className="block  label" for="grid-last-name">
-                          Seniority
-                        </label>
+                        <label className="block label">Seniority</label>
                         <select
+                          name="seniorityOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp1Id}
+                          onChange={handleChange}
+                          value={form.seniorityOp1}
                         >
                           {seniorities?.map((seniority) => {
                             return (
@@ -198,12 +145,12 @@ function RecruiterEdit() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block   label" for="grid-first-name">
-                          Area 2
-                        </label>
+                        <label className="block label">Area 2</label>
                         <select
+                          name="areaOp2"
+                          onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp2Id}
+                          value={form.areaOp2}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -211,12 +158,12 @@ function RecruiterEdit() {
                         </select>
                       </div>
                       <div className="w-full md:w-1/2 px-3">
-                        <label className="block  label" for="grid-last-name">
-                          Seniority 2
-                        </label>
+                        <label className="block label">Seniority 2</label>
                         <select
+                          name="seniorityOp2"
+                          onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp2Id}
+                          value={form.seniorityOp2}
                         >
                           {seniorities?.map((seniority) => {
                             return (
@@ -230,12 +177,12 @@ function RecruiterEdit() {
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                        <label className="block   label" for="grid-first-name">
-                          Area 3
-                        </label>
+                        <label className="block label">Area 3</label>
                         <select
+                          name="areaOp3"
+                          onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp3Id}
+                          value={form.areaOp3}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -243,12 +190,12 @@ function RecruiterEdit() {
                         </select>
                       </div>
                       <div className="w-full md:w-1/2 px-3">
-                        <label className="block  label" for="grid-last-name">
-                          Seniority 3
-                        </label>
+                        <label className="block label">Seniority 3</label>
                         <select
+                          name="seniorityOp3"
+                          onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp3Id}
+                          value={form.seniorityOp3}
                         >
                           {seniorities?.map((seniority) => {
                             return (

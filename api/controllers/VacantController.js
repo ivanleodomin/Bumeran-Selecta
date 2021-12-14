@@ -12,12 +12,13 @@ class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    const { areaId, cityId, countryId, seniorityId } = req.body;
+    console.log(req.body, "BODY");
+    const { AreaId, CityId, CountryId, SeniorityId } = req.body;
     const vacant = await Vacant.create(req.body);
-    const city = await City.findByPk(cityId);
-    const country = await Country.findByPk(countryId);
-    const degree = await Seniority.findByPk(seniorityId);
-    const area = await Area.findByPk(areaId);
+    const city = await City.findByPk(CityId);
+    const country = await Country.findByPk(CountryId);
+    const degree = await Seniority.findByPk(SeniorityId);
+    const area = await Area.findByPk(AreaId);
     const created = await vacant.setCity(city);
 
     await vacant.setSeniority(degree);

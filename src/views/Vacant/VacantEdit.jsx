@@ -1,70 +1,18 @@
 import React from "react";
-import axios from "axios";
-import { Link, useLocation, useHistory } from "react-router-dom";
-import { useEditForm } from "../../hooks/useEditForm";
+import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const VacantEdit = () => {
-  const id = useLocation().pathname.slice(13);
-  const history = useHistory();
+  const {
+    form,
+    handleChange,
+    handleSubmit,
+    city,
+    seniorities,
+    areas,
+    id
+  } = useForm("editVacant");
 
-  const [areas, setAreas] = React.useState([]);
-  const [seniorities, setSeniorities] = React.useState([]);
-  const [city, setCity] = React.useState([]);
-
-  const valueTitle = useEditForm("");
-  const valueVacants = useEditForm("");
-  const valueAreas = useEditForm("");
-  const valueCity = useEditForm("");
-  const valueDescription = useEditForm("");
-  const valueSeniorities = useEditForm("");
-  const valueCountries = useEditForm("");
-  const nameCountry = useEditForm("");
-
-  React.useEffect(() => {
-    axios
-      .get("/api/area")
-      .then((info) => info.data)
-      .then((data) => setAreas(data));
-
-    axios
-      .get("/api/seniority")
-      .then((info) => info.data)
-      .then((data) => setSeniorities(data));
-
-    axios
-      .get(`/api/vacant/${id}`)
-      .then((info) => info.data)
-      .then((data) => {
-        nameCountry.setValor(data.Country.name);
-        valueCountries.setValor(data.Country.id);
-        valueAreas.setValor(data.Area.id);
-        valueCity.setValor(data.City.id);
-        valueVacants.setValor(data.vacant);
-        valueDescription.setValor(data.description);
-        valueSeniorities.setValor(data.Seniority.id);
-        valueTitle.setValor(data.title);
-      })
-      .then(() =>
-        axios
-          .get(`/api/country/${valueCountries.value}`)
-          .then((info) => info.data)
-          .then((data) => setCity(data))
-      );
-  }, [valueCountries.value]);
-
-  const handleSubmit = () => {
-    axios
-      .put(`/api/vacant/${id}`, {
-        vacant: valueVacants.value,
-        title: valueTitle.value,
-        description: valueDescription.value,
-        AreaId: valueAreas.value,
-        CityId: valueCity.value,
-        SeniorityId: valueSeniorities.value,
-        CountryId: valueCountries.value,
-      })
-      .then(history.push("/vacants"));
-  };
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -91,45 +39,43 @@ const VacantEdit = () => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs mb-2 label">
                         Titulo
                       </label>
                       <input
+                        name="title"
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Titulo"
-                        {...valueTitle}
+                        onChange={handleChange}
+                        value={form.title}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs mb-2 label">
                         Pais
                       </label>
                       <select
+                        name="CountryId"
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        {...valueCountries}
                         disabled
                       >
-                        <option>{nameCountry.value}</option>;
+                         <option>{form.CountryName}</option>;
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
-                        Localidad
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
+                        Ciudad
                       </label>
                       <select
+                        name="CityId"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        placeholder="Localidad de la Vacante"
-                        {...valueCity}
+                        placeholder="Ciudad de la Vacante"
+                        onChange={handleChange}
+                        value={form.CityId}
                       >
                         {city?.map((cities) => {
                           return (
@@ -139,27 +85,27 @@ const VacantEdit = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Numero de Vacantes
                       </label>
                       <input
+                        name="vacant"
                         type="number"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
-                        {...valueVacants}
+                        onChange={handleChange}
+                        value={form.vacant}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Area
                       </label>
                       <select
+                        name="AreaId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...valueAreas}
+                        onChange={handleChange}
+                        value={form.AreaId}
                       >
                         {areas?.map((area) => {
                           return <option value={area.id}>{area.name}</option>;
@@ -167,14 +113,14 @@ const VacantEdit = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Seniority
                       </label>
                       <select
+                        name="SeniorityId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...valueSeniorities}
+                        onChange={handleChange}
+                        value={form.SeniorityId}
                       >
                         {seniorities?.map((seniority) => {
                           return (
@@ -186,18 +132,18 @@ const VacantEdit = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Descripcion
                       </label>
                       <textarea
+                        name="description"
                         type="text"
                         rows={5}
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
-                        {...valueDescription}
+                        onChange={handleChange}
+                        value={form.description}
                       />
                     </div>
                     <div className="buttons">

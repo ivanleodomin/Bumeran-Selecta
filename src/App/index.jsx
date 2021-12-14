@@ -11,8 +11,8 @@ import VacantEdit from "../views/Vacant/VacantEdit";
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
 import LinkRecruiter from "../views/Vacant/LinkRecruiter";
 import Recruiters from "../views/Recruiter/Recruiters";
-import Graph from '../components/charts/Graph'
-import BarCh from '../components/charts/BarCh'
+import Graph from "../components/charts/Graph";
+import BarCh from "../components/charts/BarCh";
 
 function App() {
   return (
@@ -51,12 +51,10 @@ function App() {
         <Route exact path="/link-recruiter/:id">
           <LinkRecruiter />
         </Route>
-        <div>
         <Route path="/stadistics">
           <BarCh />
-          <Graph/>
+          <Graph />
         </Route>
-        </div>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>

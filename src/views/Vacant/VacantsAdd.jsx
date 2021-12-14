@@ -1,70 +1,20 @@
 import React from "react";
-import { useAddForm } from "../../hooks/useAddForm";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
+import { Link } from "react-router-dom";
 
 const VacantsAdd = () => {
+  
+  const {
+    handleChange,
+    handleSubmit,
+    city,
+    seniorities,
+    countries,
+    areas,
+    states,
+    handleChangeCountry
+  } = useForm("VacantAdd");
 
-  const history = useHistory()
-
-  const titulo = useAddForm("")
-  const vacants = useAddForm("");
-  const country = useAddForm("");
-  const seniority = useAddForm("");
-  const area = useAddForm("");
-  const description = useAddForm("")
-  const cityy = useAddForm("");
-
-  const [countryy, setCountryy] = React.useState("")
-  const [areas, setAreas] = React.useState([]);
-  const [seniorities, setSeniorities] = React.useState([]);
-  const [countries, setCountries] = React.useState([]);
-  const [city, setCity] = React.useState([]);
-  const [states, setStates] = React.useState(true);
-
-  const handleChangePais = (e) => {
-    if (e.target.value === "Elija una opcion") {
-      setStates(true);
-    } else {
-      axios
-        .get(`/api/country/${e.target.value}`)
-        .then((info) => setCity(info.data));
-      setCountryy(e.target.value);
-      setStates(false);
-    }
-  };
-
-  React.useEffect(() => {
-    axios
-      .get("/api/area")
-      .then((info) => info.data)
-      .then((data) => setAreas(data));
-
-    axios
-      .get("/api/seniority")
-      .then((info) => info.data)
-      .then((data) => setSeniorities(data));
-
-    axios
-      .get("/api/country")
-      .then((info) => info.data)
-      .then((data) => setCountries(data));
-  }, []);
-
-  const handleSubmit = () => {
-    axios
-      .post("/api/vacant/add", {
-        title: titulo.value,
-        country: country.value,
-        vacant: vacants.value,
-        areaId: area.value,
-        countryId: countryy,
-        cityId: cityy.value,
-        seniorityId: seniority.value,
-        description: description.value,
-      })
-      .then(history.push("/vacants"))
-  };
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
@@ -96,31 +46,27 @@ const VacantsAdd = () => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Titulo
                       </label>
                       <input
                         type="text"
-                        name="titulo"
+                        name="title"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Titulo"
-                        {...titulo}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs mb-2 label">
                         Pais
                       </label>
                       <select
                         type="text"
-                        name="country"
+                        name="CountryId"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={handleChangePais}
+                        onChange={handleChangeCountry}
                       >
                         <option defaultValue>Elija una opcion</option>
                         {countries?.map((countriess) => {
@@ -133,18 +79,16 @@ const VacantsAdd = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Ciudad
                       </label>
                       <select
                         type="text"
-                        name="location"
+                        name="CityId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         disabled={states}
-                        {...cityy}
+                        onChange={handleChange}
                       >
                         <option defaultValue>Elija una opcion</option>
                         {city?.map((cities) => {
@@ -155,29 +99,25 @@ const VacantsAdd = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Numero de Vacantes
                       </label>
                       <input
                         type="number"
-                        name="vacants"
+                        name="vacant"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
-                        {...vacants}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Area
                       </label>
                       <select
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...area}
-                        name="area"
+                        onChange={handleChange}
+                        name="AreaId"
                       >
                         <option defaultValue>Elija una opcion</option>
                         {areas?.map((area) => {
@@ -186,26 +126,26 @@ const VacantsAdd = () => {
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Seniority
                       </label>
                       <select
-                        name="seniority"
+                        name="SeniorityId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                        {...seniority}
+                        onChange={handleChange}
                       >
                         <option defaultValue>Elija una opcion</option>
                         {seniorities?.map((seniority) => {
-                          return <option  value={seniority.id}>{seniority.name}</option>;
+                          return (
+                            <option value={seniority.id}>
+                              {seniority.name}
+                            </option>
+                          );
                         })}
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Descripcion
                       </label>
                       <textarea
@@ -215,7 +155,7 @@ const VacantsAdd = () => {
                         cols={5}
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
-                        {...description}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="buttons">

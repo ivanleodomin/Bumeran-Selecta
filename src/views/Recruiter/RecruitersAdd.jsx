@@ -1,65 +1,22 @@
 import React from "react";
-import axios from "axios";
-import { Link, useHistory } from "react-router-dom";
-import { useAddForm } from "../../hooks/useAddForm";
+import { Link } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const RecruitersAdd = () => {
 
-  const history = useHistory()
+  const {
+    form,
+    handleChange,
+    handleSubmit,
+    city,
+    seniorities,
+    countries,
+    areas,
+    states,
+    handleChangeCountry
+  } = useForm("recruiterAdd");
 
-  const [areas, setAreas] = React.useState([]);
-  const [seniorities, setSeniorities] = React.useState([]);
-  const [countries, setCountries] = React.useState([]);
-  const [city, setCity] = React.useState([]);
-  const [states, setStates] = React.useState(true);
-  const [countryy, setCountryy] = React.useState("")
-
-  const firstName = useAddForm("");
-  const lastName = useAddForm("");
-  const cityy = useAddForm("");
-  const AreaOp1Id = useAddForm("");
-  const AreaOp2Id = useAddForm("");
-  const AreaOp3Id = useAddForm("");
-  const SeniorityOp1Id = useAddForm("");
-  const SeniorityOp2Id = useAddForm("");
-  const SeniorityOp3Id = useAddForm("");
-
-  React.useEffect(() => {
-    axios.get("/api/area").then((info) => setAreas(info.data));
-
-    axios.get("/api/seniority").then((info) => setSeniorities(info.data));
-
-    axios.get("/api/country").then((info) => setCountries(info.data));
-  }, []);
-
-  const handleChangePais = (e) => {
-    if (e.target.value === "Elija una opcion") {
-      setStates(true);
-    } else {
-      axios
-        .get(`/api/country/${e.target.value}`)
-        .then((info) => setCity(info.data));
-      setCountryy(e.target.value)
-      setStates(false);
-    }
-  };
-
-  const handleSubmit = () => {
-    axios.post("/api/recruiter", {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      countryId: countryy,
-      cityId: cityy.value,
-      areaOp1: AreaOp1Id.value,
-      areaOp2: AreaOp2Id.value,
-      areaOp3: AreaOp3Id.value,
-      seniorityOp1: SeniorityOp1Id.value,
-      seniorityOp2: SeniorityOp2Id.value,
-      seniorityOp3: SeniorityOp3Id.value,
-    })
-    history.push("/recruiters")
-  };
-
+  console.log(form)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
@@ -96,10 +53,11 @@ const RecruitersAdd = () => {
                         Nombre
                       </label>
                       <input
+                        name="firstName"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Nombre"
-                        {...firstName}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -109,10 +67,11 @@ const RecruitersAdd = () => {
                         Apellido
                       </label>
                       <input
+                        name="lastName"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Apellido"
-                        {...lastName}
+                        onChange={handleChange}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -122,10 +81,11 @@ const RecruitersAdd = () => {
                         Pais
                       </label>
                       <select
+                      name="countryId"
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={handleChangePais}
+                        onChange={handleChangeCountry}
                       >
                         <option selected>Elija una opcion</option>
                         {countries?.map((countriess) => {
@@ -144,11 +104,12 @@ const RecruitersAdd = () => {
                         Ciudad
                       </label>
                       <select
+                        name="cityId"
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         disabled={states}
-                        {...cityy}
+                        onChange={handleChange}
                       >
                         <option selected>Elija una opcion</option>
                         {city?.map((cities) => {
@@ -164,8 +125,9 @@ const RecruitersAdd = () => {
                           Area
                         </label>
                         <select
+                          name="areaOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp1Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
@@ -178,8 +140,9 @@ const RecruitersAdd = () => {
                           Seniority
                         </label>
                         <select
+                          name="seniorityOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp1Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
@@ -198,8 +161,9 @@ const RecruitersAdd = () => {
                           Area 2
                         </label>
                         <select
+                          name="areaOp2"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp2Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
@@ -212,8 +176,9 @@ const RecruitersAdd = () => {
                           Seniority 2
                         </label>
                         <select
+                        name="seniorityOp2"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp2Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
@@ -232,8 +197,9 @@ const RecruitersAdd = () => {
                           Area 3
                         </label>
                         <select
+                          name="areaOp3"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...AreaOp3Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {areas?.map((area) => {
@@ -246,8 +212,9 @@ const RecruitersAdd = () => {
                           Seniority 3
                         </label>
                         <select
+                          name="seniorityOp3"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          {...SeniorityOp3Id}
+                          onChange={handleChange}
                         >
                           <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
