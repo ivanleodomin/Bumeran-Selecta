@@ -1,5 +1,5 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 
 function RecruiterEdit() {

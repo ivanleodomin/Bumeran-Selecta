@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export const useForm = (url) => {
-  const path = useLocation().pathname;
-  const id = path[path.length - 1];
+  const {id} = useParams();
   const history = useHistory();
 
   const [form, setForm] = React.useState({});
@@ -22,15 +21,17 @@ export const useForm = (url) => {
     axios.get("/api/seniority").then((info) => setSeniorities(info.data));
 
     axios.get("/api/country").then((info) => setCountries(info.data));
-    if (url === "editRecruiter") {
+
+    if (url === "editRecruiter")
       axios
         .get(`/api/recruiter/${id}`)
         .then((info) => info.data)
         .then((data) => {
+          console.log(data, "data");
           setCountry(data.Country.id);
-          setForm({ ["firstName"]: data.firstName });
           setForm({ ["lastName"]: data.lastName });
           setForm({ ["countryId"]: data.Country.id });
+          setForm({ ["firstName"]: data.firstName });
           setForm({ ["areaOp1"]: data.AreaOp1.id });
           setForm({ ["areaOp2"]: data.AreaOp2.id });
           setForm({ ["areaOp3"]: data.AreaOp3.id });
@@ -42,7 +43,7 @@ export const useForm = (url) => {
         .then(() => axios.get(`/api/country/${country}`))
         .then((info) => info.data)
         .then((data) => setCity(data));
-    } else if (url === "editVacant") {
+    else if (url === "editVacant")
       axios
         .get(`/api/vacant/${id}`)
         .then((info) => info.data)
@@ -60,7 +61,6 @@ export const useForm = (url) => {
         .then(() => axios.get(`/api/country/${country}`))
         .then((info) => info.data)
         .then((data) => setCity(data));
-    }
   }, [country]);
 
   const handleChange = (e) => {
@@ -83,8 +83,7 @@ export const useForm = (url) => {
         })
         .then(history.push("/vacants"));
     } else if (url === "recruiterAdd") {
-      axios
-        .post("/api/recruiter", {
+      axios.post("/api/recruiter", {
         ...form,
       });
       history.push("/recruiters");
