@@ -16,7 +16,6 @@ const RecruitersAdd = () => {
     handleChangeCountry
   } = useForm("recruiterAdd");
 
-  console.log(form)
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />

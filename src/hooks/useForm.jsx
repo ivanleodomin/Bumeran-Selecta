@@ -1,10 +1,9 @@
 import React from "react";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 export const useForm = (url) => {
-  const path = useLocation().pathname;
-  const id = path[path.length - 1];
+  const {id} = useParams()
   const history = useHistory();
 
   const [form, setForm] = React.useState({});

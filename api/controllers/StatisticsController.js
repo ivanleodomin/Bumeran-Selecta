@@ -54,7 +54,7 @@ class StatisticsController {
       const vacants = await models.Vacant.findAll({
         where: { AreaId: area.id, state: "Finalizada" },
         attributes: ["id", "title", "startDate", "finishtDate"],
-        raw: true,
+       
       });
 
       let time = 0;
@@ -64,7 +64,7 @@ class StatisticsController {
         const finishtDate = new Date(vacant.finishtDate).getTime();
         time += finishtDate - startDate;
       });
-     console.log(vacants.length)
+
       time = Math.round(time / 86400000 / vacants.length);
 
       if (!isNaN(time)) data[area.name] = time;

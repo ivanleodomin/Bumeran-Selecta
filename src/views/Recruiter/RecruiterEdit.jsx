@@ -1,9 +1,8 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm } from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 
 function RecruiterEdit() {
-  
   const {
     form,
     handleChange,
@@ -14,7 +13,6 @@ function RecruiterEdit() {
     areas,
   } = useForm("editRecruiter");
 
-  console.log(form, "form");
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
