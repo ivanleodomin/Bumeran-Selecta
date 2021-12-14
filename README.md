@@ -75,3 +75,20 @@ mysql -u root -p
 (password de su usuario de ubuntu)
 CREATE USER 'teamnavent'@'localhost' IDENTIFIED BY 'password'
 CREATE DATABASE bumerandb
+
+//////////////
+Argentina logo : https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/argentina.png
+
+Chile logo:https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/chile.png
+
+Peru logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/peru.png
+
+Panama logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/panama.png
+
+Ecuador Logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/ecuador.png
+
+Mexico logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/mexico.png
+
+Uruguay logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/uruguay.png
+
+Colombia logo: https://www.bumeran.com.ar/selecta/wp-content/uploads/2021/06/colombia.png
