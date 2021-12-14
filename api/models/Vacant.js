@@ -25,11 +25,25 @@ Vacant.init(
       type: S.STRING,
       defaultValue: "Iniciada",
     },
+    startDate: {
+      type: S.STRING,
+    },
+    finishtDate: {
+      type: S.STRING,
+    },
+    assignmentDate: {
+      type: S.STRING,
+    },
   },
   {
     sequelize,
     modelName: "Vacant",
+    timestamps: false,
   }
 );
+
+Vacant.beforeCreate(async (vacant) => {
+  vacant.startDate = new Date().toISOString().split("T")[0];
+});
 
 module.exports = Vacant;
