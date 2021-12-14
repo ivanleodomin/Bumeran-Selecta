@@ -24,7 +24,7 @@ class RecruiterController {
       seniorityOp2,
       seniorityOp3,
     } = req.body;
-    console.log(req.body, "BODY")
+    console.log(req.body, "BODY");
 
     const [area1, area2, area3] = await getareas([areaOp1, areaOp2, areaOp3]);
 
@@ -54,41 +54,45 @@ class RecruiterController {
     res.send(newRec);
   }
 
-  static async getById(req, res) {
-    const { id } = req.params;
+  static async getById(req, res, next) {
+    try {
+      const { id } = req.params;
 
-    const recruiter = await Recruiter.findOne({
-      attributes: ["id", "firstName", "lastName"],
-      where: { id: id },
-      include: [
-        { model: Area, as: "AreaOp1", attributes: ["id", "name"] },
-        { model: Area, as: "AreaOp2", attributes: ["id", "name"] },
-        { model: Area, as: "AreaOp3", attributes: ["id", "name"] },
-        { model: Seniority, as: "SeniorityOp1", attributes: ["id", "name"] },
-        { model: Seniority, as: "SeniorityOp2", attributes: ["id", "name"] },
-        { model: Seniority, as: "SeniorityOp3", attributes: ["id", "name"] },
-        { model: City, as: "City", attributes: ["id", "name"] },
-        { model: Country, as: "Country", attributes: ["id", "name"] },
-      ],
-    });
+      const recruiter = await Recruiter.findOne({
+        attributes: ["id", "firstName", "lastName"],
+        where: { id: id },
+        include: [
+          { model: Area, as: "AreaOp1", attributes: ["id", "name"] },
+          { model: Area, as: "AreaOp2", attributes: ["id", "name"] },
+          { model: Area, as: "AreaOp3", attributes: ["id", "name"] },
+          { model: Seniority, as: "SeniorityOp1", attributes: ["id", "name"] },
+          { model: Seniority, as: "SeniorityOp2", attributes: ["id", "name"] },
+          { model: Seniority, as: "SeniorityOp3", attributes: ["id", "name"] },
+          { model: City, as: "City", attributes: ["id", "name"] },
+          { model: Country, as: "Country", attributes: ["id", "name"] },
+        ],
+      });
 
-    if (!recruiter) return res.sendStatus(404);
+      /* if (!recruiter) return res.sendStatus(404); */
 
-    const reviews = await Review.findAll({
-      attributes: ["id"],
-      where: { RecruiterId: id },
-      include: [{ model: Vacant, as: "Vacant" }],
-    });
+      const reviews = await Review.findAll({
+        attributes: ["id"],
+        where: { RecruiterId: id },
+        include: [{ model: Vacant, as: "Vacant" }],
+      });
 
-    const activeVacancies = await Vacant.findAll({
-      where: { RecruiterId: id, state: "Asignada" },
-    });
+      const activeVacancies = await Vacant.findAll({
+        where: { RecruiterId: id, state: "Asignada" },
+      });
 
-    recruiter.dataValues.ranking = await recruiter.getRanking();
-    recruiter.dataValues.activeVacancies = activeVacancies;
-    recruiter.dataValues.history = reviews;
+      recruiter.dataValues.ranking = await recruiter.getRanking();
+      recruiter.dataValues.activeVacancies = activeVacancies;
+      recruiter.dataValues.history = reviews;
 
-    res.send(recruiter);
+      res.send(recruiter);
+    } catch (err) {
+      next(err);
+    }
   }
 
   static async getAll(req, res) {
@@ -163,7 +167,7 @@ class RecruiterController {
         seniorityOp2,
         seniorityOp3,
       } = req.body;
-      
+
       const country = await Country.findByPk(countryId);
       const city = await City.findByPk(cityId);
       const recruiter = await Recruiter.findByPk(req.params.id);
