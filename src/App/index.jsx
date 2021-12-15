@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from "react";
 import { Switch, Route, Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
+import React from "react";
 import Home from "../views/Home";
 import Vacants from "../views/Vacant/Vacants";
-import Statistics from "../views/Statistics";
 import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
@@ -14,12 +14,24 @@ import Recruiters from "../views/Recruiter/Recruiters";
 import Graph from "../components/charts/Graph.jsx";
 import TinyBarCh from '../components/charts/TinyBarCh.jsx'
 
+import RegionSelector from "../views/RegionSelector";
+import { useSelector } from "react-redux";
 
 function App() {
+  const country = useSelector((state) => state.country).value;
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (!country) history.push("/");
+  }, [country]);
+
   return (
     <>
       <Navbar />
       <Switch>
+        <Route exact path="/">
+          <RegionSelector />
+        </Route>
         <Route path="/home">
           <Home />
         </Route>
@@ -55,9 +67,6 @@ function App() {
         <Route path="/stadistics">
           <Graph />
           <TinyBarCh/>
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
         </Route>
         <Route component={NotFound} />
         <Route path="*">

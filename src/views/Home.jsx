@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
-
+import "../styles/region.css";
 const Home = () => {
-
   //dispach de states redux limpiar
-  
+
   return (
     <div>
       <header className="bg-white-100 py-8">
@@ -85,7 +84,7 @@ const Home = () => {
                 place="top"
                 type="info"
               >
-               Apartado de estadisticas 
+                Apartado de estadisticas
               </ReactTooltip>
               <div className="w-sm">
                 <div className="mt-4 text-black-600 text-center">
@@ -101,6 +100,11 @@ const Home = () => {
           </Link>
         </div>
       </header>
+      <div className="flex center justify-center">
+        <button className="region-button">
+          <Link to="/">Seleccionar region</Link>
+        </button>
+      </div>
     </div>
   );
 };

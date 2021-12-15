@@ -1,0 +1,26 @@
+.region-button {
+  background-color: #fe0068;
+  border-radius: 20px;
+  font-size: 40px;
+  padding: 10px;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.region-button:hover {
+  background-color: #fa579b;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 5px px grey;
+}
+
+.country-button {
+  padding: 20%;
+}
+
+.country-button img:hover {
+  opacity: 2;
+}
+.title-region {
+  font-size: 50px;
+  margin-bottom: 0;
+}
