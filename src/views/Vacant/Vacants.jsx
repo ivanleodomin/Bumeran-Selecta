@@ -56,8 +56,8 @@ const Vacants = () => {
           { name: "Estado", data: state },
           { name: "Pais", data: countries },
         ]}
-        resets={[resetArea, resetCountry, resetState]}
-        adds={[addArea, addState, addCountry]}
+        resets={[resetArea, resetState]}
+        adds={[addArea, addState,]}
         routeButton="/vacant-form"
       />
       <Results datas={vacants} View={View} Card={Card} />

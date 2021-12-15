@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
     data: arreglo de strings con el nombre de los items desplegables
     name: placeholder del dropdown
     action: accion de redux para realizar el dispach con el nombre del item elegidos
-    reset: accion de redux para realizar un reseteo del estado a su valor por defecto
+    reset (opcional): accion de redux para realizar un reseteo del estado a su valor por defecto
 */
 
 function Dropdown({ data, name, action, reset }) {

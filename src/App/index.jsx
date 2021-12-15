@@ -21,6 +21,7 @@ function App() {
   const country = useSelector((state) => state.country).value;
   const history = useHistory();
 
+
   React.useEffect(() => {
     if (!country) history.push("/");
   }, [country]);

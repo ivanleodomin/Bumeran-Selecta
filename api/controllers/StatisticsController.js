@@ -32,27 +32,30 @@ class StatisticsController {
 
       if (!country) throw new Error("country field required");
 
-      const countryId = await models.Country.findOne({
+      const countryData = await models.Country.findOne({
         where: { name: country },
         raw: true,
       });
+      const CountryId = countryData.id;
 
-      const CountryId = countryId.id;
-
-      if (!area) recruiters = await models.Recruiter.findAll();
+      if (!area)
+        recruiters = await models.Recruiter.findAll({ where: CountryId });
       else {
         const AreaOp1Id = await models.Area.findOne({
+          raw: true,
           where: { name: area },
         });
         recruiters = await models.Recruiter.findAll({
           where: { AreaOp1Id: AreaOp1Id.id, CountryId },
+          raw: true,
         });
       }
 
       for (let rec of recruiters) {
         const recruiter = await models.Recruiter.findByPk(rec.id);
         recruiter.dataValues.ranking = await recruiter.getRanking();
-        arr.push(recruiter.dataValues);
+        console.log(recruiter);
+        arr.push(recruiter);
       }
 
       arr.sort((recruiterA, recruiterB) => {

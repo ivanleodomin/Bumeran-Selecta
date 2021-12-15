@@ -3,8 +3,18 @@ import { Link } from "react-router-dom";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
 import "../styles/region.css";
+import { resetState } from "../features/stateSlice";
+import { resetArea } from "../features/areaSlice";
+import { resetSeniority } from "../features/senioritys";
+import { useDispatch } from "react-redux";
+
 const Home = () => {
-  //dispach de states redux limpiar
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(resetState());
+    dispatch(resetArea());
+    dispatch(resetSeniority());
+  }, []);
 
   return (
     <div>

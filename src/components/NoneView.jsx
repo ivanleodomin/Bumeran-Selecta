@@ -2,7 +2,7 @@ export default function NoneView({ name }) {
   return (
     <div className="no-select">
       <h1>
-        Elegí una {name} para ver su informacion <span>acá</span>
+        Elegí {name} para ver su informacion <span>acá</span>
       </h1>
       <img
         alt="reclutador no seleccionado"
