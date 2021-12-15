@@ -38,8 +38,11 @@ class StatisticsController {
       });
       const CountryId = countryData.id;
 
-      if (!area)
-        recruiters = await models.Recruiter.findAll({ where: CountryId });
+      if (!area){
+
+        recruiters = await models.Recruiter.findAll({ where:{ CountryId} });
+        console.log(recruiters)
+      }
       else {
         const AreaOp1Id = await models.Area.findOne({
           raw: true,
@@ -50,6 +53,7 @@ class StatisticsController {
           raw: true,
         });
       }
+
 
       for (let rec of recruiters) {
         const recruiter = await models.Recruiter.findByPk(rec.id);

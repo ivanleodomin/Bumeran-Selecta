@@ -122,22 +122,6 @@ class RecruiterController {
     }
   }
 
-  static async test(req, res) {
-    const { seniority, area, country } = req.query;
-    const page = parseInt(req.query.page) - 1;
-
-    const where = {};
-
-    if (!seniority) where.seniorityOp1Id = seniority;
-
-    const rec = await Recruiter.findAndCountAll({
-      where,
-      offset: page * 10,
-      limit: 10,
-    });
-    res.send(rec.rows);
-  }
-
   static async deleteById(req, res) {
     const { id } = req.params;
     await Vacant.update(
