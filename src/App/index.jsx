@@ -21,7 +21,7 @@ function App() {
   const history = useHistory();
 
   React.useEffect(() => {
-    history.push("/");
+    if (!country) history.push("/");
   }, [country]);
 
   return (

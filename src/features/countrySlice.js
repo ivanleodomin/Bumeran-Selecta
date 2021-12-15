@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = localStorage.getItem('country') || {}
+const initialState = localStorage.getItem('country') || ""
 
 const countrySlice = createSlice({
     name: "country",

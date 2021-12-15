@@ -5,5 +5,6 @@ const StatisticsController = require("../controllers/StatisticsController");
 router.get("/vacants", StatisticsController.getVacancyReport); //resibe un query string "state" con el estado de vacante que se desea y se resibira la cantidad
 router.get("/recruiters-ranck", StatisticsController.getRecruiterReport); //resibe un query string "state" con el estado de vacante que se desea y se resibira la cantidad
 router.get("/vacants/closing", StatisticsController.closingTimeArea)
+router.get("/recruiters/closing", StatisticsController.closingTimeRec)
 
 module.exports = router;
