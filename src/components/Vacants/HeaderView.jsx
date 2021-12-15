@@ -39,9 +39,9 @@ export default function HeaderView({ vacant, id }) {
   };
 
   return (
-    <div className="w-full">
+    <div className="header-buttons-recruiter">
       <Assess assess={assess} vacant={vacant} />
-      <div className="padding">
+      <div className="">
         <>
           {vacant.state !== "Finalizada" && (
             <>

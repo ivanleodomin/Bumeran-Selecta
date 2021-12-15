@@ -7,7 +7,7 @@ import View from "../../components/Recruiters/View";
 import { useSelector } from "react-redux";
 import { resetArea, addArea } from "../../features/areaSlice";
 import { resetSeniority, addSeniority } from "../../features/senioritys";
-import { resetCountry, addCountry } from "../../features/countrySlice";
+
 
 const Recruiters = () => {
   const [areas, setAreas] = React.useState([]);
@@ -56,8 +56,8 @@ const Recruiters = () => {
           { name: "Grado", data: seniorities },
           { name: "Pais", data: countries },
         ]}
-        resets={[resetArea, resetCountry, resetSeniority]}
-        adds={[addArea, addSeniority, addCountry]}
+        resets={[resetArea, resetSeniority]}
+        adds={[addArea, addSeniority, ]}
         routeButton="/recruiter-form"
       />
       <Results datas={recruiters} View={View} Card={Card} />

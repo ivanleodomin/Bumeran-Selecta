@@ -21,7 +21,7 @@ function View() {
     <>
       <div className="view">
         {!id ? (
-          <NoneView />
+          <NoneView name="una vacante"/>
         ) : (
           <div className="p-5">
             <HeaderView vacant={vacant} id={id} />

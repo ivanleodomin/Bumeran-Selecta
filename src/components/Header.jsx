@@ -8,7 +8,9 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
   const [reset, setReset] = React.useState(false);
   const dispatch = useDispatch();
   const handleTrash = () => {
-    resets.map((reset) => dispatch(reset()));
+    resets.forEach((reset) => {
+      dispatch(reset());
+    });
     setReset(true);
   };
 
@@ -27,13 +29,9 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
             />
           );
         })}
-        <div className="remove-filters">
-          <button
-            onClick={handleTrash}
-          >
-            <BsFillTrashFill />
-          </button>
-        </div>
+        <button className="remove-filters" onClick={handleTrash}>
+          <BsFillTrashFill />
+        </button>
         <div className="newRecruiter">
           <Link to={routeButton}>
             <button className="fas fa-plus-circle">
