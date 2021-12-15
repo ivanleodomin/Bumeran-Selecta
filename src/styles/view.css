@@ -127,7 +127,6 @@ td {
 
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th {
@@ -147,4 +146,42 @@ td {
 
 td:hover {
   background-color: rgb(233, 233, 233);
+}
+
+.more{
+  width: 100%;
+}
+
+.button-activity, .button-history{
+  font-size: 20px;
+  padding: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 0px 5px;
+  margin-right:20px;
+  color: #fff;
+  transition: 0.5s
+}
+
+.button-history{
+  border:1px solid  blue;
+  color: blue
+}
+
+.button-activity{
+  border:1px solid  rgb(253, 93, 163);
+  color:rgb(253, 93, 163) ;
+}
+
+
+.button-history:hover{
+  background-color: rgb(181, 169, 231);
+  box-shadow: 0px 0px 5px;
+  transform: scale(1.05);
+}
+
+.button-activity:hover{
+  background-color: rgb(248, 221, 233);
+  box-shadow: 0px 0px 5px;
+  transform: scale(1.05);
 }

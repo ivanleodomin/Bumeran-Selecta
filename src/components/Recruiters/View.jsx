@@ -6,11 +6,15 @@ import swal from "sweetalert";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import NoneView from "../NoneView";
+import ActivityTable from "./ActivityTable";
+import HistoryTable from "./HistoryTable";
 
 function View() {
   const { id } = useParams();
   const [recruiter, setRecruiter] = React.useState({});
   const [ranking, setRanking] = React.useState(["★", "★★★★"]);
+  const [showActivity, setShowActivity] = React.useState(false);
+  const [showHistory, setShowHistory] = React.useState(false);
   const history = useHistory();
 
   const handleDelete = async () => {
@@ -48,9 +52,13 @@ function View() {
       });
   }, [id]);
 
-  const hanlderActivity = () => {};
+  const hanlderActivity = () => {
+    setShowActivity(true);
+  };
 
-  const hanlderHistory = () => {};
+  const hanlderHistory = () => {
+    setShowHistory(true)
+  };
 
   return (
     <div className="view">
@@ -58,6 +66,18 @@ function View() {
         <NoneView name="un reclutador" />
       ) : (
         <div className="view">
+
+          <ActivityTable
+            show={showActivity}
+            close={setShowActivity}
+            activity={recruiter.activeVacancies}
+          />
+
+          <HistoryTable
+            show={showHistory}
+            close={setShowHistory}
+            history={recruiter.history}
+          />
           <div className="header-buttons-recruiter">
             <Link to={`/recruiter-edit/${recruiter.id}`}>
               <button className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
@@ -102,10 +122,13 @@ function View() {
               </table>
             </div>
             <div className="more">
-              <button className="button-activity"onClick={hanlderActivity}>vacantes activas</button>
-              <button className="button-history" onClick={hanlderHistory}>historial de vacantes</button>
+              <button className="button-activity" onClick={hanlderActivity}>
+                vacantes activas
+              </button>
+              <button className="button-history" onClick={hanlderHistory}>
+                historial de vacantes
+              </button>
             </div>
-            <h1>Ranking: {recruiter.ranking}</h1>
           </div>
         </div>
       )}
