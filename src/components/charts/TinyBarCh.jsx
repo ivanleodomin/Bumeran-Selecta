@@ -1,7 +1,6 @@
-import React, { PureComponent, useEffect, useState, useSelector } from "react";
-import axios, * as others from 'axios';
-
-
+import React, { PureComponent, useEffect, useState } from "react";
+import axios, * as others from "axios";
+import { useSelector } from "react-redux";
 
 import {
   BarChart,
@@ -15,51 +14,44 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
 const TinyBarCh = () => {
   const [rec, setRec] = useState([]);
 
   const [areaName, setAreaName] = useState([]);
-  const [areaSelec, setAreaSelec] = useState('')
-  
+  const [areaSelec, setAreaSelec] = useState("");
 
-  //const countryName = useSelector((state) => state.country)
+  const country = useSelector((state) => state.country).value
+  console.log(country);
 
-/*   useEffect(() => {
+  /*   useEffect(() => {
     axios
       .get("/api/area")
       .then((res) => res.data)
       .then((data) => setAreaName(data));
   }, []); */
-  
+
   useEffect(() => {
     axios
-    .get(`/api/statistics/recruiters-ranck?area=${areaName}`)
-    .then((info) => info.data)
-    .then((data) => setRec(data));
+      .get(`/api/statistics/recruiters-ranck?country=${country}`)
+      .then((info) => (info.data))
+      .then((data) => setRec(data));
     axios
-    .get("/api/area")
-    .then((res) => res.data)
-    .then((data) => setAreaName(data));
-  }, []);
-  
-  console.log(rec);
-  
-  
-  const handleChange = (e) =>{
-    setAreaSelec(e.target.value);
-  }
+      .get("/api/area")
+      .then((res) => res.data)
+      .then((data) => setAreaName(data));
+  }, [country]);
 
-  
+  console.log(rec);
+
+  const handleChange = (e) => {
+    setAreaSelec(e.target.value);
+  };
+
   return (
     <>
-    
-      <select
-      onChange={handleChange}
-      name="select">
-        {areaName.map(area =>(
-          <option  
-          value={area.name}>{area.name}</option>
+      <select onChange={handleChange} name="select">
+        {areaName.map((area) => (
+          <option value={area.name}>{area.name}</option>
         ))}
       </select>
 
