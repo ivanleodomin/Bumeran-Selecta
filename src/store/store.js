@@ -4,14 +4,18 @@ import seniorityReducer from "../features/senioritys";
 import countryReducer from "../features/countrySlice";
 import stateReducer from "../features/stateSlice"
 
-const store = configureStore({
+
+
+
+export const store = configureStore({
   reducer: {
-   state: stateReducer,
-   area: areaReducer,
-   seniority: seniorityReducer,
-   country: countryReducer
+    state: stateReducer,
+    area: areaReducer,
+    seniority: seniorityReducer,
+    country: countryReducer
   },
 },
 window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
-export default store;
+
+export default store

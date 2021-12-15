@@ -16,31 +16,35 @@ class StatisticsController {
     res.send(vacants);
   }
 
-  static async getRecruiterReport(req, res) {
-    const { area } = req.query;
-    let recruiters;
-    let arr = [];
+  static async getRecruiterReport(req, res, next) {
+    try {
+      const { area } = req.query;
+      let recruiters;
+      let arr = [];
 
-    if (!area) recruiters = await models.Recruiter.findAll();
-    else {
-      const AreaOp1Id = await models.Area.findOne({ where: { name: area } });
-      recruiters = await models.Recruiter.findAll({
-        where: { AreaOp1Id: AreaOp1Id.id },
+      if (!area) recruiters = await models.Recruiter.findAll();
+      else {
+        const AreaOp1Id = await models.Area.findOne({ where: { name: area } });
+        recruiters = await models.Recruiter.findAll({
+          where: { AreaOp1Id: AreaOp1Id.id },
+        });
+      }
+
+      for (let rec of recruiters) {
+        const recruiter = await models.Recruiter.findByPk(rec.id);
+        recruiter.dataValues.ranking = await recruiter.getRanking();
+        arr.push(recruiter.dataValues);
+      }
+
+      arr.sort((recruiterA, recruiterB) => {
+        if (recruiterA.ranking > recruiterB.ranking) return -1;
+        if (recruiterA.ranking < recruiterB.ranking) return 1;
+        return 0;
       });
+      res.send(arr);
+    } catch (err) {
+      next(err);
     }
-
-    for (let rec of recruiters) {
-      const recruiter = await models.Recruiter.findByPk(rec.id);
-      recruiter.dataValues.ranking = await recruiter.getRanking();
-      arr.push(recruiter.dataValues);
-    }
-
-    arr.sort((recruiterA, recruiterB) => {
-      if (recruiterA.ranking > recruiterB.ranking) return -1;
-      if (recruiterA.ranking < recruiterB.ranking) return 1;
-      return 0;
-    });
-    res.send(arr);
   }
 
   static async closingTimeArea(req, res) {
@@ -54,7 +58,6 @@ class StatisticsController {
       const vacants = await models.Vacant.findAll({
         where: { AreaId: area.id, state: "Finalizada" },
         attributes: ["id", "title", "startDate", "finishtDate"],
-       
       });
 
       let time = 0;

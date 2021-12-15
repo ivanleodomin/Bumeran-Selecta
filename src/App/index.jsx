@@ -12,7 +12,8 @@ import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
 import LinkRecruiter from "../views/Vacant/LinkRecruiter";
 import Recruiters from "../views/Recruiter/Recruiters";
 import Graph from "../components/charts/Graph";
-import BarCh from "../components/charts/BarCh";
+import TinyBarCh from '../components/charts/TinyBarCh'
+
 
 function App() {
   return (
@@ -52,8 +53,8 @@ function App() {
           <LinkRecruiter />
         </Route>
         <Route path="/stadistics">
-          <BarCh />
           <Graph />
+          <TinyBarCh/>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
