@@ -33,7 +33,7 @@ const TinyBarCh = () => {
   useEffect(() => {
     axios
       .get(`/api/statistics/recruiters-ranck?country=${country}`)
-      .then((info) => (info.data))
+      .then((info) => console.log(info.data))
       .then((data) => setRec(data));
     axios
       .get("/api/area")
