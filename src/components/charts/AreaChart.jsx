@@ -14,7 +14,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const TinyBarCh = () => {
+const AreaChart = () => {
   const [rec, setRec] = useState([]);
   const [areaRec, setAreaRec] = useState([])
 
@@ -23,50 +23,32 @@ const TinyBarCh = () => {
   
 
   const country = useSelector((state) => state.country).value
-
-
-  /*   useEffect(() => {
-    axios
-      .get("/api/area")
-      .then((res) => res.data)
-      .then((data) => setAreaName(data));
-  }, []); */
+  console.log(country);
 
   useEffect(() => {
     axios
-      .get(`/api/statistics/recruiters-ranck?country=${country}`)
+      .get(`/api/statistics/recruiters-ranck?country=${country}&area=${areaSelec}`)
       .then((info) => (info.data))
       .then((data) => setRec(data));
     axios
       .get("/api/area")
       .then((res) => res.data)
       .then((data) => setAreaName(data));
-  }, [country]);
+  }, [country, areaSelec]);
 
-  useEffect(() => {
-    axios
-      .get(`/api/statistics/recruiters-ranck?country=${country}&area=${areaSelec}`)
-      .then((info) => (info.data))
-      .then((data) => setAreaRec(data));
-    axios
-      .get("/api/area")
-      .then((res) => res.data)
-      .then((data) => setAreaName(data));
-  }, []);
+  console.log(rec);
 
-
-/* 
   const handleChange = (e) => {
     setAreaSelec(e.target.value);
-  }; */
+  };
 
   return (
     <>
- {/*      <select onChange={handleChange} name="select">
+      <select onChange={handleChange} name="select">
         {areaName.map((area) => (
           <option value={area.name}>{area.name}</option>
         ))}
-      </select> */}
+      </select>
 
       <ResponsiveContainer width="100%" aspect={3}>
         <BarChart width={730} height={250} data={rec}>
@@ -87,6 +69,4 @@ const TinyBarCh = () => {
   );
 };
 
-export default TinyBarCh;
-
-//Data => Routes.
+export default AreaChart;
