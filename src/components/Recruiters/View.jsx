@@ -11,6 +11,8 @@ import HistoryTable from "./HistoryTable";
 
 function View() {
   const { id } = useParams();
+  const [historyRec, setHistoryRec] = React.useState([])
+  const [activityRec, setActivityRec] = React.useState([])
   const [recruiter, setRecruiter] = React.useState({});
   const [ranking, setRanking] = React.useState(["★", "★★★★"]);
   const [showActivity, setShowActivity] = React.useState(false);
@@ -39,6 +41,8 @@ function View() {
       .then((res) => res.data)
       .then((data) => {
         setRecruiter(data);
+        setHistoryRec(data.history)
+        setActivityRec(data.activeVacancies)
         return data;
       })
       .then((data) => {
@@ -57,7 +61,7 @@ function View() {
   };
 
   const hanlderHistory = () => {
-    setShowHistory(true)
+    setShowHistory(true);
   };
 
   return (
@@ -66,17 +70,16 @@ function View() {
         <NoneView name="un reclutador" />
       ) : (
         <div className="view">
-
           <ActivityTable
             show={showActivity}
             close={setShowActivity}
-            activity={recruiter.activeVacancies}
+            activity={activityRec}
           />
 
           <HistoryTable
             show={showHistory}
             close={setShowHistory}
-            history={recruiter.history}
+            history={historyRec}
           />
           <div className="header-buttons-recruiter">
             <Link to={`/recruiter-edit/${recruiter.id}`}>
@@ -102,23 +105,27 @@ function View() {
             </h1>
             <div className="experticia">
               <h1 className="title">Areas de experticia</h1>
-              <table class="experticia-table">
-                <tr>
-                  <th>Area</th>
-                  <th>Grado</th>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp1?.name}</td>
-                  <td>{recruiter.SeniorityOp1?.name}</td>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp2?.name}</td>
-                  <td>{recruiter.SeniorityOp2?.name}</td>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp3?.name}</td>
-                  <td>{recruiter.SeniorityOp3?.name}</td>
-                </tr>
+              <table className="experticia-table">
+                <thead>
+                  <tr>
+                    <th>Area</th>
+                    <th>Grado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{recruiter.AreaOp1?.name}</td>
+                    <td>{recruiter.SeniorityOp1?.name}</td>
+                  </tr>
+                  <tr>
+                    <td>{recruiter.AreaOp2?.name}</td>
+                    <td>{recruiter.SeniorityOp2?.name}</td>
+                  </tr>
+                  <tr>
+                    <td>{recruiter.AreaOp3?.name}</td>
+                    <td>{recruiter.SeniorityOp3?.name}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
             <div className="more">

@@ -74,19 +74,21 @@ class RecruiterController {
 
     if (!recruiter) return res.sendStatus(404);
 
-    const reviews = await Review.findAll({
-      attributes: ["id"],
-      where: { RecruiterId: id },
-      include: [{ model: Vacant, as: "Vacant" }],
+    const history = await Vacant.findAll({
+      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+      include: [{ model: Area, as: "Area", attributes: ["name"] }],
+      where: { RecruiterId: id, state: "Finalizada" },
     });
 
     const activeVacancies = await Vacant.findAll({
+      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+      include: [{ model: Area, as: "Area", attributes: ["name"] }],
       where: { RecruiterId: id, state: "Asignada" },
     });
 
     recruiter.dataValues.ranking = await recruiter.getRanking();
     recruiter.dataValues.activeVacancies = activeVacancies;
-    recruiter.dataValues.history = reviews;
+    recruiter.dataValues.history = history;
 
     res.send(recruiter);
   }

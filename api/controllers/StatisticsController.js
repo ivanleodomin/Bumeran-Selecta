@@ -38,25 +38,32 @@ class StatisticsController {
       });
       const CountryId = countryData.id;
 
-      if (!area){
-
-        recruiters = await models.Recruiter.findAll({ where:{ CountryId} });
-        console.log(recruiters)
-      }
-      else {
+      if (!area) {
+        recruiters = await models.Recruiter.findAll({ where: { CountryId } });
+      } else {
         const AreaOp1Id = await models.Area.findOne({
           raw: true,
           where: { name: area },
         });
+
         recruiters = await models.Recruiter.findAll({
           where: { AreaOp1Id: AreaOp1Id.id, CountryId },
           raw: true,
         });
       }
 
-
       for (let rec of recruiters) {
-        const recruiter = await models.Recruiter.findByPk(rec.id);
+        const recruiter = await models.Recruiter.findOne({
+          where: { id: rec.id },
+          attributes: ["id", "firstName", "lastName"],
+          include: [
+            {
+              model: models.Country,
+              attributes: ["id", "name"],
+              as: "Country",
+            },
+          ],
+        });
         recruiter.dataValues.ranking = await recruiter.getRanking();
         console.log(recruiter);
         arr.push(recruiter);

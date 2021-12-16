@@ -9,7 +9,7 @@ const Navbar = () => {
     <header className="relative">
       <div className="flex item-center justify-center shadow h-16 navbar">
         <div className="logo">
-          <Link to={location.pathname !== "/" && "/home"}>
+          <Link to={location.pathname !== "/" ? "/home" : "/"}>
             <img src={logo} alt="BumeranLogo" className="w-full" />
           </Link>
         </div>

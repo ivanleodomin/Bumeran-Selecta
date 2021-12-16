@@ -1,6 +1,8 @@
 import Modal from "react-modal";
 import React from "react";
 import "../../styles/assess.css";
+import { AiOutlineLeftCircle } from 'react-icons/ai';
+
 
 export default function ActivityTable({ show, activity, close }) {
   const customStyles = {
@@ -9,32 +11,40 @@ export default function ActivityTable({ show, activity, close }) {
       left: "50%",
       right: "auto",
       bottom: "auto",
-      height: "50%",
-      width: "50%",
+      height: "60%",
+      width: "70%",
       marginRight: "-50%",
       transform: "translate(-50%, -50%)",
     },
   };
 
   return (
-    <div>
-      <Modal isOpen={show} style={customStyles}>
-        <h1>Activity</h1>
-        <ul className="list-disc list-inside bg-blue-200">
-          <h3>Vacantes activas</h3>
-          {activity?.map((vacante) => {
+    <Modal isOpen={show} style={customStyles} ariaHideApp={false}>
+      <div className="modal-table">
+      <button onClick={() => close(false)}><AiOutlineLeftCircle/></button>
+        <table>
+          <thead>
+            <tr>
+              <th>Titulo</th>
+              <th>Area</th>
+              <th>Vacantes</th>
+              <th>Iniciada en</th>
+              <th>Asignado en</th>
+            </tr>
+          </thead>
+          {activity?.map((item, i) => {
             return (
-              <li>
-                Id de vacante: {vacante?.id} <br />
-                Puesto: {vacante?.title} <br />
-                Description: {vacante?.description}
-                <br />
-              </li>
+              <tr key={i}>
+                <td>{item.title}</td>
+                <td>{item.Area.name}</td>
+                <td>{item.vacant}</td>
+                <td>{item.startDate}</td>
+                <td>{item.assignmentDate}</td>
+              </tr>
             );
           })}
-        </ul>
-        <button onClick={() => close(false)}>close</button>
-      </Modal>
-    </div>
+        </table>
+      </div>
+    </Modal>
   );
 }

@@ -1,8 +1,9 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/*
 @import url('https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@300&family=Quicksand&display=swap');
-
+*/
 body {
   height: 100%;
   background-color: rgb(237, 241, 247);

@@ -20,7 +20,6 @@ function App() {
   const country = useSelector((state) => state.country).value;
   const history = useHistory();
 
-
   React.useEffect(() => {
     if (!country) history.push("/");
   }, [country]);
@@ -47,20 +46,18 @@ function App() {
         <Route exact path="/recruiter-edit/:id">
           <RecruiterEdit />
         </Route>
+        <Route exact path="/recruiters">
+          <Recruiters />
+        </Route>
         <Route path="/recruiters/:id">
           <Recruiters />
         </Route>
-        <Route path="/recruiters">
-          <Recruiters />
+        <Route exact path="/vacants/">
+          <Vacants />
         </Route>
-        {/*Preguntar*/}
         <Route path="/vacants/:id">
           <Vacants />
         </Route>
-        <Route path="/vacants/">
-          <Vacants />
-        </Route>
-        {/*Preguntar*/}
         <Route exact path="/link-recruiter/:id">
           <LinkRecruiter />
         </Route>
