@@ -35,7 +35,7 @@ class VacantController {
         include: [
           {
             model: Recruiter,
-            attributes: ["firstName", "lastName"],
+            attributes: ["id", "firstName", "lastName"],
             as: "Recruiter",
           },
           { model: Country, attributes: ["id", "name"], as: "Country" },
@@ -44,6 +44,17 @@ class VacantController {
           { model: Seniority, attributes: ["id", "name"], as: "Seniority" },
         ],
       });
+
+      if (vacant.state === "Finalizada") {
+        const review = await Review.findOne({
+          raw: true,
+          where: {
+            VacantId: vacant.id,
+          },
+        });
+        console.log(review)
+        vacant.dataValues.review = review.score;
+      }
 
       return res.send(vacant);
     } catch (err) {

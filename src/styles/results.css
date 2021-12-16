@@ -29,8 +29,14 @@
 }
 
 .corrusel-cards::-webkit-scrollbar {
-  width: 6px;
+  width: 9px;
   height: 6px;
+}
+
+/*PREGUNTAR*/
+.corrusel-cards::-webkit-scrollbar-thumb {
+  background-color: rgb(182, 182, 182);
+  border-radius: 6px;
 }
 
 

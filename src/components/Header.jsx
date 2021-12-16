@@ -2,6 +2,7 @@ import Dropdown from "./DropDown";
 import React from "react";
 import { Link } from "react-router-dom";
 import { BsFillTrashFill } from "react-icons/bs";
+import { AiOutlinePlusCircle } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 
 const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
@@ -33,11 +34,12 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
           <BsFillTrashFill />
         </button>
         <div className="newRecruiter">
-          <Link to={routeButton}>
-            <button className="fas fa-plus-circle">
+            <Link to={routeButton}>
+          <button className="newRecruiterButton">
+              <AiOutlinePlusCircle style={{ color: "white", position: "relative", left: "0"}} />
               <span>Nuevo</span>
-            </button>
-          </Link>
+          </button>
+            </Link>
         </div>
       </div>
     </div>

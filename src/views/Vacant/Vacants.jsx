@@ -9,7 +9,6 @@ import { resetArea } from "../../features/areaSlice";
 import { resetState } from "../../features/stateSlice";
 import { addArea } from "../../features/areaSlice";
 import { addState } from "../../features/stateSlice";
-import { resetCountry, addCountry } from "../../features/countrySlice";
 
 const Vacants = () => {
   const state = [

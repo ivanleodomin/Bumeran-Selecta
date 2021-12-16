@@ -1,14 +1,15 @@
 .region-button {
-  background-color: #fe0068;
   border-radius: 20px;
-  font-size: 40px;
+  font-size: 18px;
   padding: 10px;
-  color: #fff;
+  border: 1px solid #fe0068;
+  color: #fe0068;
   transition: 0.5s;
+  background-color: #fff;
+  margin-bottom: 20px;
 }
 
 .region-button:hover {
-  background-color: #fa579b;
   transform: scale(1.05);
   box-shadow: 0px 0px 5px px grey;
 }

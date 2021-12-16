@@ -112,7 +112,7 @@ const Home = () => {
       </header>
       <div className="flex center justify-center">
         <button className="region-button">
-          <Link to="/">Seleccionar region</Link>
+          <Link to="/">Cambiar region</Link>
         </button>
       </div>
     </div>

@@ -112,7 +112,10 @@ li {
 }
 
 .newRecruiter {
-  font-size: 15px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size:17px;
   width: 8%;
   height: 35px;
   display: flex;
@@ -121,7 +124,15 @@ li {
   border-radius: 5px;
   border: blue;
   background-color: blue;
+  font-family: "Hind Vadodara", sans-serif;
   margin-right: 5px;
+}
+
+.newRecruiterButton{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center
 }
 
 .remove-filters {

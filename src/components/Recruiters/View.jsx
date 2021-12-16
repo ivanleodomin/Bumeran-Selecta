@@ -144,36 +144,3 @@ function View() {
 }
 
 export default View;
-
-/* logica acticas 
-
-  <ul className="list-disc list-inside bg-blue-200">
-                <h3>Vacantes activas</h3>
-                {recruiter?.activeVacancies?.map((vacante) => {
-                  return (
-                    <li>
-                      Id de vacante: {vacante?.id} <br />
-                      Puesto: {vacante?.title} <br />
-                      Description: {vacante?.description}
-                      <br />
-                    </li>
-                  );
-                })}
-              </ul>
-*/
-
-/*Logica history
-
- <ul className="list-disc list-inside bg-pink-200">
-                <h3>Historial</h3>
-                {recruiter?.history?.map((history) => {
-                  return (
-                    <li>
-                      Id de vacante: {history.Vacant.id} <br />
-                      Puesto: {history?.Vacant?.title} <br />
-                      Description: {history?.Vacant?.description} <br />
-                    </li>
-                  );
-                })}
-              </ul>
-*/

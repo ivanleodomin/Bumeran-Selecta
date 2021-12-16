@@ -1,3 +1,5 @@
+import React from "react";
+
 export default function InfoVacant({ vacant }) {
   return (
     <div className="label space-y-8">
@@ -5,10 +7,15 @@ export default function InfoVacant({ vacant }) {
       <h1>
         Estado: <span className="estado">{vacant.state}</span>
       </h1>
+      {vacant.state === "Finalizada" && (
+        <h1>
+          Puntaje: <span className="estado">{vacant.review} puntos</span>
+        </h1>
+      )}
       <h1>{`${vacant.City?.name}, ${vacant.Country?.name} `}</h1>
       <p>Description: {vacant.description}</p>
       <h3 className="list-disc list-inside bg-yellow-200">{`Area: ${vacant.Area?.name}`}</h3>
-      <div className="">
+      <div>
         <h3>Vacantes disponibles: {vacant.vacant}</h3>
       </div>
       <h1>
