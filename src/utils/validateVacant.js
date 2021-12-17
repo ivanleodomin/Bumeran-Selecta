@@ -20,8 +20,8 @@ export default function validateVacant(values) {
   }
   if (!values.description) {
     errors.description = "Description Required";
-  } else if (values.description.length < 50) {
-    errors.description = "La descripcion tiene que ser mayor a 50";
+  } else if (values.description.length < 15) {
+    errors.description = "La descripcion tiene que ser mayor a 15";
   }
   return errors;
 }

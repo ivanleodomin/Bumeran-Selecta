@@ -42,7 +42,7 @@
     "eject": "react-scripts eject",
     "server": "nodemon api/server.js",
     "client": "craco start",
-    "postinstall": "npm run seed"
+    "postinstall": "npm run api/seed"
   },
   "proxy": "http://localhost:3001/",
   "eslintConfig": {

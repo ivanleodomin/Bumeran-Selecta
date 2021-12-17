@@ -155,7 +155,11 @@ const useForm = (validate, key) => {
           ...values,
         })
         .then(history.push("/vacants"));
+
+        window.location.reload()
     }
+
+
   }
 
   return {

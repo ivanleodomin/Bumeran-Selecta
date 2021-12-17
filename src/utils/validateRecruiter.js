@@ -1,10 +1,15 @@
 export default function validateRecruiter(values) {
+  const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   let errors = {};
   if (!values.firstName) {
     errors.firstName = "First name required";
+  } else if (format.test(values.firstName)) {
+    errors.firstName = "Enter a valid firstName";
   }
   if (!values.lastName) {
     errors.lastName = "Last name required";
+  }else if (format.test(values.lastName)) {
+    errors.lastName = "Enter a valid lastname";
   }
   if (!values.cityId) {
     errors.cityId = "City required";
