@@ -1,33 +1,37 @@
-import React from 'react'
-import AreaChart from './AreaChart'
-import Graph from './Graph'
-import StateVacants from './StateVacants'
-import TinyBarCh from './TinyBarCh'
-import TimeRecruiter from './TimeRecruiter'
+import React from "react";
+import RankingRecruiter from "./RankingRecruiter";
+import TimeCloseRecruiters from "./TimeCloseRecruiters";
+import StateVacants from "./StateVacants";
+import TimeRecruiter from "./TimeRecruiter";
 
 const ChartsLayout = () => {
-    return (
-        <div className='m-10 p-8'>
-            <div className='m-10 p-8'>
-                <h1 className='text-xl mx-auto text-center  '  >Todos los Reclutadores</h1>
-            <TinyBarCh/>
-            </div>
-            <div className='m-10 p-8' >
-            <Graph/>
-            </div> 
-            <div className='m-10 p-8' >        
-            <AreaChart/>
-            </div>
-            <div className='m-10 p-8' >
-                <h1 className='text-xl  font-semibold font text-center' >Numero de vacantes segun su estado.</h1>
-            <StateVacants/>
+  return (
+    <div>
+      <div>
+        <div className="p-8">
+          <h1 className="text-center text-gray-700 mb-1 p-5 text-2xl font-semibold underline">
+            Nuestros mejores reclutadores
+          </h1>
+          <div >
 
-            </div>
-            <div>
-                <TimeRecruiter/>
-            </div>
+          <RankingRecruiter />
+          </div>
         </div>
-    )
-}
+      </div>
+      <div className="m-10 p-8">
+        <h1 className="text-xl  text-gray-700 mb-1 p-5 text-2xl font-semibold underline font text-center">
+          Numero de vacantes segun su estado.
+        </h1>
+        <StateVacants />
+      </div>
+      <div className="m-10 p-8">
+        <TimeCloseRecruiters />
+      </div>
+      <div>
+        <TimeRecruiter />
+      </div>
+    </div>
+  );
+};
 
-export default ChartsLayout
+export default ChartsLayout;

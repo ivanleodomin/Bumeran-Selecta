@@ -45,7 +45,6 @@ const Vacants = () => {
       .then((data) => setCountries(data))
       .catch((error) => console.error(error));
   }, [areaName, stateName, countryName]);
-
   return (
     <>
       {/* <h1>ABM DE VACANTES</h1> */}

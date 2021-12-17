@@ -25,7 +25,6 @@ const Navbar = () => {
         className="flex item-center justify-center shadow h-16 navbar"
       >
         <div
-          style={checkRout()}
           className={checkLoge() === logo ? "w-full logo" : "w-full-rec-vac"}
         >
           <Link to={"/home"}>

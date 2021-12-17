@@ -15,7 +15,7 @@ function Card({ data }) {
         <div className="area">{data.Country?.name}</div>
         <div className="vacantes">vacantes disponibles: {data.vacant}</div>
       </div>
-      <div className="bottom-card"></div>
+      <div className="bottom-card rec"></div>
     </div>
 
   );

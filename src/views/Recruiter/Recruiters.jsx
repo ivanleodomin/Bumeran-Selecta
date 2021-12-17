@@ -46,7 +46,6 @@ const Recruiters = () => {
 
       .catch((error) => console.error(error));
   }, [areaName, seniorityName, countryName]);
-
   return (
     <>
       {/* <h1>ABM DE RECLUTADORES</h1> */}

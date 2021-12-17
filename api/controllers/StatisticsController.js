@@ -2,8 +2,9 @@ const models = require("../models");
 
 class StatisticsController {
   static async getVacancyReport(req, res) {
-    const { state, area, country } = req.query;
+    const { area, country } = req.query;
     const where = {};
+    const states = ["Iniciada", "Asignada", "Finalizada"];
 
     if (!country) throw new Error("country field required");
 
@@ -13,15 +14,24 @@ class StatisticsController {
 
     where.CountryId = countryId.id;
 
-    if (state) where.state = state;
-    if (area) {
+    const data = [];
+
+    if (area && area !== "Todos") {
+      console.log(area);
       const AreaId = await models.Area.findOne({ where: { name: area } });
       where.AreaId = AreaId.id;
     }
 
-    const vacants = await models.Vacant.findAndCountAll({ where });
+    for (let state of states) {
+      where.state = state;
+      const vacants = await models.Vacant.findAndCountAll({ where });
+      const count = {};
+      count.state = state;
+      count.count = vacants.count;
+      data.push(count);
+    }
 
-    res.send(vacants);
+    res.send(data);
   }
 
   static async getRecruiterReport(req, res) {
@@ -38,7 +48,7 @@ class StatisticsController {
       });
       const CountryId = countryData.id;
 
-      if (!area) {
+      if (!area || area === "Todos") {
         recruiters = await models.Recruiter.findAll({ where: { CountryId } });
       } else {
         const AreaOp1Id = await models.Area.findOne({
@@ -64,17 +74,18 @@ class StatisticsController {
             },
           ],
         });
-        recruiter.dataValues.ranking = await recruiter.getRanking();
-        console.log(recruiter);
+        const rank = await recruiter.getRanking();
+        recruiter.dataValues.ranking = rank.toFixed(1);
         arr.push(recruiter);
       }
 
       arr.sort((recruiterA, recruiterB) => {
-        if (recruiterA.ranking > recruiterB.ranking) return -1;
+        if (recruiterA.dataValues.ranking > recruiterB.dataValues.ranking)
+          return -1;
         if (recruiterA.ranking < recruiterB.ranking) return 1;
         return 0;
       });
-      res.send(arr);
+      res.send(arr.slice(0, 5));
     } catch (err) {
       console.log(err);
       res.status(500).send(err);
@@ -92,7 +103,7 @@ class StatisticsController {
         raw: true,
       });
 
-      const data = {};
+      const data = [];
 
       const areas = await models.Area.findAll({
         raw: true,
@@ -118,7 +129,12 @@ class StatisticsController {
 
         time = Math.round(time / 86400000 / vacants.length);
 
-        if (!isNaN(time)) data[area.name] = time;
+        if (!isNaN(time)) {
+          const closing = {};
+          closing.Area = area.name;
+          closing.diasAprox = time;
+          data.push(closing);
+        }
       }
 
       res.status(200).send(data);
@@ -129,7 +145,7 @@ class StatisticsController {
 
   static async closingTimeRec(req, res) {
     try {
-      const recruiterDays = {};
+      const data = [];
       const { country } = req.query;
 
       if (!country) throw new Error("country field required");
@@ -161,23 +177,19 @@ class StatisticsController {
           const assignmentDate = new Date(vacant.assignmentDate).getTime();
           const finishtDate = new Date(vacant.finishtDate).getTime();
           time += finishtDate - assignmentDate;
-          console.log(
-            "assignmentDate",
-            vacant.assignmentDate,
-            "finishtDate",
-            vacant.finishtDate
-          );
         });
 
         time = Math.round(time / 86400000 / vacants.length);
 
-        console.log(`${recruiter.firstName} ${recruiter.lastName} TIME:`, time);
-
-        if (!isNaN(time)) recruiterDays[fullName] = time;
-        else recruiterDays[fullName] = -1;
+        if (!isNaN(time)) {
+          const recruiterDays = {};
+          recruiterDays.Reclutador = fullName;
+          recruiterDays.diasAprox = time;
+          data.push(recruiterDays);
+        }
       }
 
-      res.send(recruiterDays);
+      res.send(data);
     } catch (err) {
       res.status(500).send({ error: err });
     }
