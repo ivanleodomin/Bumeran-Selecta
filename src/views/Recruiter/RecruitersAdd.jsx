@@ -56,7 +56,7 @@ const RecruitersAdd = () => {
                         placeholder="Nombre"
                         onChange={handleChange}
                       />
-                      {errors.firstName && <p>{errors.firstName}</p>}
+                      {errors.firstName && <p className="error">{errors.firstName}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -69,7 +69,7 @@ const RecruitersAdd = () => {
                         placeholder="Apellido"
                         onChange={handleChange}
                       />
-                      {errors.lastName && <p>{errors.lastName}</p>}
+                      {errors.lastName && <p className="error">{errors.lastName}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs mb-2 label">
@@ -109,7 +109,7 @@ const RecruitersAdd = () => {
                           return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
-                      {errors.cityId && <p>{errors.cityId}</p>}
+                      {errors.cityId && <p className="error">{errors.cityId}</p>}
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -126,7 +126,7 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
-                        {errors.areaOp1 && <p>{errors.areaOp1}</p>}
+                        {errors.areaOp1 && <p className="error">{errors.areaOp1}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
@@ -146,7 +146,7 @@ const RecruitersAdd = () => {
                             );
                           })}
                         </select>
-                        {errors.seniorityOp1 && <p>{errors.seniorityOp1}</p>}
+                        {errors.seniorityOp1 && <p className="error">{errors.seniorityOp1}</p>}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -164,7 +164,7 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
-                        {errors.areaOp2 && <p>{errors.areaOp2}</p>}
+                        {errors.areaOp2 && <p className="error">{errors.areaOp2}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
@@ -184,7 +184,7 @@ const RecruitersAdd = () => {
                             );
                           })}
                         </select>
-                        {errors.seniorityOp2 && <p>{errors.seniorityOp2}</p>}
+                        {errors.seniorityOp2 && <p className="error">{errors.seniorityOp2}</p>}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -202,7 +202,7 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
-                        {errors.areaOp3 && <p>{errors.areaOp3}</p>}
+                        {errors.areaOp3 && <p className="error">{errors.areaOp3}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
@@ -222,7 +222,7 @@ const RecruitersAdd = () => {
                             );
                           })}
                         </select>
-                        {errors.seniorityOp3 && <p>{errors.seniorityOp3}</p>}
+                        {errors.seniorityOp3 && <p className="error">{errors.seniorityOp3}</p>}
                       </div>
                     </div>
                     <div className="buttons">

@@ -52,7 +52,7 @@ const VacantsAdd = () => {
                         placeholder="Titulo"
                         onChange={handleChange}
                       />
-                      {errors.title && <p>{errors.title}</p>}
+                      {errors.title && <p className="error">{errors.title}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs mb-2 label">
@@ -93,7 +93,9 @@ const VacantsAdd = () => {
                           return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
-                      {errors.CityId && <p>{errors.CityId}</p>}
+                      {errors.CityId && (
+                        <p className="error">{errors.CityId}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -107,7 +109,9 @@ const VacantsAdd = () => {
                         onChange={handleChange}
                         value={values.vacant}
                       />
-                      {errors.vacant && <p>{errors.vacant}</p>}
+                      {errors.vacant && (
+                        <p className="error">{errors.vacant}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -123,7 +127,9 @@ const VacantsAdd = () => {
                           return <option value={area.id}>{area.name}</option>;
                         })}
                       </select>
-                      {errors.AreaId && <p>{errors.AreaId}</p>}
+                      {errors.AreaId && (
+                        <p className="error">{errors.AreaId}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -143,7 +149,9 @@ const VacantsAdd = () => {
                           );
                         })}
                       </select>
-                      {errors.SeniorityId && <p>{errors.SeniorityId}</p>}
+                      {errors.SeniorityId && (
+                        <p className="error">{errors.SeniorityId}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -159,7 +167,9 @@ const VacantsAdd = () => {
                         onChange={handleChange}
                         value={values.description}
                       />
-                      {errors.description && <p>{errors.description}</p>}
+                      {errors.description && (
+                        <p className="error">{errors.description}</p>
+                      )}
                     </div>
                     <div className="buttons">
                       <Link to="/home">

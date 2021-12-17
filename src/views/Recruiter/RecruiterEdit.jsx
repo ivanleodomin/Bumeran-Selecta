@@ -57,6 +57,9 @@ function RecruiterEdit() {
                         onChange={handleChange}
                         value={values.firstName}
                       />
+                      {errors.firstName && (
+                        <p className="error">{errors.firstName}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -70,6 +73,9 @@ function RecruiterEdit() {
                         onChange={handleChange}
                         value={values.lastName}
                       />
+                      {errors.lastName && (
+                        <p className="error">{errors.lastName}</p>
+                      )}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs mb-2 label">
@@ -110,6 +116,9 @@ function RecruiterEdit() {
                           return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
+                      {errors.cityId && (
+                        <p className="error">{errors.cityId}</p>
+                      )}
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -124,6 +133,9 @@ function RecruiterEdit() {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp1 && (
+                          <p className="error">{errors.areaOp1}</p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block label">Seniority</label>
@@ -141,6 +153,9 @@ function RecruiterEdit() {
                             );
                           })}
                         </select>
+                        {errors.seniorityOp1 && (
+                          <p className="error">{errors.seniorityOp1}</p>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -156,6 +171,9 @@ function RecruiterEdit() {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp2 && (
+                          <p className="error">{errors.areaOp2}</p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block label">Seniority 2</label>
@@ -173,6 +191,9 @@ function RecruiterEdit() {
                             );
                           })}
                         </select>
+                        {errors.seniorityOp2 && (
+                          <p className="error">{errors.seniorityOp2}</p>
+                        )}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -188,6 +209,9 @@ function RecruiterEdit() {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp3 && (
+                          <p className="error">{errors.areaOp3}</p>
+                        )}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block label">Seniority 3</label>
@@ -205,6 +229,9 @@ function RecruiterEdit() {
                             );
                           })}
                         </select>
+                        {errors.seniorityOp3 && (
+                          <p className="error">{errors.seniorityOp3}</p>
+                        )}
                       </div>
                     </div>
                     <div className="buttons">

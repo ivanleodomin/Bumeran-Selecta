@@ -2,26 +2,29 @@ export default function validateVacant(values) {
   let errors = {};
   const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
   if (!values.title) {
-    errors.title = "Titulo required";
+    errors.title = "Titulo es requerido";
   } else if (format.test(values.title)) {
-    errors.title = "Enter a valid Title";
+    errors.title = "Titulo contiene un caracter invalido";
   }
   if (!values.vacant) {
-    errors.vacant = "Vacant Required";
+    errors.vacant = "Vacante es requerido";
   }
   if (!values.CityId) {
-    errors.CityId = "City Required";
+    errors.CityId = "Ciudad es requerido";
   }
   if (!values.AreaId) {
-    errors.AreaId = "Area Required";
+    errors.AreaId = "Area es requerido";
   }
   if (!values.SeniorityId) {
-    errors.SeniorityId = "Seniority Required";
+    errors.SeniorityId = "Seniority es requerido";
   }
   if (!values.description) {
-    errors.description = "Description Required";
+    errors.description = "Descripcion es requerido";
   } else if (values.description.length < 15) {
     errors.description = "La descripcion tiene que ser mayor a 15";
+  } else if (format.test(values.description)) {
+    errors.description = "Titulo contiene un caracter invalido";
   }
+
   return errors;
 }

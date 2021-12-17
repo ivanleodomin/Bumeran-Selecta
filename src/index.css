@@ -104,10 +104,10 @@ body {
 }
 
 .rosa {
-  background: #F13D89;
+  background: #f13d89;
 }
 
-.tutorial{
+.tutorial {
   color: black;
 }
 
@@ -115,7 +115,9 @@ body {
   padding-left: 1000px;
 }
 
-
-.region-button{
-  background-color: red
+.region-button {
+  background-color: red;
+}
+.error {
+  color: red;
 }

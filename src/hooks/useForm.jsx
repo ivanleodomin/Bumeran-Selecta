@@ -33,7 +33,7 @@ const useForm = (validate, key) => {
     axios.get("/api/area").then((info) => setAreas(info.data));
 
     axios.get("/api/seniority").then((info) => setSeniorities(info.data));
-    
+
     if (key === "VacantAdd")
       objectValues = {
         title: "",
@@ -112,18 +112,6 @@ const useForm = (validate, key) => {
     setIsSubmitting(true);
   };
 
-  const handleChangeCountry = (e) => {
-    if (e.target.value === "Elija una opcion") {
-      setStates(true);
-    } else {
-      axios
-        .get(`/api/country/${e.target.value}`)
-        .then((info) => setCity(info.data));
-      setStates(false);
-      setValues({ ...values, [e.target.name]: e.target.value });
-    }
-  };
-
   function submitForm() {
     setIsSubmitted(true);
     if (key === "RecruiterEdit") {
@@ -156,10 +144,8 @@ const useForm = (validate, key) => {
         })
         .then(history.push("/vacants"));
 
-        window.location.reload()
+      window.location.reload();
     }
-
-
   }
 
   return {
@@ -169,8 +155,6 @@ const useForm = (validate, key) => {
     errors,
     countries,
     city,
-    handleChangeCountry,
-    states,
     seniorities,
     areas,
     submitForm,
