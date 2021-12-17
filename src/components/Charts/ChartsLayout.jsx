@@ -4,6 +4,7 @@ import Graph from './Graph'
 import StateVacants from './StateVacants'
 import TinyBarCh from './TinyBarCh'
 import TimeRecruiter from './TimeRecruiter'
+
 const ChartsLayout = () => {
     return (
         <div className='m-10 p-8'>

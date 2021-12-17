@@ -1,0 +1,18 @@
+.w-full-rec-vac{
+    height: 90px;
+    width: 500px;
+    margin-bottom: 10px;
+}
+
+.logo-rec-vac{
+    display: flex;
+    align-items: center;
+    justify-content:center;
+    height: 100%; 
+    width: 100%;
+}
+
+.logo{
+    margin-top: 20px;
+}
+

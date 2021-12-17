@@ -15,6 +15,7 @@ export default function RegionSelector() {
     "uruguay",
   ];
 
+  
   return (
     <div className="grid grid-cols-2 gap-2 loge-home">
       <div className="logoselector">
