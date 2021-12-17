@@ -30,12 +30,19 @@ class VacantController {
   static async getById(req, res, next) {
     try {
       const vacant = await Vacant.findOne({
-        attributes: ["id", "title", "state", "description", "vacant"],
         where: { id: req.params.id },
+        attributes: {
+          exclude: [
+            "RecruiterId",
+            "CityId",
+            "CountryId",
+            "AreaId",
+            "SeniorityId",
+          ],
+        },
         include: [
           {
             model: Recruiter,
-            attributes: ["id", "firstName", "lastName"],
             as: "Recruiter",
           },
           { model: Country, attributes: ["id", "name"], as: "Country" },
@@ -52,7 +59,7 @@ class VacantController {
             VacantId: vacant.id,
           },
         });
-        console.log(review)
+        console.log(review);
         vacant.dataValues.review = review.score;
       }
 

@@ -1,11 +1,12 @@
 import React from "react";
+import "../../styles/view.css";
 
 export default function InfoVacant({ vacant }) {
   return (
     <div className="label space-y-8">
       <h1 className="font-bold">Titulo: {vacant.title}</h1>
       <h1>
-        Estado: <span className="estado">{vacant.state}</span>
+        Estado: <span className="estado">{vacant.state}</span> el día <span>{vacant.startDate}</span>
       </h1>
       {vacant.state === "Finalizada" && (
         <h1>
@@ -13,7 +14,10 @@ export default function InfoVacant({ vacant }) {
         </h1>
       )}
       <h1>{`${vacant.City?.name}, ${vacant.Country?.name} `}</h1>
-      <p>Description: {vacant.description}</p>
+      <div className="description">
+        <h1>Descripción: </h1>
+        <p>{vacant.description}</p>
+      </div>
       <h3 className="list-disc list-inside bg-yellow-200">{`Area: ${vacant.Area?.name}`}</h3>
       <div>
         <h3>Vacantes disponibles: {vacant.vacant}</h3>

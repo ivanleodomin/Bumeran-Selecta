@@ -1,4 +1,4 @@
-const { DataTypes, Model } = require("sequelize");
+const { DataTypes, Model, Op } = require("sequelize");
 const db = require("../config/db");
 const Review = require("./Review");
 const { skillsCal, calcActivity } = require("../utils/skillsCal.js");
@@ -41,7 +41,12 @@ Recruiter.getBests = async function (vacant) {
   const bests = [];
   try {
     const recruiters = await Recruiter.findAll({
-      where: { CountryId: vacant.CountryId },
+      where: { CountryId: vacant.CountryId,
+         [Op.or]: [
+        {AreaOp1Id : vacant.AreaId},
+        {AreaOp2Id : vacant.AreaId},
+        {AreaOp3Id : vacant.AreaId}
+      ] },
     });
 
     for (let recruiter of recruiters) {

@@ -11,8 +11,8 @@ import VacantEdit from "../views/Vacant/VacantEdit";
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
 import LinkRecruiter from "../views/Vacant/LinkRecruiter";
 import Recruiters from "../views/Recruiter/Recruiters";
-import Graph from "../components/charts/Graph";
-import BarCh from "../components/charts/BarCh";
+import ChartsLayout from "../components/Charts/ChartsLayout";
+
 import RegionSelector from "../views/RegionSelector";
 import { useSelector } from "react-redux";
 
@@ -62,8 +62,7 @@ function App() {
           <LinkRecruiter />
         </Route>
         <Route path="/stadistics">
-          <BarCh />
-          <Graph />
+        <ChartsLayout/>
         </Route>
         <Route component={NotFound} />
         <Route path="*">

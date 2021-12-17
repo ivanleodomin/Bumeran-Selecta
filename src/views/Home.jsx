@@ -21,7 +21,7 @@ const Home = () => {
       <header className="bg-white-100 py-8">
         <div className="md:flex md:justify-center md:space-x-8 md:px-14">
           <Link to="/vacants">
-            <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
+            <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg transform hover:scale-110 hover:shadow-2xl transition duration-500 mx-auto md:mx-0">
               <button
                 className="text-black-900 px-4 py-2 rounded text-2xl absolute  "
                 data-tip
