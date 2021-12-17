@@ -25,10 +25,10 @@ function RecruiterEdit() {
             className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
             style={{ top: "5px" }}
           >
-            <img
+            {/* <img
               className="logo-gratis-R"
               src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
-            />
+            /> */}
             <div className="rounded-t bg-white px-6 py-6">
               <div
                 className="text-center flex justify-center"
@@ -37,7 +37,7 @@ function RecruiterEdit() {
                 }}
               >
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Generar un nuevo Reclutador
+                  Editar un Reclutador
                 </h6>
               </div>
             </div>

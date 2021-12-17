@@ -32,7 +32,7 @@ const VacantEdit = () => {
                 }}
               >
                 <h6 className="text-blueGray-700 text-xl font-bold">
-                  Edicion de la vacante n{id}
+                  Editar una vacante
                 </h6>
               </div>
             </div>
