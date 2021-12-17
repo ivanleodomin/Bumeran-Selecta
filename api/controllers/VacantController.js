@@ -97,8 +97,14 @@ class VacantController {
 
   static async updateVacantByIdParams(req, res, next) {
     try {
+      console.log(req.body, "body");
+
       const vacant = await Vacant.findByPk(req.params.id);
-      await vacant.update(req.body);
+      await Vacant.update(req.body, {
+        where: {
+          id: req.body.id,
+        },
+      });
       return res.status(202).send(vacant);
     } catch (err) {
       next(err);

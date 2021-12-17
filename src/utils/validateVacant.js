@@ -9,9 +9,6 @@ export default function validateVacant(values) {
   if (!values.vacant) {
     errors.vacant = "Vacant Required";
   }
-  if (!values.CountryId) {
-    errors.CountryId = "Country Required";
-  }
   if (!values.CityId) {
     errors.CityId = "City Required";
   }

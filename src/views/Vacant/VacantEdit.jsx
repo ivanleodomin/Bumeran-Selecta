@@ -9,7 +9,7 @@ const VacantEdit = () => {
     handleSubmit,
     values,
     errors,
-    city,
+    cities,
     seniorities,
     areas,
     id,
@@ -50,7 +50,7 @@ const VacantEdit = () => {
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Titulo"
                         onChange={handleChange}
-                         value={values.title}
+                        value={values.title}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -64,7 +64,7 @@ const VacantEdit = () => {
                         placeholder="Pais de la Vacante"
                         disabled
                       >
-                         <option>{values.CountryName}</option>;
+                        <option>{values.CountryName}</option>;
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -79,10 +79,8 @@ const VacantEdit = () => {
                         onChange={handleChange}
                         value={values.CityId}
                       >
-                        {city?.map((cities) => {
-                          return (
-                            <option value={cities.id}>{cities.name}</option>
-                          );
+                        {cities?.map((city) => {
+                          return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
                     </div>

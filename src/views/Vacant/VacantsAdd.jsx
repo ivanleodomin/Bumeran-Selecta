@@ -1,5 +1,5 @@
 import React from "react";
-import  useForm  from "../../hooks/useForm";
+import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
 import validateVacant from "../../utils/validateVacant";
 
@@ -10,11 +10,10 @@ const VacantsAdd = () => {
     values,
     errors,
     countries,
-    city,
-    handleChangeCountry,
-    states,
+    cities,
     seniorities,
     areas,
+    countryId,
   } = useForm(validateVacant, "VacantAdd");
 
   return (
@@ -64,7 +63,9 @@ const VacantsAdd = () => {
                         name="CountryId"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={handleChangeCountry}
+                        onChange={handleChange}
+                        value={countryId}
+                        disabled
                       >
                         {countries?.map((countriess) => {
                           <option defaultValue>Elija una opcion</option>;
@@ -75,7 +76,6 @@ const VacantsAdd = () => {
                           );
                         })}
                       </select>
-                      {errors.CountryId && <p>{errors.CountryId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -86,14 +86,11 @@ const VacantsAdd = () => {
                         name="CityId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                        disabled={states}
                         onChange={handleChange}
                       >
                         <option defaultValue>Elija una opcion</option>
-                        {city?.map((cities) => {
-                          return (
-                            <option value={cities.id}>{cities.name}</option>
-                          );
+                        {cities?.map((city) => {
+                          return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
                       {errors.CityId && <p>{errors.CityId}</p>}
