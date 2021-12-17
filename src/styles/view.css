@@ -9,6 +9,14 @@
   color: rgb(21, 204, 174);
 }
 
+/*Vacant*/
+
+.description {
+  border: 1px solid rgb(199, 198, 198);
+  padding: 15px;
+}
+
+
 /*Targeta por defecto*/
 
 .no-select {
@@ -123,11 +131,11 @@ table,
 th,
 td {
   border: 1px solid black;
+  font-size: 20px;
 }
 
 table {
   width: 100%;
-  border-collapse: collapse;
 }
 
 th {
@@ -136,6 +144,7 @@ th {
 }
 
 td {
+  color:#3d3c3c ;
   text-align: center;
 }
 
@@ -143,8 +152,44 @@ th,
 td {
   padding: 15px;
   text-align: left;
+  height: 70px;
 }
 
 td:hover {
   background-color: rgb(233, 233, 233);
+}
+
+.more{
+  width: 100%;
+}
+
+.button-activity, .button-history{
+  font-size: 20px;
+  padding: 10px;
+  padding-bottom: 10px;
+  border-radius: 20px;
+  margin-right:20px;
+  color: #fff;
+  transition: 0.5s
+}
+
+.button-history{
+  border:1px solid  blue;
+  color: blue
+}
+
+.button-activity{
+  border:1px solid  rgb(253, 93, 163);
+  color:rgb(253, 93, 163) ;
+}
+
+
+.button-history:hover{
+  box-shadow: 0px 0px 5px;
+  transform: scale(1.05);
+}
+
+.button-activity:hover{
+  box-shadow: 0px 0px 5px;
+  transform: scale(1.05);
 }

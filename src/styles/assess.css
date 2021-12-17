@@ -95,3 +95,16 @@ input[type="radio"]:checked ~ label {
 .stars{
     box-shadow: 0 4px 2px -2px gray;
 }
+
+
+
+.modal-table button{
+  font-size: 30px;
+}
+
+.modal-table h1{
+  font-size: 60px;
+  color: rgb(170, 162, 162);
+  text-align: center;
+
+}

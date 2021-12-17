@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router";
+import { useHistory } from "react-router-dom";
 import Home from "../views/Home";
 import Vacants from "../views/Vacant/Vacants";
-import Statistics from "../views/Statistics";
 import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
@@ -11,14 +11,26 @@ import VacantEdit from "../views/Vacant/VacantEdit";
 import RecruiterEdit from "../views/Recruiter/RecruiterEdit";
 import LinkRecruiter from "../views/Vacant/LinkRecruiter";
 import Recruiters from "../views/Recruiter/Recruiters";
-import Graph from "../components/charts/Graph";
-import BarCh from "../components/charts/BarCh";
+import ChartsLayout from "../components/Charts/ChartsLayout";
+
+import RegionSelector from "../views/RegionSelector";
+import { useSelector } from "react-redux";
 
 function App() {
+  const country = useSelector((state) => state.country).value;
+  const history = useHistory();
+
+  React.useEffect(() => {
+    if (!country) history.push("/");
+  }, [country]);
+
   return (
     <>
       <Navbar />
       <Switch>
+        <Route exact path="/">
+          <RegionSelector />
+        </Route>
         <Route path="/home">
           <Home />
         </Route>
@@ -34,29 +46,23 @@ function App() {
         <Route exact path="/recruiter-edit/:id">
           <RecruiterEdit />
         </Route>
+        <Route exact path="/recruiters">
+          <Recruiters />
+        </Route>
         <Route path="/recruiters/:id">
           <Recruiters />
         </Route>
-        <Route path="/recruiters">
-          <Recruiters />
+        <Route exact path="/vacants/">
+          <Vacants />
         </Route>
-        {/*Preguntar*/}
         <Route path="/vacants/:id">
           <Vacants />
         </Route>
-        <Route path="/vacants/">
-          <Vacants />
-        </Route>
-        {/*Preguntar*/}
         <Route exact path="/link-recruiter/:id">
           <LinkRecruiter />
         </Route>
         <Route path="/stadistics">
-          <BarCh />
-          <Graph />
-        </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
+        <ChartsLayout/>
         </Route>
         <Route component={NotFound} />
         <Route path="*">

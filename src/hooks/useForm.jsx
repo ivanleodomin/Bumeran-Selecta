@@ -1,100 +1,106 @@
 import React from "react";
 import axios from "axios";
-import { useHistory, useLocation } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
-export const useForm = (url) => {
-  const path = useLocation().pathname;
-  const id = path[path.length - 1];
+const useForm = (validate, key) => {
+
+  const { id } = useParams();
   const history = useHistory();
 
-  const [form, setForm] = React.useState({});
+  let objectValues = {};
 
-  const [country, setCountry] = React.useState([]);
-  const [city, setCity] = React.useState([]);
+  const [values, setValues] = React.useState(objectValues);
+  const [prueba, setPrueba] = React.useState([]);
+  const [isSubmitted, setIsSubmitted] = React.useState(false);
   const [areas, setAreas] = React.useState([]);
   const [seniorities, setSeniorities] = React.useState([]);
+  const [city, setCity] = React.useState([]);
+  const [errors, setErrors] = React.useState({});
   const [countries, setCountries] = React.useState([]);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [states, setStates] = React.useState(true);
+  const [cities, setCities] = React.useState([]);
+
 
   React.useEffect(() => {
+    if (Object.keys(errors).length === 0 && isSubmitting) {
+      submitForm();
+    }
     axios.get("/api/area").then((info) => setAreas(info.data));
 
     axios.get("/api/seniority").then((info) => setSeniorities(info.data));
 
     axios.get("/api/country").then((info) => setCountries(info.data));
-    if (url === "editRecruiter") {
+
+    if (key === "VacantAdd")
+      objectValues = {
+        title: "",
+        vacant: "",
+        CountryId: "",
+        CityId: "",
+        AreaId: "",
+        SeniorityId: "",
+        description: "",
+      };
+    else if (key === "RecruiterAdd")
+      objectValues = {
+        firstName: "",
+        lastName: "",
+        countryId: "",
+        cityId: "",
+        areaOp1: "",
+        seniorityOp1: "",
+        areaOp2: "",
+        seniorityOp2: "",
+        areaOp3: "",
+        seniorityOp3: "",
+      };
+    else if (key === "RecruiterEdit")
       axios
         .get(`/api/recruiter/${id}`)
         .then((info) => info.data)
         .then((data) => {
-          setCountry(data.Country.id);
-          setForm({ ["firstName"]: data.firstName });
-          setForm({ ["lastName"]: data.lastName });
-          setForm({ ["countryId"]: data.Country.id });
-          setForm({ ["areaOp1"]: data.AreaOp1.id });
-          setForm({ ["areaOp2"]: data.AreaOp2.id });
-          setForm({ ["areaOp3"]: data.AreaOp3.id });
-          setForm({ ["seniorityOp1"]: data.SeniorityOp1.id });
-          setForm({ ["seniorityOp2"]: data.SeniorityOp2.id });
-          setForm({ ["seniorityOp3"]: data.SeniorityOp3.id });
-          setForm({ ["cityId"]: data.City.id });
-        })
-        .then(() => axios.get(`/api/country/${country}`))
-        .then((info) => info.data)
-        .then((data) => setCity(data));
-    } else if (url === "editVacant") {
+          objectValues.firstName = data.firstName;
+          objectValues.lastName = data.lastName;
+          objectValues.countryId = data.Country.id;
+          objectValues.cityId = data.City.id;
+          objectValues.areaOp1 = data.AreaOp1.id;
+          objectValues.areaOp2 = data.AreaOp2.id;
+          objectValues.areaOp3 = data.AreaOp3.id;
+          objectValues.seniorityOp1 = data.SeniorityOp1.id;
+          objectValues.seniorityOp2 = data.SeniorityOp2.id;
+          objectValues.seniorityOp3 = data.SeniorityOp3.id;
+          setPrueba(data.SeniorityOp3.id);
+        });
+    else if (key === "VacantEdit")
       axios
         .get(`/api/vacant/${id}`)
         .then((info) => info.data)
         .then((data) => {
-          setCountry(data.Country.id);
-          setForm({ ["CountryId"]: data.Country.id });
-          setForm({ ["CountryName"]: data.Country.name });
-          setForm({ ["AreaId"]: data.Area.id });
-          setForm({ ["SeniorityId"]: data.Seniority.id });
-          setForm({ ["vacant"]: data.vacant });
-          setForm({ ["description"]: data.description });
-          setForm({ ["title"]: data.title });
-          setForm({ ["CityId"]: data.City.id });
-        })
-        .then(() => axios.get(`/api/country/${country}`))
-        .then((info) => info.data)
-        .then((data) => setCity(data));
-    }
-  }, [country]);
+          objectValues.CountryId = data.Country.id;
+          objectValues.CountryName = data.Country.name;
+          objectValues.AreaId = data.Area.id;
+          objectValues.SeniorityId = data.Seniority.id;
+          objectValues.vacant = data.vacant;
+          objectValues.title = data.title;
+          objectValues.CityId = data.City.id;
+          objectValues.description = data.description;
+          setPrueba(data.City.id);
+        });
+  }, [prueba, errors]);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setValues({
+      ...values,
+      [name]: value,
+    });
   };
 
-  const handleSubmit = () => {
-    if (url === "editRecruiter") {
-      axios
-        .put(`/api/recruiter/${id}`, {
-          ...form,
-          countryId: country,
-        })
-        .then(history.push("/recruiters"));
-    } else if (url === "editVacant") {
-      axios
-        .put(`/api/vacant/${id}`, {
-          ...form,
-          countryId: country,
-        })
-        .then(history.push("/vacants"));
-    } else if (url === "recruiterAdd") {
-      axios
-        .post("/api/recruiter", {
-        ...form,
-      });
-      history.push("/recruiters");
-    } else if (url === "VacantAdd") {
-      axios
-        .post("/api/vacant/add", {
-          ...form,
-        })
-        .then(history.push("/vacants"));
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setErrors(validate(values));
+    setIsSubmitting(true);
   };
 
   const handleChangeCountry = (e) => {
@@ -104,22 +110,55 @@ export const useForm = (url) => {
       axios
         .get(`/api/country/${e.target.value}`)
         .then((info) => setCity(info.data));
-      setCountry(e.target.value);
       setStates(false);
-      setForm({ ...form, [e.target.name]: e.target.value });
+      setValues({ ...values, [e.target.name]: e.target.value });
     }
   };
+  function submitForm() {
+    setIsSubmitted(true);
+    if (key === "RecruiterEdit") {
+      axios
+        .put(`/api/recruiter/${"id"}`, {
+          ...values,
+          /* countryId: country, */
+        })
+        .then(history.push("/recruiters"));
+    } else if (key === "VacantEdit") {
+      axios
+        .put(`/api/vacant/${"id"}`, {
+          ...values,
+          /* countryId: country, */
+        })
+        .then(history.push("/vacants"));
+    } else if (key === "RecruiterAdd") {
+      axios.post("/api/recruiter", {
+        ...values,
+      });
+      history.push("/recruiters");
+    } else if (key === "VacantAdd") {
+      axios
+        .post("/api/vacant/add", {
+          ...values,
+        })
+        .then(history.push("/vacants"));
+    }
+  }
 
   return {
-    form,
-    handleSubmit,
     handleChange,
-    city,
+    handleSubmit,
+    values,
+    errors,
     countries,
-    areas,
-    seniorities,
-    states,
-    id,
+    city,
     handleChangeCountry,
+    states,
+    seniorities,
+    areas,
+    submitForm,
+    id,
+    cities,
   };
 };
+
+export default useForm;

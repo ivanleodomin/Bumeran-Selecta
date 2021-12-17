@@ -24,7 +24,6 @@ class RecruiterController {
       seniorityOp2,
       seniorityOp3,
     } = req.body;
-    console.log(req.body, "BODY");
 
     const [area1, area2, area3] = await getareas([areaOp1, areaOp2, areaOp3]);
 
@@ -75,6 +74,7 @@ class RecruiterController {
 
       /* if (!recruiter) return res.sendStatus(404); */
 
+<<<<<<< HEAD
       const reviews = await Review.findAll({
         attributes: ["id"],
         where: { RecruiterId: id },
@@ -88,6 +88,23 @@ class RecruiterController {
       recruiter.dataValues.ranking = await recruiter.getRanking();
       recruiter.dataValues.activeVacancies = activeVacancies;
       recruiter.dataValues.history = reviews;
+=======
+    const history = await Vacant.findAll({
+      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+      include: [{ model: Area, as: "Area", attributes: ["name"] }],
+      where: { RecruiterId: id, state: "Finalizada" },
+    });
+
+    const activeVacancies = await Vacant.findAll({
+      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+      include: [{ model: Area, as: "Area", attributes: ["name"] }],
+      where: { RecruiterId: id, state: "Asignada" },
+    });
+
+    recruiter.dataValues.ranking = await recruiter.getRanking();
+    recruiter.dataValues.activeVacancies = activeVacancies;
+    recruiter.dataValues.history = history;
+>>>>>>> 50a733e61c93c3fc0b267d944ed6dfdfee409e05
 
       res.send(recruiter);
     } catch (err) {
@@ -124,22 +141,6 @@ class RecruiterController {
       console.log(err);
       res.status(500).send([]);
     }
-  }
-
-  static async test(req, res) {
-    const { seniority, area, country } = req.query;
-    const page = parseInt(req.query.page) - 1;
-
-    const where = {};
-
-    if (!seniority) where.seniorityOp1Id = seniority;
-
-    const rec = await Recruiter.findAndCountAll({
-      where,
-      offset: page * 10,
-      limit: 10,
-    });
-    res.send(rec.rows);
   }
 
   static async deleteById(req, res) {

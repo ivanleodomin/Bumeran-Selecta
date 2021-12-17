@@ -3,7 +3,7 @@ import "../styles/results.css";
 
 function Results({ datas, View, Card }) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-3 gap-4 results">
       <div className="corrusel-cards scrollbox">
         {datas?.map((data, i) => {
           return <Card key={i} data={data} />;

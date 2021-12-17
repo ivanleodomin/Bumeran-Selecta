@@ -2,17 +2,26 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
 import ReactTooltip from "react-tooltip";
+import "../styles/region.css";
+import { resetState } from "../features/stateSlice";
+import { resetArea } from "../features/areaSlice";
+import { resetSeniority } from "../features/senioritys";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
+  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(resetState());
+    dispatch(resetArea());
+    dispatch(resetSeniority());
+  }, []);
 
-  //dispach de states redux limpiar
-  
   return (
     <div>
       <header className="bg-white-100 py-8">
         <div className="md:flex md:justify-center md:space-x-8 md:px-14">
           <Link to="/vacants">
-            <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg hover:shadow-xl transform hover:scale-110 transition duration-500 mx-auto md:mx-0">
+            <div className="mt-16 py-4 px-4 bg-whit w-60 bg-white rounded-xl shadow-lg transform hover:scale-110 hover:shadow-2xl transition duration-500 mx-auto md:mx-0">
               <button
                 className="text-black-900 px-4 py-2 rounded text-2xl absolute  "
                 data-tip
@@ -85,7 +94,7 @@ const Home = () => {
                 place="top"
                 type="info"
               >
-               Apartado de estadisticas 
+                Apartado de estadisticas
               </ReactTooltip>
               <div className="w-sm">
                 <div className="mt-4 text-black-600 text-center">
@@ -101,6 +110,11 @@ const Home = () => {
           </Link>
         </div>
       </header>
+      <div className="flex center justify-center">
+        <button className="region-button">
+          <Link to="/">Cambiar region</Link>
+        </button>
+      </div>
     </div>
   );
 };

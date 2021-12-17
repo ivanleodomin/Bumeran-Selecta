@@ -1,17 +1,19 @@
 import React from "react";
+import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
+import validateVacant from "../../utils/validateVacant";
 
 const VacantEdit = () => {
   const {
-    form,
     handleChange,
     handleSubmit,
+    values,
+    errors,
     city,
     seniorities,
     areas,
-    id
-  } = useForm("editVacant");
+    id,
+  } = useForm(validateVacant, "VacantEdit");
 
   return (
     <>
@@ -48,7 +50,7 @@ const VacantEdit = () => {
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Titulo"
                         onChange={handleChange}
-                        value={form.title}
+                         value={values.title}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -62,7 +64,7 @@ const VacantEdit = () => {
                         placeholder="Pais de la Vacante"
                         disabled
                       >
-                         <option>{form.CountryName}</option>;
+                         <option>{values.CountryName}</option>;
                       </select>
                     </div>
                     <div className="relative w-full mb-3">
@@ -75,7 +77,7 @@ const VacantEdit = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Ciudad de la Vacante"
                         onChange={handleChange}
-                        value={form.CityId}
+                        value={values.CityId}
                       >
                         {city?.map((cities) => {
                           return (
@@ -94,7 +96,7 @@ const VacantEdit = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         onChange={handleChange}
-                        value={form.vacant}
+                        value={values.vacant}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -105,7 +107,7 @@ const VacantEdit = () => {
                         name="AreaId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         onChange={handleChange}
-                        value={form.AreaId}
+                        value={values.AreaId}
                       >
                         {areas?.map((area) => {
                           return <option value={area.id}>{area.name}</option>;
@@ -120,7 +122,7 @@ const VacantEdit = () => {
                         name="SeniorityId"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         onChange={handleChange}
-                        value={form.SeniorityId}
+                        value={values.SeniorityId}
                       >
                         {seniorities?.map((seniority) => {
                           return (
@@ -143,7 +145,7 @@ const VacantEdit = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
                         onChange={handleChange}
-                        value={form.description}
+                        value={values.description}
                       />
                     </div>
                     <div className="buttons">

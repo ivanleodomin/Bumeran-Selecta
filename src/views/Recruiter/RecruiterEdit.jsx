@@ -1,20 +1,21 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
+import validateRecruiter from "../../utils/validateRecruiter";
 
 function RecruiterEdit() {
-  
   const {
-    form,
     handleChange,
     handleSubmit,
+    values,
+    errors,
     city,
-    seniorities,
     countries,
+    states,
+    seniorities,
     areas,
-  } = useForm("editRecruiter");
+  } = useForm(validateRecruiter, "RecruiterEdit");
 
-  console.log(form, "form");
   return (
     <>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96" />
@@ -54,7 +55,7 @@ function RecruiterEdit() {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Nombre"
                         onChange={handleChange}
-                        value={form.firstName}
+                        value={values.firstName}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -67,7 +68,7 @@ function RecruiterEdit() {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Apellido"
                         onChange={handleChange}
-                        value={form.lastName}
+                        value={values.lastName}
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -81,7 +82,8 @@ function RecruiterEdit() {
                         placeholder="Pais de la Vacante"
                         disabled
                         onChange={handleChange}
-                        value={form.countryId}
+                        value={values.countryId}
+                        disabled
                       >
                         {countries?.map((countriess) => {
                           return (
@@ -102,7 +104,7 @@ function RecruiterEdit() {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
                         onChange={handleChange}
-                        value={form.cityId}
+                        value={values.cityId}
                       >
                         {city?.map((cities) => {
                           return (
@@ -118,7 +120,7 @@ function RecruiterEdit() {
                           name="areaOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           onChange={handleChange}
-                          value={form.areaOp1}
+                          value={values.areaOp1}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -131,7 +133,7 @@ function RecruiterEdit() {
                           name="seniorityOp1"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           onChange={handleChange}
-                          value={form.seniorityOp1}
+                          value={values.seniorityOp1}
                         >
                           {seniorities?.map((seniority) => {
                             return (
@@ -150,7 +152,7 @@ function RecruiterEdit() {
                           name="areaOp2"
                           onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          value={form.areaOp2}
+                          value={values.areaOp2}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -163,7 +165,7 @@ function RecruiterEdit() {
                           name="seniorityOp2"
                           onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          value={form.seniorityOp2}
+                          value={values.seniorityOp2}
                         >
                           {seniorities?.map((seniority) => {
                             return (
@@ -182,7 +184,7 @@ function RecruiterEdit() {
                           name="areaOp3"
                           onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          value={form.areaOp3}
+                          value={values.areaOp3}
                         >
                           {areas?.map((area) => {
                             return <option value={area.id}>{area.name}</option>;
@@ -195,7 +197,7 @@ function RecruiterEdit() {
                           name="seniorityOp3"
                           onChange={handleChange}
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
-                          value={form.seniorityOp3}
+                          value={values.seniorityOp3}
                         >
                           {seniorities?.map((seniority) => {
                             return (

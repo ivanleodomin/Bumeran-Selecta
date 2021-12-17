@@ -5,13 +5,19 @@ import { useParams, useHistory, Link } from "react-router-dom";
 import swal from "sweetalert";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
+import NoneView from "../NoneView";
+import ActivityTable from "./ActivityTable";
+import HistoryTable from "./HistoryTable";
 
 function View() {
   const { id } = useParams();
+  const [historyRec, setHistoryRec] = React.useState([])
+  const [activityRec, setActivityRec] = React.useState([])
   const [recruiter, setRecruiter] = React.useState({});
-  const [ranking, setRanking] = React.useState([]);
+  const [ranking, setRanking] = React.useState(["★", "★★★★"]);
+  const [showActivity, setShowActivity] = React.useState(false);
+  const [showHistory, setShowHistory] = React.useState(false);
   const history = useHistory();
-  console.log(id);
 
   const handleDelete = async () => {
     swal({
@@ -35,33 +41,46 @@ function View() {
       .then((res) => res.data)
       .then((data) => {
         setRecruiter(data);
+        setHistoryRec(data.history)
+        setActivityRec(data.activeVacancies)
         return data;
       })
       .then((data) => {
-        if (data.ranking === 1) setRanking(["★", "★★★★"]);
-        if (data.ranking === 2) setRanking(["★★", "★★★"]);
-        if (data.ranking === 3) setRanking(["★★★", "★★"]);
-        if (data.ranking === 4) setRanking(["★★★★", "★"]);
-        if (data.ranking === 5) setRanking(["★★★★★", ""]);
+        const rank = parseInt(data.ranking);
+        if (rank === 1 || rank === 0) {
+          setRanking(["★", "★★★★"]);
+        } else if (rank === 2) setRanking(["★★", "★★★"]);
+        else if (rank === 3) setRanking(["★★★", "★★"]);
+        else if (rank === 4) setRanking(["★★★★", "★"]);
+        else if (rank === 5) setRanking(["★★★★★", ""]);
       });
   }, [id]);
 
-  console.log("Recruiter", recruiter);
+  const hanlderActivity = () => {
+    setShowActivity(true);
+  };
+
+  const hanlderHistory = () => {
+    setShowHistory(true);
+  };
 
   return (
     <div className="view">
       {!id ? (
-        <div className="no-select">
-          <h1>
-            Elegí un reclutador para ver su informacion <span>acá</span>
-          </h1>
-          <img
-            alt="reclutador no seleccionado"
-            src="https://www.bumeran.com.ar/candidate/static/media/empty-state-avisos.3a4129ba.svg"
-          />
-        </div>
+        <NoneView name="un reclutador" />
       ) : (
         <div className="view">
+          <ActivityTable
+            show={showActivity}
+            close={setShowActivity}
+            activity={activityRec}
+          />
+
+          <HistoryTable
+            show={showHistory}
+            close={setShowHistory}
+            history={historyRec}
+          />
           <div className="header-buttons-recruiter">
             <Link to={`/recruiter-edit/${recruiter.id}`}>
               <button className="ml-5 inline-flex items-center leading-none text-white rounded-full p-2 shadow text-teal text-sm bg-blue-500 hover:bg-blue-700">
@@ -86,53 +105,37 @@ function View() {
             </h1>
             <div className="experticia">
               <h1 className="title">Areas de experticia</h1>
-              <table class="experticia-table">
-                <tr>
-                  <th>Area</th>
-                  <th>Grado</th>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp1?.name}</td>
-                  <td>{recruiter.SeniorityOp1?.name}</td>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp2?.name}</td>
-                  <td>{recruiter.SeniorityOp2?.name}</td>
-                </tr>
-                <tr>
-                  <td>{recruiter.AreaOp3?.name}</td>
-                  <td>{recruiter.SeniorityOp3?.name}</td>
-                </tr>
+              <table className="experticia-table">
+                <thead>
+                  <tr>
+                    <th>Area</th>
+                    <th>Grado</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{recruiter.AreaOp1?.name}</td>
+                    <td>{recruiter.SeniorityOp1?.name}</td>
+                  </tr>
+                  <tr>
+                    <td>{recruiter.AreaOp2?.name}</td>
+                    <td>{recruiter.SeniorityOp2?.name}</td>
+                  </tr>
+                  <tr>
+                    <td>{recruiter.AreaOp3?.name}</td>
+                    <td>{recruiter.SeniorityOp3?.name}</td>
+                  </tr>
+                </tbody>
               </table>
             </div>
-            <div className="">
-              <ul className="list-disc list-inside bg-blue-200">
-                <h3>Vacantes activas</h3>
-                {recruiter?.activeVacancies?.map((vacante) => {
-                  return (
-                    <li>
-                      Id de vacante: {vacante?.id} <br />
-                      Puesto: {vacante?.title} <br />
-                      Description: {vacante?.description}
-                      <br />
-                    </li>
-                  );
-                })}
-              </ul>
-              <ul className="list-disc list-inside bg-pink-200">
-                <h3>Historial</h3>
-                {recruiter?.history?.map((history) => {
-                  return (
-                    <li>
-                      Id de vacante: {history.Vacant.id} <br />
-                      Puesto: {history?.Vacant?.title} <br />
-                      Description: {history?.Vacant?.description} <br />
-                    </li>
-                  );
-                })}
-              </ul>
+            <div className="more">
+              <button className="button-activity" onClick={hanlderActivity}>
+                vacantes activas
+              </button>
+              <button className="button-history" onClick={hanlderHistory}>
+                historial de vacantes
+              </button>
             </div>
-            <h1>Ranking: {recruiter.ranking}</h1>
           </div>
         </div>
       )}

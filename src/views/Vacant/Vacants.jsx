@@ -9,7 +9,6 @@ import { resetArea } from "../../features/areaSlice";
 import { resetState } from "../../features/stateSlice";
 import { addArea } from "../../features/areaSlice";
 import { addState } from "../../features/stateSlice";
-import { resetCountry, addCountry } from "../../features/countrySlice";
 
 const Vacants = () => {
   const state = [
@@ -56,8 +55,8 @@ const Vacants = () => {
           { name: "Estado", data: state },
           { name: "Pais", data: countries },
         ]}
-        resets={[resetArea, resetCountry, resetState]}
-        adds={[addArea, addState, addCountry]}
+        resets={[resetArea, resetState]}
+        adds={[addArea, addState,]}
         routeButton="/vacant-form"
       />
       <Results datas={vacants} View={View} Card={Card} />

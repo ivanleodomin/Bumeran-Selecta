@@ -30,12 +30,19 @@ class VacantController {
   static async getById(req, res, next) {
     try {
       const vacant = await Vacant.findOne({
-        attributes: ["id", "title", "state", "description", "vacant"],
         where: { id: req.params.id },
+        attributes: {
+          exclude: [
+            "RecruiterId",
+            "CityId",
+            "CountryId",
+            "AreaId",
+            "SeniorityId",
+          ],
+        },
         include: [
           {
             model: Recruiter,
-            attributes: ["firstName", "lastName"],
             as: "Recruiter",
           },
           { model: Country, attributes: ["id", "name"], as: "Country" },
@@ -44,6 +51,17 @@ class VacantController {
           { model: Seniority, attributes: ["id", "name"], as: "Seniority" },
         ],
       });
+
+      if (vacant.state === "Finalizada") {
+        const review = await Review.findOne({
+          raw: true,
+          where: {
+            VacantId: vacant.id,
+          },
+        });
+        console.log(review);
+        vacant.dataValues.review = review.score;
+      }
 
       return res.send(vacant);
     } catch (err) {
