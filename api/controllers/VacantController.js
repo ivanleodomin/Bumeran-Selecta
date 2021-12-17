@@ -72,7 +72,6 @@ class VacantController {
   static async getAll(req, res, next) {
     try {
       const { state, area, country } = req.query;
-      console.log(state);
       const where = {};
 
       if (state) where.state = state;
@@ -83,9 +82,7 @@ class VacantController {
       if (country) {
         const CountryId = await Country.findOne({ where: { name: country } });
         where.CountryId = CountryId.id;
-        console.log(CountryId);
       }
-      console.log("where", where);
 
       const vacant = await Vacant.findAll({
         where,

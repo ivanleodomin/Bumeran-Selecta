@@ -1,6 +1,6 @@
+import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 import { useHistory } from "react-router-dom";
-import React from "react";
 import Home from "../views/Home";
 import Vacants from "../views/Vacant/Vacants";
 import NotFound from "../views/NotFound";

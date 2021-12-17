@@ -1,20 +1,21 @@
 import React from "react";
+import useForm from "../../hooks/useForm";
 import { Link } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
+import validateRecruiter from "../../utils/validateRecruiter";
 
 const RecruitersAdd = () => {
-
   const {
-    form,
     handleChange,
     handleSubmit,
-    city,
-    seniorities,
+    values,
+    errors,
     countries,
-    areas,
+    city,
+    handleChangeCountry,
     states,
-    handleChangeCountry
-  } = useForm("recruiterAdd");
+    seniorities,
+    areas,
+  } = useForm(validateRecruiter, "RecruiterAdd");
 
   return (
     <>
@@ -25,10 +26,10 @@ const RecruitersAdd = () => {
             className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
             style={{ top: "5px" }}
           >
-            <img
+            {/* <img
               className="logo-gratis-R"
               src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
-            />
+            /> */}
             <div className="rounded-t bg-white px-6 py-6">
               <div
                 className="text-center flex justify-center"
@@ -46,9 +47,7 @@ const RecruitersAdd = () => {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Nombre
                       </label>
                       <input
@@ -58,11 +57,10 @@ const RecruitersAdd = () => {
                         placeholder="Nombre"
                         onChange={handleChange}
                       />
+                      {errors.firstName && <p>{errors.firstName}</p>}
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Apellido
                       </label>
                       <input
@@ -72,15 +70,14 @@ const RecruitersAdd = () => {
                         placeholder="Apellido"
                         onChange={handleChange}
                       />
+                      {errors.lastName && <p>{errors.lastName}</p>}
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs mb-2 label">
                         Pais
                       </label>
                       <select
-                      name="countryId"
+                        name="countryId"
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
@@ -95,11 +92,10 @@ const RecruitersAdd = () => {
                           );
                         })}
                       </select>
+                      {errors.countryId && <p>{errors.countryId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block text-blueGray-600 text-xs font-bold mb-2 label"
-                      >
+                      <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
                         Ciudad
                       </label>
                       <select
@@ -117,6 +113,7 @@ const RecruitersAdd = () => {
                           );
                         })}
                       </select>
+                      {errors.cityId && <p>{errors.cityId}</p>}
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
                       <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -133,6 +130,7 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp1 && <p>{errors.areaOp1}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
@@ -152,6 +150,7 @@ const RecruitersAdd = () => {
                             );
                           })}
                         </select>
+                        {errors.seniorityOp1 && <p>{errors.seniorityOp1}</p>}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -169,13 +168,14 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp2 && <p>{errors.areaOp2}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
                           Seniority 2
                         </label>
                         <select
-                        name="seniorityOp2"
+                          name="seniorityOp2"
                           className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                           onChange={handleChange}
                         >
@@ -188,6 +188,7 @@ const RecruitersAdd = () => {
                             );
                           })}
                         </select>
+                        {errors.seniorityOp2 && <p>{errors.seniorityOp2}</p>}
                       </div>
                     </div>
                     <div className="flex flex-wrap -mx-3 mb-6">
@@ -205,6 +206,7 @@ const RecruitersAdd = () => {
                             return <option value={area.id}>{area.name}</option>;
                           })}
                         </select>
+                        {errors.areaOp3 && <p>{errors.areaOp3}</p>}
                       </div>
                       <div className="w-full md:w-1/2 px-3">
                         <label className="block  label" for="grid-last-name">
@@ -218,13 +220,13 @@ const RecruitersAdd = () => {
                           <option defaultValue>Elija una opcion</option>
                           {seniorities?.map((seniority) => {
                             return (
-                            
                               <option value={seniority.id}>
                                 {seniority.name}
                               </option>
                             );
                           })}
                         </select>
+                        {errors.seniorityOp3 && <p>{errors.seniorityOp3}</p>}
                       </div>
                     </div>
                     <div className="buttons">
