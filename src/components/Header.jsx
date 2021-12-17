@@ -18,7 +18,7 @@ const HeaderRecruiters = ({ filters, resets, adds, routeButton }) => {
   return (
     <div className="body-page">
       <div className="filters">
-        <i className="fas fa-search"></i>
+       
         {filters.map((filter, i) => {
           return (
             <Dropdown
