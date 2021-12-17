@@ -74,37 +74,21 @@ class RecruiterController {
 
       /* if (!recruiter) return res.sendStatus(404); */
 
-<<<<<<< HEAD
-      const reviews = await Review.findAll({
-        attributes: ["id"],
-        where: { RecruiterId: id },
-        include: [{ model: Vacant, as: "Vacant" }],
+      const history = await Vacant.findAll({
+        attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+        include: [{ model: Area, as: "Area", attributes: ["name"] }],
+        where: { RecruiterId: id, state: "Finalizada" },
       });
 
       const activeVacancies = await Vacant.findAll({
+        attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
+        include: [{ model: Area, as: "Area", attributes: ["name"] }],
         where: { RecruiterId: id, state: "Asignada" },
       });
 
       recruiter.dataValues.ranking = await recruiter.getRanking();
       recruiter.dataValues.activeVacancies = activeVacancies;
-      recruiter.dataValues.history = reviews;
-=======
-    const history = await Vacant.findAll({
-      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
-      include: [{ model: Area, as: "Area", attributes: ["name"] }],
-      where: { RecruiterId: id, state: "Finalizada" },
-    });
-
-    const activeVacancies = await Vacant.findAll({
-      attributes: ["id", "title", "vacant", "startDate", "assignmentDate"],
-      include: [{ model: Area, as: "Area", attributes: ["name"] }],
-      where: { RecruiterId: id, state: "Asignada" },
-    });
-
-    recruiter.dataValues.ranking = await recruiter.getRanking();
-    recruiter.dataValues.activeVacancies = activeVacancies;
-    recruiter.dataValues.history = history;
->>>>>>> 50a733e61c93c3fc0b267d944ed6dfdfee409e05
+      recruiter.dataValues.history = history;
 
       res.send(recruiter);
     } catch (err) {
@@ -156,6 +140,7 @@ class RecruiterController {
 
   static async updateRecruiterByIdParams(req, res, next) {
     try {
+      console.log(req.body, "BODY");
       const {
         firstName,
         lastName,
@@ -167,13 +152,21 @@ class RecruiterController {
         seniorityOp1,
         seniorityOp2,
         seniorityOp3,
+        id,
       } = req.body;
 
       const country = await Country.findByPk(countryId);
       const city = await City.findByPk(cityId);
-      const recruiter = await Recruiter.findByPk(req.params.id);
+      const recruiter = await Recruiter.findByPk(id);
 
-      await recruiter.update({ firstName, lastName });
+      await Recruiter.update(
+        { firstName, lastName },
+        {
+          where: {
+            id,
+          },
+        }
+      );
 
       recruiter.setCountry(country);
       recruiter.setCity(city);

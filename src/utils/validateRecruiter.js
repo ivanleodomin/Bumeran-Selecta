@@ -6,9 +6,6 @@ export default function validateRecruiter(values) {
   if (!values.lastName) {
     errors.lastName = "Last name required";
   }
-  if (!values.countryId) {
-    errors.countryId = "Country required";
-  }
   if (!values.cityId) {
     errors.cityId = "City required";
   }

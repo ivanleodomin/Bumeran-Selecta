@@ -9,10 +9,10 @@ function RecruiterEdit() {
     handleSubmit,
     values,
     errors,
-    city,
+    cities,
     countries,
-    states,
     seniorities,
+    countryId,
     areas,
   } = useForm(validateRecruiter, "RecruiterEdit");
 
@@ -82,7 +82,7 @@ function RecruiterEdit() {
                         placeholder="Pais de la Vacante"
                         disabled
                         onChange={handleChange}
-                        value={values.countryId}
+                        value={countryId}
                         disabled
                       >
                         {countries?.map((countriess) => {
@@ -106,10 +106,8 @@ function RecruiterEdit() {
                         onChange={handleChange}
                         value={values.cityId}
                       >
-                        {city?.map((cities) => {
-                          return (
-                            <option value={cities.id}>{cities.name}</option>
-                          );
+                        {cities?.map((city) => {
+                          return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
                     </div>

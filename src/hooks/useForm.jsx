@@ -1,9 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { useHistory, useParams } from "react-router-dom";
-
+import { useSelector } from "react-redux";
+import findId from "../utils/functions";
 const useForm = (validate, key) => {
-
+  const country = useSelector((state) => state.country).value;
   const { id } = useParams();
   const history = useHistory();
 
@@ -20,23 +21,23 @@ const useForm = (validate, key) => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [states, setStates] = React.useState(true);
   const [cities, setCities] = React.useState([]);
-
+  const [countryId, setCountryId] = React.useState(0);
+  const [idVacant, setIdVacant] = React.useState(0);
 
   React.useEffect(() => {
     if (Object.keys(errors).length === 0 && isSubmitting) {
       submitForm();
     }
+    axios.get("/api/country").then((info) => setCountries(info.data));
+
     axios.get("/api/area").then((info) => setAreas(info.data));
 
     axios.get("/api/seniority").then((info) => setSeniorities(info.data));
-
-    axios.get("/api/country").then((info) => setCountries(info.data));
-
+    
     if (key === "VacantAdd")
       objectValues = {
         title: "",
         vacant: "",
-        CountryId: "",
         CityId: "",
         AreaId: "",
         SeniorityId: "",
@@ -46,7 +47,6 @@ const useForm = (validate, key) => {
       objectValues = {
         firstName: "",
         lastName: "",
-        countryId: "",
         cityId: "",
         areaOp1: "",
         seniorityOp1: "",
@@ -62,7 +62,6 @@ const useForm = (validate, key) => {
         .then((data) => {
           objectValues.firstName = data.firstName;
           objectValues.lastName = data.lastName;
-          objectValues.countryId = data.Country.id;
           objectValues.cityId = data.City.id;
           objectValues.areaOp1 = data.AreaOp1.id;
           objectValues.areaOp2 = data.AreaOp2.id;
@@ -70,6 +69,7 @@ const useForm = (validate, key) => {
           objectValues.seniorityOp1 = data.SeniorityOp1.id;
           objectValues.seniorityOp2 = data.SeniorityOp2.id;
           objectValues.seniorityOp3 = data.SeniorityOp3.id;
+          setIdVacant(data.id);
           setPrueba(data.SeniorityOp3.id);
         });
     else if (key === "VacantEdit")
@@ -77,7 +77,6 @@ const useForm = (validate, key) => {
         .get(`/api/vacant/${id}`)
         .then((info) => info.data)
         .then((data) => {
-          objectValues.CountryId = data.Country.id;
           objectValues.CountryName = data.Country.name;
           objectValues.AreaId = data.Area.id;
           objectValues.SeniorityId = data.Seniority.id;
@@ -85,9 +84,19 @@ const useForm = (validate, key) => {
           objectValues.title = data.title;
           objectValues.CityId = data.City.id;
           objectValues.description = data.description;
+          setIdVacant(data.id);
           setPrueba(data.City.id);
         });
   }, [prueba, errors]);
+
+  React.useEffect(() => {
+    async function find() {
+      await findId(country, countries, setCountryId);
+    }
+    if (!countryId) find();
+
+    axios.get(`/api/country/${countryId}`).then((info) => setCities(info.data));
+  }, [countryId, countries]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -114,30 +123,35 @@ const useForm = (validate, key) => {
       setValues({ ...values, [e.target.name]: e.target.value });
     }
   };
+
   function submitForm() {
     setIsSubmitted(true);
     if (key === "RecruiterEdit") {
       axios
         .put(`/api/recruiter/${"id"}`, {
+          id: idVacant,
+          countryId,
           ...values,
-          /* countryId: country, */
         })
         .then(history.push("/recruiters"));
     } else if (key === "VacantEdit") {
       axios
         .put(`/api/vacant/${"id"}`, {
+          CountryId: countryId,
+          id: idVacant,
           ...values,
-          /* countryId: country, */
         })
         .then(history.push("/vacants"));
     } else if (key === "RecruiterAdd") {
       axios.post("/api/recruiter", {
+        countryId,
         ...values,
       });
       history.push("/recruiters");
     } else if (key === "VacantAdd") {
       axios
         .post("/api/vacant/add", {
+          CountryId: countryId,
           ...values,
         })
         .then(history.push("/vacants"));
@@ -158,6 +172,7 @@ const useForm = (validate, key) => {
     submitForm,
     id,
     cities,
+    countryId,
   };
 };
 

@@ -10,11 +10,10 @@ const RecruitersAdd = () => {
     values,
     errors,
     countries,
-    city,
-    handleChangeCountry,
-    states,
     seniorities,
     areas,
+    cities,
+    countryId,
   } = useForm(validateRecruiter, "RecruiterAdd");
 
   return (
@@ -81,9 +80,10 @@ const RecruitersAdd = () => {
                         type="text"
                         className=" block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Pais de la Vacante"
-                        onChange={handleChangeCountry}
+                        onChange={handleChange}
+                        value={countryId}
+                        disabled
                       >
-                        <option selected>Elija una opcion</option>
                         {countries?.map((countriess) => {
                           return (
                             <option value={countriess.id}>
@@ -92,7 +92,6 @@ const RecruitersAdd = () => {
                           );
                         })}
                       </select>
-                      {errors.countryId && <p>{errors.countryId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -103,14 +102,11 @@ const RecruitersAdd = () => {
                         type="text"
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Localidad de la Vacante"
-                        disabled={states}
                         onChange={handleChange}
                       >
                         <option selected>Elija una opcion</option>
-                        {city?.map((cities) => {
-                          return (
-                            <option value={cities.id}>{cities.name}</option>
-                          );
+                        {cities?.map((city) => {
+                          return <option value={city.id}>{city.name}</option>;
                         })}
                       </select>
                       {errors.cityId && <p>{errors.cityId}</p>}
