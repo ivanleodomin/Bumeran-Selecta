@@ -24,7 +24,6 @@ class RecruiterController {
       seniorityOp2,
       seniorityOp3,
     } = req.body;
-    console.log(req.body, "BODY")
 
     const [area1, area2, area3] = await getareas([areaOp1, areaOp2, areaOp3]);
 

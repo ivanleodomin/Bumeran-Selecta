@@ -11,7 +11,6 @@ function View() {
   const [recruiter, setRecruiter] = React.useState({});
   const [ranking, setRanking] = React.useState([]);
   const history = useHistory();
-  console.log(id);
 
   const handleDelete = async () => {
     swal({
@@ -45,8 +44,6 @@ function View() {
         if (data.ranking === 5) setRanking(["★★★★★", ""]);
       });
   }, [id]);
-
-  console.log("Recruiter", recruiter);
 
   return (
     <div className="view">

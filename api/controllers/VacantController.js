@@ -12,7 +12,6 @@ class VacantController {
   //------------------Vacant-----------------------
 
   static async createVacant(req, res, next) {
-    console.log(req.body, "BODY");
     const { AreaId, CityId, CountryId, SeniorityId } = req.body;
     const vacant = await Vacant.create(req.body);
     const city = await City.findByPk(CityId);
@@ -54,7 +53,6 @@ class VacantController {
   static async getAll(req, res, next) {
     try {
       const { state, area, country } = req.query;
-      console.log(state);
       const where = {};
 
       if (state) where.state = state;
@@ -65,9 +63,7 @@ class VacantController {
       if (country) {
         const CountryId = await Country.findOne({ where: { name: country } });
         where.CountryId = CountryId.id;
-        console.log(CountryId);
       }
-      console.log("where", where);
 
       const vacant = await Vacant.findAll({
         where,

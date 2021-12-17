@@ -1,22 +1,24 @@
 import React from "react";
-import { useForm } from "../../hooks/useForm";
+import { useForms } from "../../hooks/useForms";
 import { Link } from "react-router-dom";
+import validateVacant from "../../utils/validateVacant";
 
 const VacantsAdd = () => {
-  
   const {
     handleChange,
     handleSubmit,
-    city,
-    seniorities,
+    values,
+    errors,
     countries,
-    areas,
+    city,
+    handleChangeCountry,
     states,
-    handleChangeCountry
-  } = useForm("VacantAdd");
+    seniorities,
+    areas,
+  } = useForms(validateVacant, "VacantAdd");
 
   return (
-    <>
+    <React.Fragment>
       <div className="w-full absolute backView justify-center pt-4 pb-4 px-96"></div>
       <section className="pt-24 py-1 bg-blueGray-50">
         <div className="form px-4 mx-auto mt-6">
@@ -24,11 +26,6 @@ const VacantsAdd = () => {
             className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0"
             style={{ top: "5px" }}
           >
-            <img
-              alt="pj"
-              className="logo-gratis"
-              src="https://imgbum-rebranding.jobscdn.com/empresas-assets/skins/bumeran/styles/img/gratis-icon.svg"
-            />
             <div className="rounded-t bg-white px-6 py-6">
               <div
                 className="text-center flex justify-center"
@@ -56,6 +53,7 @@ const VacantsAdd = () => {
                         placeholder="Titulo"
                         onChange={handleChange}
                       />
+                      {errors.title && <p>{errors.title}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs mb-2 label">
@@ -68,8 +66,8 @@ const VacantsAdd = () => {
                         placeholder="Pais de la Vacante"
                         onChange={handleChangeCountry}
                       >
-                        <option defaultValue>Elija una opcion</option>
                         {countries?.map((countriess) => {
+                          <option defaultValue>Elija una opcion</option>;
                           return (
                             <option value={countriess.id}>
                               {countriess.name}
@@ -77,6 +75,7 @@ const VacantsAdd = () => {
                           );
                         })}
                       </select>
+                      {errors.CountryId && <p>{errors.CountryId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -97,10 +96,11 @@ const VacantsAdd = () => {
                           );
                         })}
                       </select>
+                      {errors.CityId && <p>{errors.CityId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
-                        Numero de Vacantes
+                        Vacants
                       </label>
                       <input
                         type="number"
@@ -108,7 +108,9 @@ const VacantsAdd = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="00"
                         onChange={handleChange}
+                        value={values.vacant}
                       />
+                      {errors.vacant && <p>{errors.vacant}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -124,6 +126,7 @@ const VacantsAdd = () => {
                           return <option value={area.id}>{area.name}</option>;
                         })}
                       </select>
+                      {errors.AreaId && <p>{errors.AreaId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -143,6 +146,7 @@ const VacantsAdd = () => {
                           );
                         })}
                       </select>
+                      {errors.SeniorityId && <p>{errors.SeniorityId}</p>}
                     </div>
                     <div className="relative w-full mb-3">
                       <label className="block text-blueGray-600 text-xs font-bold mb-2 label">
@@ -156,7 +160,9 @@ const VacantsAdd = () => {
                         className="appearance-none block w-full bg-white text-gray-700 border border-gray-400 shadow-inner rounded-md py-3 px-4 leading-tight focus:outline-none  focus:border-gray-500 label"
                         placeholder="Descripcion de la vacante"
                         onChange={handleChange}
+                        value={values.description}
                       />
+                      {errors.description && <p>{errors.description}</p>}
                     </div>
                     <div className="buttons">
                       <Link to="/home">
@@ -179,7 +185,7 @@ const VacantsAdd = () => {
         </div>
       </section>
       <div className="h-48"></div>
-    </>
+    </React.Fragment>
   );
 };
 

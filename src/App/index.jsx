@@ -1,8 +1,8 @@
-import React, { Suspense, lazy } from "react";
+import React from "react";
 import { Switch, Route, Redirect } from "react-router";
 import Home from "../views/Home";
 import Vacants from "../views/Vacant/Vacants";
-import Statistics from "../views/Statistics";
+/* import Statistics from "../views/Statistics"; */
 import NotFound from "../views/NotFound";
 import Navbar from "../components/Navbar";
 import RecruitersAdd from "../views/Recruiter/RecruitersAdd";
@@ -40,14 +40,12 @@ function App() {
         <Route path="/recruiters">
           <Recruiters />
         </Route>
-        {/*Preguntar*/}
         <Route path="/vacants/:id">
           <Vacants />
         </Route>
         <Route path="/vacants/">
           <Vacants />
         </Route>
-        {/*Preguntar*/}
         <Route exact path="/link-recruiter/:id">
           <LinkRecruiter />
         </Route>
